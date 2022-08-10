@@ -1,6 +1,7 @@
 #include "../include/glfw3.h"
 #include "..\..\PichezDLL\baseGame.h"
 #include "../../PichezDLL/window.h"
+#include "../../PichezDLL/renderer.h"
 
 int main()
 {
@@ -20,6 +21,7 @@ BaseGame::~BaseGame()
 int BaseGame::run()
 {
 	Window* window = new Window();
+	Renderer* renderer = new Renderer();
 	////GLFWwindow* window;
 
 	///* Initialize the library */
@@ -38,21 +40,25 @@ int BaseGame::run()
 	//glfwMakeContextCurrent(window);
 
 	/* Loop until the user closes the window */
+
 	window->createWindow();
 
-	while (!glfwWindowShouldClose(window->getWindow()))
-	{
-		/* Render here */
-		glClear(GL_COLOR_BUFFER_BIT);
+	//while (!glfwWindowShouldClose(window->getWindow()))
+	//{
+	//	/* Render here */
+	//	glClear(GL_COLOR_BUFFER_BIT);
 
-		/* Swap front and back buffers */
-		glfwSwapBuffers(window->getWindow());
+	//	/* Swap front and back buffers */
+	//	glfwSwapBuffers(window->getWindow());
 
-		/* Poll for and process events */
-		glfwPollEvents();
-	}
+	//	/* Poll for and process events */
+	//	glfwPollEvents();
+	//}
+
+	renderer->renderWindow(window->getWindow());
 
 	glfwTerminate();
 
+	delete window;
 	return 0;
 }
