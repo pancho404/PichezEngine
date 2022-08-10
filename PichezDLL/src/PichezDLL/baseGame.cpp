@@ -1,7 +1,23 @@
 #include "../include/glfw3.h"
+#include "..\..\PichezDLL\baseGame.h"
 
 
 int main()
+{
+	BaseGame* game = new BaseGame();
+	game->run();
+	delete game;
+}
+
+BaseGame::BaseGame()
+{
+}
+
+BaseGame::~BaseGame()
+{
+}
+
+int BaseGame::run()
 {
 
 	GLFWwindow* window;
@@ -35,7 +51,6 @@ int main()
 	}
 
 	glfwTerminate();
-	
-	return 0;
 
+	return 0;
 }
