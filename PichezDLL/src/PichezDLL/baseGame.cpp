@@ -60,5 +60,6 @@ int BaseGame::run()
 	glfwTerminate();
 
 	delete window;
+	delete renderer;
 	return 0;
 }
