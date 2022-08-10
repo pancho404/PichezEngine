@@ -1,4 +1,4 @@
-#include "glfw3.h"
+#include "../include/glfw3.h"
 
 
 int main()
