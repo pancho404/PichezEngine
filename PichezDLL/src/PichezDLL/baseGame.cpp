@@ -4,13 +4,6 @@
 #include "../../PichezDLL/renderer.h"
 
 
-int main()
-{
-	BaseGame* game = new BaseGame();
-	game->run();
-	delete game;
-}
-
 DllExport BaseGame::BaseGame()
 {
 }
