@@ -25,6 +25,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="baseGame.h" />
+    <ClInclude Include="DLLExport.h" />
     <ClInclude Include="renderer.h" />
     <ClInclude Include="window.h" />
   </ItemGroup>

@@ -13,14 +13,26 @@ DllExport void Renderer::renderWindow(GLFWwindow* window)
 {
 	while (!glfwWindowShouldClose(window))
 	{
-		/* Render here */
-		glClear(GL_COLOR_BUFFER_BIT);
+		clearWindow();
 
-		/* Swap front and back buffers */
-		glfwSwapBuffers(window);
+		swapBuffers(window);
 
-		/* Poll for and process events */
-		glfwPollEvents();
-		
+		pollEvents();
+
 	}
+}
+
+DllExport void Renderer::clearWindow()
+{
+	glClear(GL_COLOR_BUFFER_BIT);
+}
+
+DllExport void Renderer::swapBuffers(GLFWwindow* window)
+{
+	glfwSwapBuffers(window);
+}
+
+DllExport void Renderer::pollEvents()
+{
+	glfwPollEvents();
 }

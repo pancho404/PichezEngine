@@ -8,6 +8,9 @@ public:
 	DllExport Renderer();
 	DllExport ~Renderer();
 	DllExport void renderWindow(GLFWwindow* window);
+	DllExport void clearWindow();
+	DllExport void swapBuffers(GLFWwindow* window);
+	DllExport void pollEvents();
 private:
 };
 

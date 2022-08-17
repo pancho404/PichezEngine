@@ -3,6 +3,7 @@
 #include "../../PichezDLL/window.h"
 #include "../../PichezDLL/renderer.h"
 
+
 int main()
 {
 	BaseGame* game = new BaseGame();
@@ -10,15 +11,15 @@ int main()
 	delete game;
 }
 
-BaseGame::BaseGame()
+DllExport BaseGame::BaseGame()
 {
 }
 
-BaseGame::~BaseGame()
+DllExport BaseGame::~BaseGame()
 {
 }
 
-int BaseGame::run()
+DllExport int BaseGame::run()
 {
 	Window* window = new Window();
 	Renderer* renderer = new Renderer();

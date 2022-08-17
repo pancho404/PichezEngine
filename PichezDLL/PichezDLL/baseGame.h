@@ -1,10 +1,11 @@
 #pragma once
+#include"DLLExport.h"
 class BaseGame
 {
 public:
-	BaseGame();
-	~BaseGame();
-	int run();
+	DllExport BaseGame();
+	DllExport ~BaseGame();
+	DllExport int run();
 
 private:
 
