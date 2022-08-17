@@ -15,17 +15,37 @@ DllExport GLFWwindow* Window::getWindow()
 	return window;
 }
 
-DllExport int Window::createWindow()
-{	
-	if (!glfwInit())
+DllExport GLFWwindow* Window::createWindow(int width, int height, std::string name)
+{
+	return glfwCreateWindow(width, height, "name", NULL, NULL);
+}
+
+DllExport int Window::init()
+{
+	return glfwInit();
+}
+
+DllExport void Window::terminate()
+{
+	glfwTerminate();
+}
+
+DllExport void Window::makeContextCurrent()
+{
+	return glfwMakeContextCurrent(window);
+}
+
+DllExport int Window::run()
+{
+	if (!init())
 		return -1;
 
-	window = glfwCreateWindow(640, 480, "PichezEngineWindow", NULL, NULL);
+	window = createWindow(640, 480, "PichezEngineWindow");
 	if (!window)
 	{
-		glfwTerminate();
+		terminate();
 		return -1;
 	}
 
-	glfwMakeContextCurrent(window);
+	makeContextCurrent();
 }
