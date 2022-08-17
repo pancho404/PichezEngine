@@ -11,7 +11,7 @@ DllExport Renderer::~Renderer()
 
 DllExport void Renderer::renderWindow(GLFWwindow* window)
 {
-	while (!glfwWindowShouldClose(window))
+	while (!windowShouldClose(window))
 	{
 		clearWindow();
 
@@ -35,4 +35,9 @@ DllExport void Renderer::swapBuffers(GLFWwindow* window)
 DllExport void Renderer::pollEvents()
 {
 	glfwPollEvents();
+}
+
+DllExport int Renderer::windowShouldClose(GLFWwindow* window)
+{
+	return glfwWindowShouldClose(window);
 }

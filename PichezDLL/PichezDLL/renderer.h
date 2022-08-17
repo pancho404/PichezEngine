@@ -11,6 +11,7 @@ public:
 	DllExport void clearWindow();
 	DllExport void swapBuffers(GLFWwindow* window);
 	DllExport void pollEvents();
+	DllExport int windowShouldClose(GLFWwindow* window);
 private:
 };
 
