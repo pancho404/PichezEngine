@@ -1,14 +1,14 @@
 #pragma once
 #include "glfw3.h"
-
+#include"DLLExport.h"
 
 class Window
 {
 public:
-	Window();
-	~Window();
-	int createWindow();
-	GLFWwindow* getWindow();
+	DllExport Window();
+	DllExport ~Window();
+	DllExport int createWindow();
+	DllExport GLFWwindow* getWindow();
 private:
 	GLFWwindow* window;
 };

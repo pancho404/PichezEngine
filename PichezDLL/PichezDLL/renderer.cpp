@@ -1,15 +1,15 @@
 #include "renderer.h"
-Renderer::Renderer()
+DllExport Renderer::Renderer()
 {
 
 }
 
-Renderer::~Renderer()
+DllExport Renderer::~Renderer()
 {
 
 }
 
-void Renderer::renderWindow(GLFWwindow* window)
+DllExport void Renderer::renderWindow(GLFWwindow* window)
 {
 	while (!glfwWindowShouldClose(window))
 	{
