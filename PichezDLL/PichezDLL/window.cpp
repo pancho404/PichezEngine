@@ -1,35 +1,51 @@
 #include "window.h"
 
 
-Window::Window()
+DllExport Window::Window()
 {
 }
 
-Window::~Window()
+DllExport Window::~Window()
 {
 
 }
 
-GLFWwindow* Window::getWindow()
+DllExport GLFWwindow* Window::getWindow()
 {
 	return window;
 }
 
-int Window::createWindow()
-{	
+DllExport GLFWwindow* Window::createWindow(int width, int height, std::string name)
+{
+	return glfwCreateWindow(width, height, "name", NULL, NULL);
+}
 
-	/* Initialize the library */
-	if (!glfwInit())
+DllExport int Window::init()
+{
+	return glfwInit();
+}
+
+DllExport void Window::terminate()
+{
+	glfwTerminate();
+}
+
+DllExport void Window::makeContextCurrent()
+{
+	return glfwMakeContextCurrent(window);
+}
+
+DllExport int Window::run()
+{
+	if (!init())
 		return -1;
 
-	/* Create a windowed mode window and its OpenGL context */
-	window = glfwCreateWindow(640, 480, "PichezEngineWindow", NULL, NULL);
+	window = createWindow(640, 480, "PichezEngineWindow");
 	if (!window)
 	{
-		glfwTerminate();
+		terminate();
 		return -1;
 	}
 
-	/* Make the window's context current */
-	glfwMakeContextCurrent(window);
+	makeContextCurrent();
 }
