@@ -1,4 +1,3 @@
-#include "glew.h"
 #include "window.h"
 
 DllExport Window::Window()
@@ -36,9 +35,7 @@ DllExport void Window::makeContextCurrent()
 	if (glewInit()!= GLEW_OK)
 	{
 		std::cout << "Error" << std::endl;
-	}
-
-	
+	}	
 }
 
 DllExport int Window::run()

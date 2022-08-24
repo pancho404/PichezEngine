@@ -18,7 +18,6 @@ DllExport int BaseGame::run()
 	renderer->renderWindow(window->getWindow());
 
 	glfwTerminate();
-
 	delete window;
 	delete renderer;
 	return 0;
