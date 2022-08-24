@@ -32,7 +32,7 @@ DllExport void Window::terminate()
 
 DllExport void Window::makeContextCurrent()
 {
-	return glfwMakeContextCurrent(window);
+	glfwMakeContextCurrent(window);
 	glewInit();
 }
 
