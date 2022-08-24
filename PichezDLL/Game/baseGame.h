@@ -1,5 +1,6 @@
 #pragma once
 #include"DLLExport.h"
+
 class BaseGame
 {
 public:

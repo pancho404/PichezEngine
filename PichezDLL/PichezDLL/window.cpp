@@ -33,7 +33,12 @@ DllExport void Window::terminate()
 DllExport void Window::makeContextCurrent()
 {
 	glfwMakeContextCurrent(window);
-	glewInit();
+	if (glewInit()!= GLEW_OK)
+	{
+		std::cout << "Error" << std::endl;
+	}
+
+	
 }
 
 DllExport int Window::run()
