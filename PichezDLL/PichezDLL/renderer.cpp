@@ -1,4 +1,5 @@
 #include "renderer.h"
+
 DllExport Renderer::Renderer()
 {
 
