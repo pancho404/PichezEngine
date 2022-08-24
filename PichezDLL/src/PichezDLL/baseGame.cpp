@@ -1,8 +1,8 @@
+#include "glew.h"
 #include "../include/glfw3.h"
 #include "..\..\PichezDLL\baseGame.h"
 #include "../../PichezDLL/window.h"
 #include "../../PichezDLL/renderer.h"
-
 
 DllExport BaseGame::BaseGame()
 {

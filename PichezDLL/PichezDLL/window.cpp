@@ -1,5 +1,5 @@
+#include "glew.h"
 #include "window.h"
-
 
 DllExport Window::Window()
 {
@@ -33,6 +33,7 @@ DllExport void Window::terminate()
 DllExport void Window::makeContextCurrent()
 {
 	return glfwMakeContextCurrent(window);
+	glewInit();
 }
 
 DllExport int Window::run()
