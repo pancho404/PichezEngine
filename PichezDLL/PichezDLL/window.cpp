@@ -43,7 +43,7 @@ DllExport int Window::run()
 	if (!init())
 		return -1;
 
-	window = createWindow(640, 480, "PichezEngineWindow");
+	window = createWindow(640, 480, "a");
 	if (!window)
 	{
 		terminate();
