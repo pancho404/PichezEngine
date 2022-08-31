@@ -11,7 +11,7 @@ public:
 	DllExport ~Window();
 	DllExport int run();
 	DllExport GLFWwindow* getWindow();
-	DllExport GLFWwindow* createWindow(int width, int height, std::string name);
+	DllExport GLFWwindow* createWindow(int width, int height);
 	DllExport int init();
 	DllExport void terminate();
 	DllExport void makeContextCurrent();
