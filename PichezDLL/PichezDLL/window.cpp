@@ -16,7 +16,7 @@ DllExport GLFWwindow* Window::getWindow()
 
 DllExport GLFWwindow* Window::createWindow(int width, int height, std::string name)
 {
-	return glfwCreateWindow(width, height, "name", NULL, NULL);
+	return glfwCreateWindow(width, height, "PichezEngine", NULL, NULL);
 }
 
 DllExport int Window::init()
