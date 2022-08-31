@@ -19,7 +19,7 @@ DllExport void Renderer::renderWindow(GLFWwindow* window)
 		 0.0f,  0.5f,
 		 0.5f, -0.5f
 	};
-	generateBuffers(1, buffer, vertexBufferSize, vertexPositions, GL_STATIC_DRAW);
+	setBuffers(1, buffer, vertexBufferSize, vertexPositions, GL_STATIC_DRAW);
 
 	while (!windowShouldClose(window))
 	{
@@ -64,7 +64,7 @@ DllExport int Renderer::windowShouldClose(GLFWwindow* window)
 //	
 //}
 
-DllExport void Renderer::generateBuffers(int quantity, unsigned int& id, const int bufferSize, float bufferArray[], GLenum bufferMode)
+DllExport void Renderer::setBuffers(int quantity, unsigned int& id, const int bufferSize, float bufferArray[], GLenum bufferMode)
 {
 	glGenBuffers(quantity, &id);
 	glBindBuffer(GL_ARRAY_BUFFER, id);

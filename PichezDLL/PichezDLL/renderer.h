@@ -16,7 +16,7 @@ public:
 	DllExport void pollEvents();
 	DllExport int windowShouldClose(GLFWwindow* window);
 	//DllExport void createTriangleVertexes();
-	DllExport void generateBuffers(int quantity, unsigned int& id, const int bufferSize, float bufferArray[], GLenum bufferMode);
+	DllExport void setBuffers(int quantity, unsigned int& id, const int bufferSize, float bufferArray[], GLenum bufferMode);
 private:
 	
 };
