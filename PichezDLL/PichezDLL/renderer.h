@@ -3,7 +3,7 @@
 #include "glfw3.h"
 #include "DLLExport.h"
 
-const int vertexBufferSize = 6;
+const int vertexBufferSize = 9;
 
 class Renderer
 {
@@ -17,6 +17,7 @@ public:
 	DllExport int windowShouldClose(GLFWwindow* window);
 	//DllExport void createTriangleVertexes();
 	DllExport void setBuffers(int quantity, unsigned int& id, const int bufferSize, float bufferArray[], GLenum bufferMode);
+	DllExport void setFloatVertex();
 private:
 	
 };

@@ -15,9 +15,9 @@ DllExport void Renderer::renderWindow(GLFWwindow* window)
 	unsigned int buffer;
 	float vertexPositions[vertexBufferSize] =
 	{
-		-0.5f, -0.5f,
-		 0.0f,  0.5f,
-		 0.5f, -0.5f
+		-0.5f, -0.5f, 0.0f,
+		 0.0f,  0.5f, 0.0f,
+		 0.5f, -0.5f, 0.0f
 	};
 	setBuffers(1, buffer, vertexBufferSize, vertexPositions, GL_STATIC_DRAW);
 
@@ -69,5 +69,13 @@ DllExport void Renderer::setBuffers(int quantity, unsigned int& id, const int bu
 	glGenBuffers(quantity, &id);
 	glBindBuffer(GL_ARRAY_BUFFER, id);
 	glBufferData(GL_ARRAY_BUFFER, bufferSize * sizeof(float), bufferArray, bufferMode);
+	
+	
+}
+
+DllExport void Renderer::setFloatVertex()
+{
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 3, 0);
 }
 
