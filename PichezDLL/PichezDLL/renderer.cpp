@@ -13,13 +13,20 @@ DllExport Renderer::~Renderer()
 DllExport void Renderer::renderWindow(GLFWwindow* window)
 {
 	unsigned int buffer; //creamos una variable que sera utilizada como buffer
-	float vertexPositions[vertexBufferSize] = //Creamos el array de las posiciones de los vertices del triangulo 
+	float vertexPositions[] = //Creamos el array de las posiciones de los vertices del triangulo 
 	{
-		-0.5f, -0.5f, 0.0f,
-		 0.0f,  0.5f, 0.0f,
-		 0.5f, -0.5f, 0.0f
+		-0.5f, -0.5f, 0.0f, //0
+		 0.5f, -0.5f, 0.0f, //1
+		 0.5f,  0.5f, 0.0f, //2
+		-0.5f,  0.5f, 0.0f  //3
 	};
-	setBuffers(1, buffer, vertexBufferSize, vertexPositions, GL_STATIC_DRAW); //Seteamos el buffer creado
+
+	unsigned int indexes[] =
+	{
+		0,1,2,
+		2,3,0
+	};
+	setBuffers(1, buffer, indexes, GL_STATIC_DRAW); //Seteamos el buffer creado
 	setFloatVertex(); //Seteamos los datos de las posiciones de los vertices
 
 	std::string vertexShader =
@@ -49,7 +56,7 @@ DllExport void Renderer::renderWindow(GLFWwindow* window)
 	{
 		clearWindow();
 
-		glDrawArrays(GL_TRIANGLES, 0, 3); //Dibujamos recorriendo el array ENTERO creado anteriormente
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr); //Dibujamos recorriendo el array ENTERO creado anteriormente
 
 		swapBuffers(window);
 
@@ -74,16 +81,17 @@ DllExport void Renderer::pollEvents()
 	glfwPollEvents();
 }
 
-DllExport int Renderer::windowShouldClose(GLFWwindow* window)
+DllExport int Renderer::windowShouldClose(GLFWwindow* window)a+c
 {
 	return glfwWindowShouldClose(window);
 }
 
-DllExport void Renderer::setBuffers(int quantity, unsigned int& id, const int bufferSize, float bufferArray[], GLenum bufferMode)
+DllExport void Renderer::setBuffers(int quantity, unsigned int& id, unsigned int bufferArray[], GLenum bufferMode)
 {
-	glGenBuffers(quantity, &id); //Crea el buffer con el ID pasado por parametro (un unsigned int)
-	glBindBuffer(GL_ARRAY_BUFFER, id); //Permite utilizar el buffer creado como un buffer de openGL
-	glBufferData(GL_ARRAY_BUFFER, bufferSize * sizeof(float), bufferArray, bufferMode);	//Le asigna la info al buffer
+	unsigned int indexBufferObject;
+	glGenBuffers(quantity, &indexBufferObject); //Crea el buffer con el ID pasado por parametro (un unsigned int)
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBufferObject); //Permite utilizar el buffer creado como un buffer de openGL
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, 6 * sizeof(unsigned int), bufferArray, bufferMode);	//Le asigna la info al buffer
 }
 
 DllExport void Renderer::setFloatVertex()

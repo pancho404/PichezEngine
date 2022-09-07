@@ -5,7 +5,6 @@
 #include<iostream>
 #include<string.h>
 
-const int vertexBufferSize = 9;
 
 class Renderer
 {
@@ -18,7 +17,7 @@ public:
 	DllExport void pollEvents();
 	DllExport int windowShouldClose(GLFWwindow* window);
 	//DllExport void createTriangleVertexes();
-	DllExport void setBuffers(int quantity, unsigned int& id, const int bufferSize, float bufferArray[], GLenum bufferMode);
+	DllExport void setBuffers(int quantity, unsigned int& id, unsigned int bufferArray[], GLenum bufferMode);
 	DllExport void setFloatVertex();
 	DllExport static unsigned int CompileShader(unsigned int type, const std::string& source);
 	DllExport static unsigned int CreateShader(const std::string& vertexShader, const std::string& fragmentShader);
