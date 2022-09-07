@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\PichezDLL\baseGame.cpp" />
+    <ClCompile Include="entity.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="renderer.cpp" />
     <ClCompile Include="window.cpp" />
@@ -27,6 +28,7 @@
   <ItemGroup>
     <ClInclude Include="baseGame.h" />
     <ClInclude Include="DLLExport.h" />
+    <ClInclude Include="entity.h" />
     <ClInclude Include="renderer.h" />
     <ClInclude Include="window.h" />
   </ItemGroup>
