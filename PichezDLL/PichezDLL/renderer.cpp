@@ -22,28 +22,28 @@ DllExport void Renderer::renderWindow(GLFWwindow* window)
 	setBuffers(1, buffer, vertexBufferSize, vertexPositions, GL_STATIC_DRAW); //Seteamos el buffer creado
 	setFloatVertex(); //Seteamos los datos de las posiciones de los vertices
 
-	std::string vertexShader =
-		"#version 330 core\n"
-		"\n"
-		"layout(location = 0) in vec4 position;"
-		"\n"
-		"void main()\n"
-		"{\n"
-		"	gl_Position = position;"
-		"}\n";
+	//std::string vertexShader =
+	//	"#version 330 core\n"
+	//	"\n"
+	//	"layout(location = 0) in vec4 position;"
+	//	"\n"
+	//	"void main()\n"
+	//	"{\n"
+	//	"	gl_Position = position;"
+	//	"}\n";
 
-	std::string fragmentShader =
-		"#version 330 core\n"
-		"\n"
-		"layout(location = 0) out vec4 color;"
-		"\n"
-		"void main()\n"
-		"{\n"
-		"	color = vec4(1.0, 0.0, 0.0, 1.0);\n"
-		"}\n";
+	//std::string fragmentShader =
+	//	"#version 330 core\n"
+	//	"\n"
+	//	"layout(location = 0) out vec4 color;"
+	//	"\n"
+	//	"void main()\n"
+	//	"{\n"
+	//	"	color = vec4(1.0, 0.0, 0.0, 1.0);\n"
+	//	"}\n";
 
-	unsigned int shader = CreateShader(vertexShader, fragmentShader);
-	glUseProgram(shader);
+	//unsigned int shader = CreateShader(vertexShader, fragmentShader);
+	//glUseProgram(shader);
 
 	while (!windowShouldClose(window))
 	{
@@ -56,7 +56,7 @@ DllExport void Renderer::renderWindow(GLFWwindow* window)
 		pollEvents();
 
 	}
-	glDeleteProgram(shader);
+	//glDeleteProgram(shader);
 }
 
 DllExport void Renderer::clearWindow()
