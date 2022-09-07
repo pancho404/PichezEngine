@@ -117,19 +117,19 @@ DllExport unsigned int Renderer::CompileShader(unsigned int type, const std::str
 	}
 	return id;
 }
-DllExport  unsigned int Renderer::CreateShader(const std::string& vertexShader, const std::string& fragmentShader)
+DllExport  unsigned int Renderer::CreateShader(const std::string& _vertexShader, const std::string& _fragmentShader)
 {
 	unsigned int program = glCreateProgram();
-	unsigned int vS = CompileShader(GL_VERTEX_SHADER, vertexShader);
-	unsigned int fS = CompileShader(GL_FRAGMENT_SHADER, fragmentShader);
+	unsigned int vertexShader = CompileShader(GL_VERTEX_SHADER, _vertexShader);
+	unsigned int fragmentShader = CompileShader(GL_FRAGMENT_SHADER, _fragmentShader);
 
-	glAttachShader(program, vS);
-	glAttachShader(program, fS);
+	glAttachShader(program, vertexShader);
+	glAttachShader(program, fragmentShader);
 	glLinkProgram(program);
 	glValidateProgram(program);
 
-	glDeleteShader(vS);
-	glDeleteShader(fS);
+	glDeleteShader(vertexShader);
+	glDeleteShader(fragmentShader);
 
 	return program;
 }
