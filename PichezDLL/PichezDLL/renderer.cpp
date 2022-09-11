@@ -12,7 +12,8 @@ DllExport Renderer::~Renderer()
 
 DllExport void Renderer::renderWindow(GLFWwindow* window)
 {
-	unsigned int buffer; //creamos una variable que sera utilizada como buffer
+	unsigned int indexBufferObject; //creamos una variable que sera utilizada como buffer
+	unsigned int vertexBufferObject;
 	float vertexPositions[] = //Creamos el array de las posiciones de los vertices del triangulo 
 	{
 		-0.5f, -0.5f, 0.0f, //0
@@ -20,13 +21,13 @@ DllExport void Renderer::renderWindow(GLFWwindow* window)
 		 0.5f,  0.5f, 0.0f, //2
 		-0.5f,  0.5f, 0.0f  //3
 	};
-
 	unsigned int indexes[] =
 	{
 		0,1,2,
 		2,3,0
 	};
-	setBuffers(1, buffer, indexes, GL_STATIC_DRAW); //Seteamos el buffer creado
+	setBuffers(1, vertexBufferObject, vertexPositions, GL_STATIC_DRAW, GL_ARRAY_BUFFER); //Seteamos el buffer creado
+	setBuffers(1, indexBufferObject, indexes, GL_STATIC_DRAW, GL_ELEMENT_ARRAY_BUFFER); //Seteamos el buffer creado
 	setFloatVertex(); //Seteamos los datos de las posiciones de los vertices
 
 	std::string vertexShader =
@@ -56,12 +57,12 @@ DllExport void Renderer::renderWindow(GLFWwindow* window)
 	{
 		clearWindow();
 
-		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr); //Dibujamos recorriendo el array ENTERO creado anteriormente
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0); //Dibujamos recorriendo el array indexes ENTERO creado anteriormente
 
 		swapBuffers(window);
 
 		pollEvents();
-
+		
 	}
 	glDeleteProgram(shader);
 }
@@ -81,22 +82,28 @@ DllExport void Renderer::pollEvents()
 	glfwPollEvents();
 }
 
-DllExport int Renderer::windowShouldClose(GLFWwindow* window)a+c
+DllExport int Renderer::windowShouldClose(GLFWwindow* window)
 {
 	return glfwWindowShouldClose(window);
 }
 
-DllExport void Renderer::setBuffers(int quantity, unsigned int& id, unsigned int bufferArray[], GLenum bufferMode)
+DllExport void Renderer::setBuffers(int quantity, unsigned int& id, unsigned int bufferArray[], GLenum drawMode, GLenum bufferMode)
 {
-	unsigned int indexBufferObject;
-	glGenBuffers(quantity, &indexBufferObject); //Crea el buffer con el ID pasado por parametro (un unsigned int)
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBufferObject); //Permite utilizar el buffer creado como un buffer de openGL
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, 6 * sizeof(unsigned int), bufferArray, bufferMode);	//Le asigna la info al buffer
+	glGenBuffers(quantity, &id); //Crea el buffer con el ID pasado por parametro (un unsigned int)
+	glBindBuffer(bufferMode, id); //bindea el parametro id a el bufferMode especificado
+	glBufferData(bufferMode, sizeof(bufferArray), bufferArray, drawMode);	//Le asigna la info al buffer
+}
+
+DllExport void Renderer::setBuffers(int quantity, unsigned int& id, float bufferArray[], GLenum drawMode, GLenum bufferMode)
+{
+	glGenBuffers(quantity, &id); //Crea el buffer con el ID pasado por parametro (un unsigned int)
+	glBindBuffer(bufferMode, id); //bindea el parametro id a el bufferMode especificado
+	glBufferData(bufferMode, sizeof(bufferArray), bufferArray, drawMode);	//Le asigna la info al buffer
 }
 
 DllExport void Renderer::setFloatVertex()
 {
-	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 3, 0); //Asigna los atributos XYZ RGB ST del vertice y por cual debera empezar a leer
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 3, 0); //Asigna los atributos XYZ RGB ST del vertice y por cual debera empezar a leer
 	glEnableVertexAttribArray(0);
 }
 

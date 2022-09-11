@@ -16,8 +16,8 @@ public:
 	DllExport void swapBuffers(GLFWwindow* window);
 	DllExport void pollEvents();
 	DllExport int windowShouldClose(GLFWwindow* window);
-	//DllExport void createTriangleVertexes();
-	DllExport void setBuffers(int quantity, unsigned int& id, unsigned int bufferArray[], GLenum bufferMode);
+	DllExport void setBuffers(int quantity, unsigned int& id, unsigned int bufferArray[], GLenum drawMode, GLenum bufferMode);
+	DllExport void setBuffers(int quantity, unsigned int& id, float bufferArray[], GLenum drawMode, GLenum bufferMode);
 	DllExport void setFloatVertex();
 	DllExport static unsigned int CompileShader(unsigned int type, const std::string& source);
 	DllExport static unsigned int CreateShader(const std::string& vertexShader, const std::string& fragmentShader);
