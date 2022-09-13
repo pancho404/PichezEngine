@@ -47,7 +47,7 @@ DllExport void Renderer::renderWindow(GLFWwindow* window)
 		"\n"
 		"void main()\n"
 		"{\n"
-		"	color = vec4(1.0, 0.0, 0.0, 1.0);\n"
+		"	color = vec4(1.0, 0.0, 1.0, 1.0);\n"
 		"}\n";
 
 	unsigned int shader = CreateShader(vertexShader, fragmentShader);
@@ -62,7 +62,7 @@ DllExport void Renderer::renderWindow(GLFWwindow* window)
 		swapBuffers(window);
 
 		pollEvents();
-		
+
 	}
 	glDeleteProgram(shader);
 }
@@ -91,14 +91,15 @@ DllExport void Renderer::setBuffers(int quantity, unsigned int& id, unsigned int
 {
 	glGenBuffers(quantity, &id); //Crea el buffer con el ID pasado por parametro (un unsigned int)
 	glBindBuffer(bufferMode, id); //bindea el parametro id a el bufferMode especificado
-	glBufferData(bufferMode, sizeof(bufferArray), bufferArray, drawMode);	//Le asigna la info al buffer
+	glBufferData(bufferMode, 6 * 2 * sizeof(float), bufferArray, drawMode);	//Le asigna la info al buffer
+
 }
 
 DllExport void Renderer::setBuffers(int quantity, unsigned int& id, float bufferArray[], GLenum drawMode, GLenum bufferMode)
 {
 	glGenBuffers(quantity, &id); //Crea el buffer con el ID pasado por parametro (un unsigned int)
 	glBindBuffer(bufferMode, id); //bindea el parametro id a el bufferMode especificado
-	glBufferData(bufferMode, sizeof(bufferArray), bufferArray, drawMode);	//Le asigna la info al buffer
+	glBufferData(bufferMode, 6 * 2 * sizeof(float), bufferArray, drawMode);	//Le asigna la info al buffer
 }
 
 DllExport void Renderer::setFloatVertex()
