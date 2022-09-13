@@ -1,6 +1,6 @@
 #include "entity.h"
 
-DllExport Entity::Entity(std::list<Position> vertexes)
+DllExport Entity::Entity(std::list<Coordinates> vertexes)
 {
 	vertexList = vertexes;
 }
@@ -10,17 +10,39 @@ Entity::~Entity()
 
 }
 
-DllExport void Entity::setPosition(Position newPos)
+DllExport void Entity::setPosition(Coordinates newPos)
 {
-	entityPos = newPos;
+	pos = newPos;
 }
 
-DllExport Position Entity::getPosition()
+DllExport Coordinates Entity::getPosition()
 {
-	return entityPos;
+	return pos;
 }
 
-DllExport std::list<Position> Entity::getVertexList()
+DllExport std::list<Coordinates> Entity::getVertexList()
 {
 	return vertexList;
 }
+
+DllExport void Entity::setRotation(Coordinates newRotation)
+{
+	rotation = newRotation;
+}
+
+DllExport Coordinates Entity::getRotation()
+{
+	return rotation;
+}
+
+DllExport void Entity::setScale(Coordinates newScale)
+{
+	scale = newScale;
+}
+
+DllExport Coordinates Entity::getScale()
+{
+	return scale;
+}
+
+

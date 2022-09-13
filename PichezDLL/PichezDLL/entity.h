@@ -2,7 +2,7 @@
 #include "DLLExport.h"
 #include <list>
 
-struct Position
+struct Coordinates
 {
 	float x;
 	float y;
@@ -12,16 +12,22 @@ struct Position
 class Entity
 {
 public:
-	DllExport Entity(std::list<Position> vertexes);
+	DllExport Entity(std::list<Coordinates> vertexes);
 	DllExport ~Entity();
-	DllExport void setPosition(Position newPos);
-	DllExport Position getPosition();
-	DllExport std::list<Position> getVertexList();
+	DllExport void setPosition(Coordinates newPos);
+	DllExport Coordinates getPosition();
+	DllExport void setRotation(Coordinates newRotation);
+	DllExport Coordinates getRotation();
+	DllExport void setScale(Coordinates newScale);
+	DllExport Coordinates getScale();
+	DllExport std::list<Coordinates> getVertexList();
 	DllExport virtual void draw() = 0;
 	
 private:
-	Position entityPos;
-	std::list<Position> vertexList;
+	Coordinates pos;
+	Coordinates rotation;
+	Coordinates scale;
+	std::list<Coordinates> vertexList;
 };
 
 
