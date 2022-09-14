@@ -10,7 +10,15 @@ public:
 	Shape();
 	~Shape();
 	void setVertices(int vertexCount, float* vertexPosition);
-	void draw() override;
+	void draw(Renderer* renderer) override;
+	float* getVertexPosition()
+	{
+		return vertexPosition;
+	}
+	int getVertexCount()
+	{
+		return vertexCount;
+	}
 
 
 };

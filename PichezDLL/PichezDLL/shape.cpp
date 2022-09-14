@@ -13,3 +13,8 @@ void Shape::setVertices(int vertexCount, float* vertexPosition)
 	this->vertexPosition = vertexPosition;
 	this->vertexCount = vertexCount;
 }
+
+void Shape::draw(Renderer* renderer)
+{
+
+}
