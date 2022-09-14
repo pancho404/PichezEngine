@@ -1,6 +1,7 @@
 #pragma once
 #include "DLLExport.h"
 #include <list>
+#include"renderer.h"
 
 struct Coordinates
 {
@@ -21,8 +22,8 @@ public:
 	DllExport void setScale(Coordinates newScale);
 	DllExport Coordinates getScale();
 	//DllExport std::list<Coordinates> getVertexList();
-	DllExport virtual void draw() = 0;
-	
+	DllExport virtual void draw(Renderer* renderer) = 0;
+
 private:
 	Coordinates pos;
 	Coordinates rotation;
