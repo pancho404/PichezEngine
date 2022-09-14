@@ -21,15 +21,19 @@
   <ItemGroup>
     <ClCompile Include="..\src\PichezDLL\baseGame.cpp" />
     <ClCompile Include="entity.cpp" />
+    <ClCompile Include="entity2d.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="renderer.cpp" />
+    <ClCompile Include="shape.cpp" />
     <ClCompile Include="window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="baseGame.h" />
     <ClInclude Include="DLLExport.h" />
     <ClInclude Include="entity.h" />
+    <ClInclude Include="entity2d.h" />
     <ClInclude Include="renderer.h" />
+    <ClInclude Include="shape.h" />
     <ClInclude Include="window.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

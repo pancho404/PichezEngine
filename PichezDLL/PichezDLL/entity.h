@@ -12,7 +12,7 @@ struct Coordinates
 class Entity
 {
 public:
-	DllExport Entity(std::list<Coordinates> vertexes);
+	DllExport Entity(/*std::list<Coordinates> vertexes*/);
 	DllExport ~Entity();
 	DllExport void setPosition(Coordinates newPos);
 	DllExport Coordinates getPosition();
@@ -20,14 +20,14 @@ public:
 	DllExport Coordinates getRotation();
 	DllExport void setScale(Coordinates newScale);
 	DllExport Coordinates getScale();
-	DllExport std::list<Coordinates> getVertexList();
+	//DllExport std::list<Coordinates> getVertexList();
 	DllExport virtual void draw() = 0;
 	
 private:
 	Coordinates pos;
 	Coordinates rotation;
 	Coordinates scale;
-	std::list<Coordinates> vertexList;
+	//std::list<Coordinates> vertexList;
 };
 
 
