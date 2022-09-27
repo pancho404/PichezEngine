@@ -106,6 +106,7 @@ DllExport void Renderer::setFloatVertex()
 {
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 3, 0); //Asigna los atributos XYZ RGB ST del vertice y por cual debera empezar a leer
 	glEnableVertexAttribArray(0);
+	
 }
 
 DllExport unsigned int Renderer::CompileShader(unsigned int type, const std::string& source)

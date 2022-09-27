@@ -13,6 +13,8 @@ DllExport int BaseGame::run()
 	Window* window = new Window();
 	Renderer* renderer = new Renderer();
 	
+	window->run();
+
 	renderer->renderWindow(window->getWindow());
 
 	glfwTerminate();
