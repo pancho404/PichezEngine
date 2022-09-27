@@ -53,17 +53,17 @@ DllExport void Renderer::renderWindow(GLFWwindow* window)
 	unsigned int shader = CreateShader(vertexShader, fragmentShader);
 	glUseProgram(shader);
 
-	while (!windowShouldClose(window))
-	{
-		clearWindow();
+	//while (!windowShouldClose(window))
+	//{
+	//	clearWindow();
 
-		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0); //Dibujamos recorriendo el array indexes ENTERO creado anteriormente
+	//	Draw(6); //Dibujamos recorriendo el array indexes ENTERO creado anteriormente
 
-		swapBuffers(window);
+	//	swapBuffers(window);
 
-		pollEvents();
+	//	pollEvents();
 
-	}
+	//}
 	glDeleteProgram(shader);
 }
 
@@ -77,22 +77,13 @@ DllExport void Renderer::swapBuffers(GLFWwindow* window)
 	glfwSwapBuffers(window);
 }
 
-DllExport void Renderer::pollEvents()
-{
-	glfwPollEvents();
-}
 
-DllExport int Renderer::windowShouldClose(GLFWwindow* window)
-{
-	return glfwWindowShouldClose(window);
-}
 
 DllExport void Renderer::setBuffers(int quantity, unsigned int& id, unsigned int bufferArray[], GLenum drawMode, GLenum bufferMode)
 {
 	glGenBuffers(quantity, &id); //Crea el buffer con el ID pasado por parametro (un unsigned int)
 	glBindBuffer(bufferMode, id); //bindea el parametro id a el bufferMode especificado
-	glBufferData(bufferMode, 6 * 2 * sizeof(float), bufferArray, drawMode);	//Le asigna la info al buffer
-
+	glBufferData(bufferMode, 6 * 2 * sizeof(float), bufferArray, drawMode);	//Le asigna la info al buffer PARAMETROS: modo al que se bindeo el buffer, tamaño del buffer, contenido del buffer, para que se va a suar el buffer
 }
 
 DllExport void Renderer::setBuffers(int quantity, unsigned int& id, float bufferArray[], GLenum drawMode, GLenum bufferMode)
@@ -104,7 +95,7 @@ DllExport void Renderer::setBuffers(int quantity, unsigned int& id, float buffer
 
 DllExport void Renderer::setFloatVertex()
 {
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 3, 0); //Asigna los atributos XYZ RGB ST del vertice y por cual debera empezar a leer
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 3, 0); //Asigna los atributos XYZ RGBA ST del vertice y por cual debera empezar a leer
 	glEnableVertexAttribArray(0);
 	
 }

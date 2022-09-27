@@ -15,7 +15,8 @@ public:
 	DllExport int init();
 	DllExport void terminate();
 	DllExport void makeContextCurrent();
-
+	DllExport void pollEvents();
+	DllExport int windowShouldClose(GLFWwindow* window);
 private:
 	GLFWwindow* window;
 };

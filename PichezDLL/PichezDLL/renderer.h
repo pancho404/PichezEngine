@@ -14,8 +14,6 @@ public:
 	DllExport void renderWindow(GLFWwindow* window);
 	DllExport void clearWindow();
 	DllExport void swapBuffers(GLFWwindow* window);
-	DllExport void pollEvents();
-	DllExport int windowShouldClose(GLFWwindow* window);
 	DllExport void setBuffers(int quantity, unsigned int& id, unsigned int bufferArray[], GLenum drawMode, GLenum bufferMode);
 	DllExport void setBuffers(int quantity, unsigned int& id, float bufferArray[], GLenum drawMode, GLenum bufferMode);
 	DllExport void setFloatVertex();

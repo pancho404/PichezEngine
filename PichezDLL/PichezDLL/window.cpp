@@ -52,3 +52,15 @@ DllExport int Window::run()
 
 	makeContextCurrent();
 }
+
+DllExport void Window::pollEvents()
+{
+	glfwPollEvents();
+}
+
+
+DllExport int Window::windowShouldClose(GLFWwindow* window)
+{
+	return glfwWindowShouldClose(window);
+}
+
