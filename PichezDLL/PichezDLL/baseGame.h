@@ -4,6 +4,7 @@
 #include "glfw3.h"
 #include "window.h"
 #include "renderer.h"
+#include "shape.h"
 
 class BaseGame
 {

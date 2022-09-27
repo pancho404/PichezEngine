@@ -21,6 +21,7 @@ public:
 	DllExport void setFloatVertex();
 	DllExport static unsigned int CompileShader(unsigned int type, const std::string& source);
 	DllExport static unsigned int CreateShader(const std::string& vertexShader, const std::string& fragmentShader);
+	DllExport void Draw(unsigned int indexCount);
 private:
 
 };

@@ -149,4 +149,8 @@ DllExport  unsigned int Renderer::CreateShader(const std::string& _vertexShader,
 
 	return program;
 }
+DllExport void Renderer::Draw(unsigned int indexCount)
+{
+	glDrawElements(GL_TRIANGLES, indexCount, GL_UNSIGNED_INT, nullptr);
+}
 
