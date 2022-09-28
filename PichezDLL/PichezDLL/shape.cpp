@@ -14,7 +14,7 @@ void Shape::setVertices(int vertexCount, float* vertexPosition)
 	this->vertexCount = vertexCount;
 }
 
-void Shape::draw(Renderer* renderer)
+void Shape::draw(Renderer* renderer, int indexCount)
 {
-	renderer->Draw(6);
+	renderer->Draw(indexCount);
 }

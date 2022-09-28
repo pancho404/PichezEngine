@@ -21,6 +21,7 @@ DllExport void Renderer::renderWindow(GLFWwindow* window)
 		 0.5f,  0.5f, 0.0f, //2
 		-0.5f,  0.5f, 0.0f  //3
 	};
+
 	unsigned int indexes[] =
 	{
 		0,1,2,
@@ -83,7 +84,7 @@ DllExport void Renderer::setBuffers(int quantity, unsigned int& id, unsigned int
 {
 	glGenBuffers(quantity, &id); //Crea el buffer con el ID pasado por parametro (un unsigned int)
 	glBindBuffer(bufferMode, id); //bindea el parametro id a el bufferMode especificado
-	glBufferData(bufferMode, 6 * 2 * sizeof(float), bufferArray, drawMode);	//Le asigna la info al buffer PARAMETROS: modo al que se bindeo el buffer, tamaño del buffer, contenido del buffer, para que se va a suar el buffer
+	glBufferData(bufferMode, 4 * 2 * sizeof(float), bufferArray, drawMode);	//Le asigna la info al buffer PARAMETROS: modo al que se bindeo el buffer, tamaño del buffer, contenido del buffer, para que se va a suar el buffer
 }
 
 DllExport void Renderer::setBuffers(int quantity, unsigned int& id, float bufferArray[], GLenum drawMode, GLenum bufferMode)

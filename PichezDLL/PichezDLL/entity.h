@@ -22,7 +22,7 @@ public:
 	DllExport void setScale(Coordinates newScale);
 	DllExport Coordinates getScale();
 	//DllExport std::list<Coordinates> getVertexList();
-	DllExport virtual void draw(Renderer* renderer) = 0;
+	DllExport virtual void draw(Renderer* renderer, int indexCount) = 0;
 
 private:
 	Coordinates pos;

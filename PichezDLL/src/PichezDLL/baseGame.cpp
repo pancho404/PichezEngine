@@ -24,7 +24,7 @@ DllExport int BaseGame::run()
 	{
 		renderer->clearWindow();
 
-		shape->draw(renderer); //Dibujamos recorriendo el array indexes ENTERO creado anteriormente
+		shape->draw(renderer, 6);
 
 		renderer->swapBuffers(window->getWindow());
 
