@@ -1,8 +1,8 @@
 #include "renderer.h"
 
-DllExport Renderer::Renderer()
+DllExport Renderer::Renderer(static glm::mat4 shaderTransform)
 {
-
+	this->shaderTransform = shaderTransform;
 }
 
 DllExport Renderer::~Renderer()
@@ -14,14 +14,12 @@ DllExport void Renderer::renderWindow(GLFWwindow* window, float vertexPositions[
 {
 	unsigned int indexBufferObject; //creamos una variable que sera utilizada como buffer
 	unsigned int vertexBufferObject;
-	
 
-	
 	setBuffers(1, vertexBufferObject, vertexPositions, GL_STATIC_DRAW, GL_ARRAY_BUFFER); //Seteamos el buffer creado
 	setBuffers(1, indexBufferObject, indexes, GL_STATIC_DRAW, GL_ELEMENT_ARRAY_BUFFER); //Seteamos el buffer creado
 	setFloatVertex(); //Seteamos los datos de las posiciones de los vertices
 
-	std::string vertexShader =
+	/*std::string vertexShader =
 		"#version 330 core\n"
 		"\n"
 		"layout(location = 0) in vec4 position;"
@@ -29,9 +27,24 @@ DllExport void Renderer::renderWindow(GLFWwindow* window, float vertexPositions[
 		"void main()\n"
 		"{\n"
 		"	gl_Position = position;\n"
+		"}\n";*/
+
+	std::string vertexShader =
+		"#version 330 core\n"
+		"\n"
+		"layout(location = 0) in vec4 position;"
+		"\n"
+		"out vec4 vertexColor;"
+		"\n"
+		"uniform mat4 modelMatrix;"
+		"\n"
+		"void main()\n"
+		"{\n"
+		"gl_Position = modelMatrix * vec4(position, 1.0f);\n"
+		"vertexColor = vec4(1.0, 0.0, 1.0, 1.0);\n"
 		"}\n";
 
-	std::string fragmentShader =
+	/*std::string fragmentShader =
 		"#version 330 core\n"
 		"\n"
 		"layout(location = 0) out vec4 color;\n"
@@ -39,22 +52,22 @@ DllExport void Renderer::renderWindow(GLFWwindow* window, float vertexPositions[
 		"void main()\n"
 		"{\n"
 		"	color = vec4(1.0, 0.0, 1.0, 1.0);\n"
+		"}\n";*/
+
+	std::string fragmentShader =
+		"#version 330 core\n"
+		"\n"
+		"layout(location = 0) out vec4 color;\n"
+		"\n"
+		"in vec4 vertexColor;"
+		"\n"
+		"void main()\n"
+		"{\n"
+		"	color = vertexColor;\n"
 		"}\n";
 
 	unsigned int shader = CreateShader(vertexShader, fragmentShader);
 	glUseProgram(shader);
-
-	//while (!windowShouldClose(window))
-	//{
-	//	clearWindow();
-
-	//	Draw(6); //Dibujamos recorriendo el array indexes ENTERO creado anteriormente
-
-	//	swapBuffers(window);
-
-	//	pollEvents();
-
-	//}
 	glDeleteProgram(shader);
 }
 
@@ -88,7 +101,7 @@ DllExport void Renderer::setFloatVertex()
 {
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 3, 0); //Asigna los atributos XYZ RGBA ST del vertice y por cual debera empezar a leer
 	glEnableVertexAttribArray(0);
-	
+
 }
 
 DllExport unsigned int Renderer::CompileShader(unsigned int type, const std::string& source)
@@ -122,6 +135,10 @@ DllExport  unsigned int Renderer::CreateShader(const std::string& _vertexShader,
 	unsigned int vertexShader = CompileShader(GL_VERTEX_SHADER, _vertexShader);
 	unsigned int fragmentShader = CompileShader(GL_FRAGMENT_SHADER, _fragmentShader);
 
+	glm::mat4 auxMat = shaderTransform;
+	unsigned int shaderTransformLoc = glGetUniformLocation(vertexShader, "modelMatrix");
+	glUniformMatrix4fv(shaderTransformLoc, 1, GL_FALSE, glm::value_ptr(auxMat));
+
 	glAttachShader(program, vertexShader);
 	glAttachShader(program, fragmentShader);
 	glLinkProgram(program);
@@ -136,4 +153,6 @@ DllExport void Renderer::Draw(unsigned int indexCount)
 {
 	glDrawElements(GL_TRIANGLES, indexCount, GL_UNSIGNED_INT, nullptr);
 }
+
+
 

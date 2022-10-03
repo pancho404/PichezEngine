@@ -1,30 +1,24 @@
 #include "shape.h"
 
-Shape::Shape()
+DllExport Shape::Shape()
 {
 }
 
-Shape::~Shape()
+DllExport Shape::~Shape()
 {
 }
 
-void Shape::setVertices(int vertexCount, float* vertexPosition)
-{
-	this->vertexPosition = vertexPosition;
-	this->vertexCount = vertexCount;
-}
-
-void Shape::draw(Renderer* renderer, int indexCount)
+DllExport void Shape::draw(Renderer* renderer, int indexCount)
 {
 	renderer->Draw(indexCount);
 }
 
-unsigned int* Shape::getIndexes()
+DllExport unsigned int* Shape::getIndexes()
 {
 	return indexes;
 }
 
-void Shape::createSquare()
+DllExport void Shape::createSquare()
 {
 	vertexPositions[0] = -0.5f;
 	vertexPositions[1] = -0.5f;
@@ -40,7 +34,7 @@ void Shape::createSquare()
 	vertexPositions[11] = 0.0f;
 }
 
-void Shape::createTriangle()
+DllExport void Shape::createTriangle()
 {
 	vertexPositions[0] = -0.5f;
 	vertexPositions[1] = -0.5f;
@@ -53,9 +47,13 @@ void Shape::createTriangle()
 	vertexPositions[8] = 0.0f;
 }
 
-float* Shape::getVertexPositions()
+DllExport float* Shape::getVertexPositions()
 {
 	return vertexPositions;
 }
 
+DllExport void Shape::setVertices(int subindex, float newVertexPos)
+{
+	this->vertexPositions[subindex] = newVertexPos;
+}
 

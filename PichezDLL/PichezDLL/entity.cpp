@@ -1,8 +1,9 @@
 #include "entity.h"
 
-DllExport Entity::Entity(/*std::list<Coordinates> vertexes*/)
+
+DllExport Entity::Entity()
 {
-	//vertexList = vertexes;
+	
 }
 
 Entity::~Entity()
@@ -10,39 +11,48 @@ Entity::~Entity()
 
 }
 
-DllExport void Entity::setPosition(Coordinates newPos)
+DllExport void Entity::setPosition(float x, float y, float z)
 {
-	pos = newPos;
+	glm::vec3 vecToAdd = glm::vec3(x, y, z);
+	translateMat = glm::translate(translateMat, vecToAdd);
+	positionVec = translateMat * positionVec;
 }
 
-DllExport Coordinates Entity::getPosition()
+DllExport glm::vec4 Entity::getPosition()
 {
-	return pos;
+	return positionVec;
 }
 
-//DllExport std::list<Coordinates> Entity::getVertexList()
-//{
-//	return vertexList;
-//}
-
-DllExport void Entity::setRotation(Coordinates newRotation)
+DllExport void Entity::setRotation(float angleAmount, glm::vec3 axis)
 {
-	rotation = newRotation;
+	translateMat = glm::rotate(translateMat, glm::radians(angleAmount), axis);
 }
 
-DllExport Coordinates Entity::getRotation()
+DllExport glm::vec4 Entity::getRotation()
 {
-	return rotation;
+	return rotationVec;
 }
 
-DllExport void Entity::setScale(Coordinates newScale)
+DllExport void Entity::setScale(float x, float y, float z)
 {
-	scale = newScale;
+	glm::vec3 vector = glm::vec3(x, y, z);
+	scaleMat = glm::scale(scaleMat, vector);
+	scaleVec;
 }
 
-DllExport Coordinates Entity::getScale()
+DllExport glm::vec4 Entity::getScale()
 {
-	return scale;
+	return scaleVec;
+}
+
+DllExport void Entity::updateModelMatrix()
+{
+	rotationMat* scaleMat* translateMat;
+}
+
+DllExport glm::mat4 Entity::getModelMatrix()
+{
+	return modelMatrix;
 }
 
 

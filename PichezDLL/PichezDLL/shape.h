@@ -1,6 +1,6 @@
 #pragma once
 #include"entity2d.h"
-class Shape :Entity2d
+class Shape : public Entity2d
 {
 private:
 	float vertexPositions[12];
@@ -10,13 +10,13 @@ private:
 		2,3,0
 	};
 public:
-	Shape();
-	~Shape();
-	void setVertices(int vertexCount, float* vertexPosition);
-	void draw(Renderer* renderer, int indexCount) override;
-	void createSquare();
-	void createTriangle();
-	float* getVertexPositions();
-	unsigned int* getIndexes();
+	DllExport Shape();
+	DllExport ~Shape();
+	DllExport void setVertices(int subindex, float newVertexPosition);
+	DllExport void draw(Renderer* renderer, int indexCount) override;
+	DllExport void createSquare();
+	DllExport void createTriangle();
+	DllExport float* getVertexPositions();
+	DllExport unsigned int* getIndexes();
 };
 

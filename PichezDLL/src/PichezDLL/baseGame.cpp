@@ -11,14 +11,17 @@ DllExport BaseGame::~BaseGame()
 DllExport int BaseGame::run()
 {
 	//INIT
-	Window* window = new Window();
-	Renderer* renderer = new Renderer();
 	Shape* shape = new Shape();
+	Window* window = new Window();
+	Renderer* renderer = new Renderer(shape->getModelMatrix());
 
 	//UPDATES Y DRAW
 	window->run();
-	shape->createSquare();
+	shape->createTriangle();
 	renderer->renderWindow(window->getWindow(), shape->getVertexPositions(), shape->getIndexes());
+
+	shape->setScale(2.0f,0.0f,0.0f);
+	shape->updateModelMatrix();
 
 	while (!window->windowShouldClose(window->getWindow()))
 	{

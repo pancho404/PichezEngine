@@ -4,12 +4,14 @@
 #include "DLLExport.h"
 #include<iostream>
 #include<string.h>
-
+#include "glm/glm.hpp"
+#include "glm/gtc/matrix_transform.hpp"
+#include "glm/gtc/type_ptr.hpp"
 
 class Renderer
 {
 public:
-	DllExport Renderer();
+	DllExport Renderer(static glm::mat4 shaderTransform);
 	DllExport ~Renderer();
 	DllExport void renderWindow(GLFWwindow* window, float vertexPositions[], unsigned int indexes[]);
 	DllExport void clearWindow();
@@ -21,6 +23,6 @@ public:
 	DllExport static unsigned int CreateShader(const std::string& vertexShader, const std::string& fragmentShader);
 	DllExport void Draw(unsigned int indexCount);
 private:
-
+	glm::mat4 shaderTransform;
 };
 
