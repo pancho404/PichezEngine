@@ -10,23 +10,13 @@ DllExport Renderer::~Renderer()
 
 }
 
-DllExport void Renderer::renderWindow(GLFWwindow* window)
+DllExport void Renderer::renderWindow(GLFWwindow* window, float vertexPositions[], unsigned int indexes[])
 {
 	unsigned int indexBufferObject; //creamos una variable que sera utilizada como buffer
 	unsigned int vertexBufferObject;
-	float vertexPositions[] = //Creamos el array de las posiciones de los vertices del triangulo 
-	{
-		-0.5f, -0.5f, 0.0f, //0
-		 0.5f, -0.5f, 0.0f, //1
-		 0.5f,  0.5f, 0.0f, //2
-		-0.5f,  0.5f, 0.0f  //3
-	};
+	
 
-	unsigned int indexes[] =
-	{
-		0,1,2,
-		2,3,0
-	};
+	
 	setBuffers(1, vertexBufferObject, vertexPositions, GL_STATIC_DRAW, GL_ARRAY_BUFFER); //Seteamos el buffer creado
 	setBuffers(1, indexBufferObject, indexes, GL_STATIC_DRAW, GL_ELEMENT_ARRAY_BUFFER); //Seteamos el buffer creado
 	setFloatVertex(); //Seteamos los datos de las posiciones de los vertices

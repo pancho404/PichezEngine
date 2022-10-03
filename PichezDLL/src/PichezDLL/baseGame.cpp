@@ -17,8 +17,8 @@ DllExport int BaseGame::run()
 
 	//UPDATES Y DRAW
 	window->run();
-
-	renderer->renderWindow(window->getWindow());
+	shape->createSquare();
+	renderer->renderWindow(window->getWindow(), shape->getVertexPositions(), shape->getIndexes());
 
 	while (!window->windowShouldClose(window->getWindow()))
 	{
@@ -37,5 +37,5 @@ DllExport int BaseGame::run()
 	delete renderer;
 	delete shape;
 	return 0;
-	
+
 }
