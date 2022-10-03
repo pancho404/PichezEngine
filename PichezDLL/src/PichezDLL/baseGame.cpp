@@ -17,11 +17,11 @@ DllExport int BaseGame::run()
 
 	//UPDATES Y DRAW
 	window->run();
-	shape->createTriangle();
+	shape->createSquare();
+	shape->setScale(2.0f, 2.0f, 2.0f);
+	shape->updateModelMatrix();
 	renderer->renderWindow(window->getWindow(), shape->getVertexPositions(), shape->getIndexes());
 
-	shape->setScale(2.0f,0.0f,0.0f);
-	shape->updateModelMatrix();
 
 	while (!window->windowShouldClose(window->getWindow()))
 	{

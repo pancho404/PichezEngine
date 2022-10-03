@@ -19,30 +19,29 @@ DllExport void Renderer::renderWindow(GLFWwindow* window, float vertexPositions[
 	setBuffers(1, indexBufferObject, indexes, GL_STATIC_DRAW, GL_ELEMENT_ARRAY_BUFFER); //Seteamos el buffer creado
 	setFloatVertex(); //Seteamos los datos de las posiciones de los vertices
 
-	/*std::string vertexShader =
-		"#version 330 core\n"
-		"\n"
-		"layout(location = 0) in vec4 position;"
-		"\n"
-		"void main()\n"
-		"{\n"
-		"	gl_Position = position;\n"
-		"}\n";*/
+	//std::string vertexShader =
+	//	"#version 330 core\n"
+	//	"\n"
+	//	"layout(location = 0) in vec4 position;"
+	//	"\n"
+	//	"void main()\n"
+	//	"{\n"
+	//	"	gl_Position = position;\n"
+	//	"}\n";
 
 	std::string vertexShader =
 		"#version 330 core\n"
 		"\n"
 		"layout(location = 0) in vec4 position;"
 		"\n"
-		"out vec4 vertexColor;"
-		"\n"
 		"uniform mat4 modelMatrix;"
 		"\n"
 		"void main()\n"
 		"{\n"
-		"gl_Position = modelMatrix * vec4(position, 1.0f);\n"
-		"vertexColor = vec4(1.0, 0.0, 1.0, 1.0);\n"
+			"gl_Position =  t * position;\n"
 		"}\n";
+
+	//MULTIPLICAR POR MODELMATRIX HACE Q SE ROMPA, SE PRESUME QUE MODEL MATRIX QUEDE SIEMPRE es null
 
 	/*std::string fragmentShader =
 		"#version 330 core\n"
@@ -58,16 +57,21 @@ DllExport void Renderer::renderWindow(GLFWwindow* window, float vertexPositions[
 		"#version 330 core\n"
 		"\n"
 		"layout(location = 0) out vec4 color;\n"
-		"\n"
-		"in vec4 vertexColor;"
+		"\n"		
 		"\n"
 		"void main()\n"
 		"{\n"
-		"	color = vertexColor;\n"
+		"	color = vec4(1.0, 0.0, 1.0, 1.0);\n"
 		"}\n";
 
-	unsigned int shader = CreateShader(vertexShader, fragmentShader);
+	unsigned int vertexShaderID;
+	unsigned int fragmentShaderID;
+	unsigned int shader = CreateShader(vertexShader, fragmentShader, vertexShaderID, fragmentShaderID);
 	glUseProgram(shader);
+
+	unsigned int shaderTransformLoc = glGetUniformLocation(vertexShaderID, "modelMatrix");
+	glUniformMatrix4fv(shaderTransformLoc, 1, GL_FALSE, glm::value_ptr(shaderTransform));
+
 	glDeleteProgram(shader);
 }
 
@@ -104,13 +108,21 @@ DllExport void Renderer::setFloatVertex()
 
 }
 
-DllExport unsigned int Renderer::CompileShader(unsigned int type, const std::string& source)
+DllExport unsigned int Renderer::CompileShader(unsigned int type, const std::string& source, unsigned int& vertexShaderID, unsigned int& fragmentShaderID)
 {
 	unsigned int id = glCreateShader(type);
 	const char* src = source.c_str();
 	glShaderSource(id, 1, &src, nullptr);
 	glCompileShader(id);
 
+	if (type== GL_VERTEX_SHADER)
+	{
+		vertexShaderID = id;
+	}
+	else if (type == GL_FRAGMENT_SHADER)
+	{
+		fragmentShaderID = id;
+	}
 
 	int result;
 	glGetShaderiv(id, GL_COMPILE_STATUS, &result);
@@ -129,15 +141,11 @@ DllExport unsigned int Renderer::CompileShader(unsigned int type, const std::str
 	}
 	return id;
 }
-DllExport  unsigned int Renderer::CreateShader(const std::string& _vertexShader, const std::string& _fragmentShader)
+DllExport  unsigned int Renderer::CreateShader(const std::string& _vertexShader, const std::string& _fragmentShader, unsigned int& vertexShaderID, unsigned int& fragmentShaderID)
 {
 	unsigned int program = glCreateProgram();
-	unsigned int vertexShader = CompileShader(GL_VERTEX_SHADER, _vertexShader);
-	unsigned int fragmentShader = CompileShader(GL_FRAGMENT_SHADER, _fragmentShader);
-
-	glm::mat4 auxMat = shaderTransform;
-	unsigned int shaderTransformLoc = glGetUniformLocation(vertexShader, "modelMatrix");
-	glUniformMatrix4fv(shaderTransformLoc, 1, GL_FALSE, glm::value_ptr(auxMat));
+	unsigned int vertexShader = CompileShader(GL_VERTEX_SHADER, _vertexShader, vertexShaderID, fragmentShaderID);
+	unsigned int fragmentShader = CompileShader(GL_FRAGMENT_SHADER, _fragmentShader, vertexShaderID, fragmentShaderID);
 
 	glAttachShader(program, vertexShader);
 	glAttachShader(program, fragmentShader);
@@ -153,6 +161,7 @@ DllExport void Renderer::Draw(unsigned int indexCount)
 {
 	glDrawElements(GL_TRIANGLES, indexCount, GL_UNSIGNED_INT, nullptr);
 }
+
 
 
 
