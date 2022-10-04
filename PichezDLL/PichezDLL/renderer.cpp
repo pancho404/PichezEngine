@@ -34,14 +34,12 @@ DllExport void Renderer::renderWindow(GLFWwindow* window, float vertexPositions[
 		"\n"
 		"layout(location = 0) in vec4 position;"
 		"\n"
-		"uniform mat4 modelMatrix;"
+		"uniform mat4 mvpMat;"
 		"\n"
 		"void main()\n"
 		"{\n"
-			"gl_Position =  t * position;\n"
+			"gl_Position =  mvpMat * vec4(position, 1.0f);\n"
 		"}\n";
-
-	//MULTIPLICAR POR MODELMATRIX HACE Q SE ROMPA, SE PRESUME QUE MODEL MATRIX QUEDE SIEMPRE es null
 
 	/*std::string fragmentShader =
 		"#version 330 core\n"
@@ -69,7 +67,7 @@ DllExport void Renderer::renderWindow(GLFWwindow* window, float vertexPositions[
 	unsigned int shader = CreateShader(vertexShader, fragmentShader, vertexShaderID, fragmentShaderID);
 	glUseProgram(shader);
 
-	unsigned int shaderTransformLoc = glGetUniformLocation(vertexShaderID, "modelMatrix");
+	unsigned int shaderTransformLoc = glGetUniformLocation(shader, "mvpMat");
 	glUniformMatrix4fv(shaderTransformLoc, 1, GL_FALSE, glm::value_ptr(shaderTransform));
 
 	glDeleteProgram(shader);
@@ -160,6 +158,11 @@ DllExport  unsigned int Renderer::CreateShader(const std::string& _vertexShader,
 DllExport void Renderer::Draw(unsigned int indexCount)
 {
 	glDrawElements(GL_TRIANGLES, indexCount, GL_UNSIGNED_INT, nullptr);
+}
+
+DllExport void Renderer::updateRendererModelMatrix(glm::mat4 modelMatrix)
+{
+	shaderTransform = modelMatrix;
 }
 
 

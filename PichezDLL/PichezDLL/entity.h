@@ -37,6 +37,7 @@ private:
 	glm::mat4 rotationMat = glm::mat4(1.0f);
 	glm::mat4 scaleMat = glm::mat4(1.0f);
 	glm::mat4 modelMatrix = glm::mat4(1.0f);
+	
 };
 
 

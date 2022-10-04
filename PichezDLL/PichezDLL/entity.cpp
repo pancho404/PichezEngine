@@ -16,6 +16,7 @@ DllExport void Entity::setPosition(float x, float y, float z)
 	glm::vec3 vecToAdd = glm::vec3(x, y, z);
 	translateMat = glm::translate(translateMat, vecToAdd);
 	positionVec = translateMat * positionVec;
+	updateModelMatrix();
 }
 
 DllExport glm::vec4 Entity::getPosition()
@@ -25,7 +26,8 @@ DllExport glm::vec4 Entity::getPosition()
 
 DllExport void Entity::setRotation(float angleAmount, glm::vec3 axis)
 {
-	translateMat = glm::rotate(translateMat, glm::radians(angleAmount), axis);
+	rotationMat = glm::rotate(rotationMat, glm::radians(angleAmount), axis);
+	updateModelMatrix();
 }
 
 DllExport glm::vec4 Entity::getRotation()
@@ -37,7 +39,7 @@ DllExport void Entity::setScale(float x, float y, float z)
 {
 	glm::vec3 vector = glm::vec3(x, y, z);
 	scaleMat = glm::scale(scaleMat, vector);
-	scaleVec;
+	updateModelMatrix();
 }
 
 DllExport glm::vec4 Entity::getScale()
@@ -47,7 +49,7 @@ DllExport glm::vec4 Entity::getScale()
 
 DllExport void Entity::updateModelMatrix()
 {
-	rotationMat* scaleMat* translateMat;
+	modelMatrix = scaleMat * rotationMat * translateMat;
 }
 
 DllExport glm::mat4 Entity::getModelMatrix()

@@ -14,18 +14,18 @@ DllExport int BaseGame::run()
 	Shape* shape = new Shape();
 	Window* window = new Window();
 	Renderer* renderer = new Renderer(shape->getModelMatrix());
+	window->run();
+	shape->createTriangle();
 
 	//UPDATES Y DRAW
-	window->run();
-	shape->createSquare();
-	shape->setScale(2.0f, 2.0f, 2.0f);
-	shape->updateModelMatrix();
-	renderer->renderWindow(window->getWindow(), shape->getVertexPositions(), shape->getIndexes());
-
-
 	while (!window->windowShouldClose(window->getWindow()))
 	{
+
 		renderer->clearWindow();
+		renderer->renderWindow(window->getWindow(), shape->getVertexPositions(), shape->getIndexes());
+		renderer->updateRendererModelMatrix(shape->getModelMatrix());
+
+		shape->setRotation((float)glfwGetTime(), glm::vec3(0.0f, 0.0f, 1.0f));
 
 		shape->draw(renderer, 6);
 
