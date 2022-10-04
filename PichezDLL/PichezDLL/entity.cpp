@@ -27,6 +27,7 @@ DllExport glm::vec4 Entity::getPosition()
 DllExport void Entity::setRotation(float angleAmount, glm::vec3 axis)
 {
 	rotationMat = glm::rotate(rotationMat, glm::radians(angleAmount), axis);
+	rotationVec = rotationMat * rotationVec;
 	updateModelMatrix();
 }
 
@@ -39,6 +40,7 @@ DllExport void Entity::setScale(float x, float y, float z)
 {
 	glm::vec3 vector = glm::vec3(x, y, z);
 	scaleMat = glm::scale(scaleMat, vector);
+	scaleVec = scaleMat * scaleVec;
 	updateModelMatrix();
 }
 
