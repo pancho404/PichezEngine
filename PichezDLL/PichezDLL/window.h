@@ -20,10 +20,7 @@ public:
 	DllExport void makeContextCurrent();
 	DllExport void pollEvents();
 	DllExport int windowShouldClose(GLFWwindow* window);
-	DllExport glm::mat4 getViewMatrix();
-	DllExport void moveCamara(float x, float y, float z);
-	DllExport void rotateCamara();
+
 private:
 	GLFWwindow* window;
-	glm::mat4 viewMatrix;
 };

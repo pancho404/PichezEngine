@@ -24,9 +24,9 @@ DllExport int BaseGame::run()
 		renderer->renderWindow(window->getWindow(), shape->getVertexPositions(), shape->getIndexes()); //Renderizamos la ventana y los objetos dentro de ella (vertices)
 
 		renderer->updateRendererModelMatrix(shape->getModelMatrix()); //Se updatea la matriz modelo que usara el renderer, enviamos la matriz de la shape.
-		renderer->updateMVPMatrix(window->getViewMatrix()); //Updateamos la matriz MVP que utiliza el renderer, enviamos como parametro la matriz View que pertenece a window.
+		renderer->updateMVPMatrix(); //Updateamos la matriz MVP que utiliza el renderer
 
-		shape->addRotationToAxis(360.0f, glm::vec3(0.0f, 0.0f, 1.0f)); // Aplicamos una transformacion a la figura
+		shape->addRotationToAxis((float)glfwGetTime(), glm::vec3(1.0f, 0.0f, 0.0f)); // Aplicamos una transformacion a la figura
 
 		shape->draw(renderer, 6); //Dibujamos la figura, enviandole que renderer la renderizará y cuantos indices posee
 

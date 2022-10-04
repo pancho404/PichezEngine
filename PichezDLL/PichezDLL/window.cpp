@@ -2,7 +2,7 @@
 
 DllExport Window::Window()
 {
-	viewMatrix = glm::mat4(1.0f);
+
 }
 
 DllExport Window::~Window()
@@ -65,9 +65,6 @@ DllExport int Window::windowShouldClose(GLFWwindow* window)
 	return glfwWindowShouldClose(window);
 }
 
-DllExport glm::mat4 Window::getViewMatrix()
-{
-	return viewMatrix;
-}
+
 
 

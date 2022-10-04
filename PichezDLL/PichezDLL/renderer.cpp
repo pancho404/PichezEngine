@@ -3,11 +3,12 @@
 DllExport Renderer::Renderer(static glm::mat4 rendererModelMatrix, std::string method)
 {
 	this->rendererModelMatrix = rendererModelMatrix;
-	if (method=="ortho")
+	viewMatrix = glm::mat4(1.0f);
+	if (method=="ortho") //Proyeccion ortografica/paralela
 	{
 		projectionMatrix = glm::ortho(-2.0f, 2.0f, -1.5f, 1.5f, -1.0f, 1.0f);
 	}
-	else if (method=="perspective")
+	else if (method=="perspective") //En este caso seria en perspectiva pero como se trata de un motor 2D no lo vamos a programar por ahora
 	{
 		//projectionMatrix= glm::perspective()
 	}
@@ -143,9 +144,14 @@ DllExport void Renderer::updateRendererModelMatrix(glm::mat4 modelMatrix)
 	rendererModelMatrix = modelMatrix;
 }
 
-DllExport void Renderer::updateMVPMatrix(glm::mat4 viewMatrix)
+DllExport void Renderer::updateMVPMatrix()
 {
 	rendererMVPMatrix = projectionMatrix * viewMatrix * rendererModelMatrix;
+}
+
+DllExport glm::mat4 Renderer::getViewMatrix()
+{
+	return viewMatrix;
 }
 
 

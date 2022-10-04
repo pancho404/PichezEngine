@@ -23,10 +23,12 @@ public:
 	DllExport static unsigned int CreateShader(const std::string& vertexShader, const std::string& fragmentShader);
 	DllExport void Draw(unsigned int indexCount);
 	DllExport void updateRendererModelMatrix(glm::mat4 modelMatrix);
-	DllExport void updateMVPMatrix(glm::mat4 viewMatrix);
+	DllExport void updateMVPMatrix();
+	DllExport glm::mat4 getViewMatrix();
 private:
 	glm::mat4 rendererModelMatrix;
 	glm::mat4 projectionMatrix;
+	glm::mat4 viewMatrix;
 	glm::mat4 rendererMVPMatrix;
 };
 
