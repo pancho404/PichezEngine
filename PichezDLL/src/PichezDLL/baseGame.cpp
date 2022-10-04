@@ -13,9 +13,9 @@ DllExport int BaseGame::run()
 	//INIT
 	Shape* shape = new Shape();
 	Window* window = new Window();
-	Renderer* renderer = new Renderer(shape->getModelMatrix());
+	Renderer* renderer = new Renderer(shape->getModelMatrix(), "ortho");
 	window->run();
-	shape->createTriangle();
+	shape->createSquare();
 
 	//UPDATES Y DRAW
 	while (!window->windowShouldClose(window->getWindow()))
@@ -24,8 +24,8 @@ DllExport int BaseGame::run()
 		renderer->clearWindow();
 		renderer->renderWindow(window->getWindow(), shape->getVertexPositions(), shape->getIndexes());
 		renderer->updateRendererModelMatrix(shape->getModelMatrix());
-
-		shape->setRotation((float)glfwGetTime(), glm::vec3(0.0f, 0.0f, 1.0f));
+		renderer->updateMVPMatrix(window->getViewMatrix());
+		shape->setRotation(360.0f, glm::vec3(0.0f, 0.0f, 1.0f));
 
 		shape->draw(renderer, 6);
 
