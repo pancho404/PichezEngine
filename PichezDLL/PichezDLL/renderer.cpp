@@ -1,8 +1,16 @@
 #include "renderer.h"
 
-DllExport Renderer::Renderer(static glm::mat4 shaderTransform)
+DllExport Renderer::Renderer(static glm::mat4 rendererModelMatrix, std::string method)
 {
-	this->shaderTransform = shaderTransform;
+	this->rendererModelMatrix = rendererModelMatrix;
+	if (method=="ortho")
+	{
+		projectionMatrix = glm::ortho(-2.0f, 2.0f, -1.5f, 1.5f, -1.0f, 1.0f);
+	}
+	else if (method=="perspective")
+	{
+		//projectionMatrix= glm::perspective()
+	}
 }
 
 DllExport Renderer::~Renderer()
@@ -32,7 +40,7 @@ DllExport void Renderer::renderWindow(GLFWwindow* window, float vertexPositions[
 	std::string vertexShader =
 		"#version 330 core\n"
 		"\n"
-		"layout(location = 0) in vec4 position;"
+		"layout(location = 0) in vec3 position;"
 		"\n"
 		"uniform mat4 mvpMat;"
 		"\n"
@@ -68,7 +76,7 @@ DllExport void Renderer::renderWindow(GLFWwindow* window, float vertexPositions[
 	glUseProgram(shader);
 
 	unsigned int shaderTransformLoc = glGetUniformLocation(shader, "mvpMat");
-	glUniformMatrix4fv(shaderTransformLoc, 1, GL_FALSE, glm::value_ptr(shaderTransform));
+	glUniformMatrix4fv(shaderTransformLoc, 1, GL_FALSE, glm::value_ptr(rendererMVPMatrix));
 
 	glDeleteProgram(shader);
 }
@@ -162,9 +170,13 @@ DllExport void Renderer::Draw(unsigned int indexCount)
 
 DllExport void Renderer::updateRendererModelMatrix(glm::mat4 modelMatrix)
 {
-	shaderTransform = modelMatrix;
+	rendererModelMatrix = modelMatrix;
 }
 
+DllExport void Renderer::updateMVPMatrix(glm::mat4 viewMatrix)
+{
+	rendererMVPMatrix = projectionMatrix * viewMatrix * rendererModelMatrix;
+}
 
 
 

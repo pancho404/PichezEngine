@@ -11,7 +11,7 @@
 class Renderer
 {
 public:
-	DllExport Renderer(static glm::mat4 shaderTransform);
+	DllExport Renderer(static glm::mat4 rendererModelMatrix, std::string method);
 	DllExport ~Renderer();
 	DllExport void renderWindow(GLFWwindow* window, float vertexPositions[], unsigned int indexes[]);
 	DllExport void clearWindow();
@@ -23,8 +23,10 @@ public:
 	DllExport static unsigned int CreateShader(const std::string& vertexShader, const std::string& fragmentShader, unsigned int& vertexShaderID, unsigned int& fragmentShaderID);
 	DllExport void Draw(unsigned int indexCount);
 	DllExport void updateRendererModelMatrix(glm::mat4 modelMatrix);
+	DllExport void updateMVPMatrix(glm::mat4 viewMatrix);
 private:
-	glm::mat4 shaderTransform;
-
+	glm::mat4 rendererModelMatrix;
+	glm::mat4 projectionMatrix;
+	glm::mat4 rendererMVPMatrix;
 };
 
