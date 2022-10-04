@@ -20,6 +20,7 @@ DllExport unsigned int* Shape::getIndexes()
 
 DllExport void Shape::createSquare()
 {
+	//Hardcodeamos las posiciones del array de vertices
 	vertexPositions[0] = -0.5f;
 	vertexPositions[1] = -0.5f;
 	vertexPositions[2] = 0.0f;
@@ -36,6 +37,7 @@ DllExport void Shape::createSquare()
 
 DllExport void Shape::createTriangle()
 {
+	//Hardcodeamos las posiciones del array de vertices
 	vertexPositions[0] = -0.5f;
 	vertexPositions[1] = -0.5f;
 	vertexPositions[2] = 0.0f;
@@ -52,8 +54,8 @@ DllExport float* Shape::getVertexPositions()
 	return vertexPositions;
 }
 
-DllExport void Shape::setVertices(int subindex, float newVertexPos)
+DllExport void Shape::setVertices(int subIndex, float newVertexPos) //Esta función permite cambiar el valor de un vertice especificando su subindice y la nueva posicion
 {
-	this->vertexPositions[subindex] = newVertexPos;
+	this->vertexPositions[subIndex] = newVertexPos; 
 }
 

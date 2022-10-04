@@ -20,16 +20,17 @@ DllExport int BaseGame::run()
 	//UPDATES Y DRAW
 	while (!window->windowShouldClose(window->getWindow()))
 	{
-
 		renderer->clearWindow();
-		renderer->renderWindow(window->getWindow(), shape->getVertexPositions(), shape->getIndexes());
-		renderer->updateRendererModelMatrix(shape->getModelMatrix());
-		renderer->updateMVPMatrix(window->getViewMatrix());
-		shape->setRotation(360.0f, glm::vec3(0.0f, 0.0f, 1.0f));
+		renderer->renderWindow(window->getWindow(), shape->getVertexPositions(), shape->getIndexes()); //Renderizamos la ventana y los objetos dentro de ella (vertices)
 
-		shape->draw(renderer, 6);
+		renderer->updateRendererModelMatrix(shape->getModelMatrix()); //Se updatea la matriz modelo que usara el renderer, enviamos la matriz de la shape.
+		renderer->updateMVPMatrix(window->getViewMatrix()); //Updateamos la matriz MVP que utiliza el renderer, enviamos como parametro la matriz View que pertenece a window.
 
-		renderer->swapBuffers(window->getWindow());
+		shape->addRotationToAxis(360.0f, glm::vec3(0.0f, 0.0f, 1.0f)); // Aplicamos una transformacion a la figura
+
+		shape->draw(renderer, 6); //Dibujamos la figura, enviandole que renderer la renderizará y cuantos indices posee
+
+		renderer->swapBuffers(window->getWindow()); //Cambiamos los punteros de los buffers para que apunten a donde corresponda backBuffer to frontBuffer y frontBuffer to backBuffer.
 
 		window->pollEvents();
 	};

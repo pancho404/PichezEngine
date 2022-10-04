@@ -12,7 +12,7 @@ private:
 public:
 	DllExport Shape();
 	DllExport ~Shape();
-	DllExport void setVertices(int subindex, float newVertexPosition);
+	DllExport void setVertices(int subIndex, float newVertexPosition);
 	DllExport void draw(Renderer* renderer, int indexCount) override;
 	DllExport void createSquare();
 	DllExport void createTriangle();

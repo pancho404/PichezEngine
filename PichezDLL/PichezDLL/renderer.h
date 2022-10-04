@@ -19,8 +19,8 @@ public:
 	DllExport void setBuffers(int quantity, unsigned int& id, unsigned int bufferArray[], GLenum drawMode, GLenum bufferMode);
 	DllExport void setBuffers(int quantity, unsigned int& id, float bufferArray[], GLenum drawMode, GLenum bufferMode);
 	DllExport void setFloatVertex();
-	DllExport static unsigned int CompileShader(unsigned int type, const std::string& source, unsigned int& vertexShaderID, unsigned int& fragmentShaderID);
-	DllExport static unsigned int CreateShader(const std::string& vertexShader, const std::string& fragmentShader, unsigned int& vertexShaderID, unsigned int& fragmentShaderID);
+	DllExport static unsigned int CompileShader(unsigned int type, const std::string& source);
+	DllExport static unsigned int CreateShader(const std::string& vertexShader, const std::string& fragmentShader);
 	DllExport void Draw(unsigned int indexCount);
 	DllExport void updateRendererModelMatrix(glm::mat4 modelMatrix);
 	DllExport void updateMVPMatrix(glm::mat4 viewMatrix);
