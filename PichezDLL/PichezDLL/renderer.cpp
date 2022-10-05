@@ -16,7 +16,7 @@ DllExport Renderer::Renderer(static glm::mat4 rendererModelMatrix, std::string m
 
 DllExport Renderer::~Renderer()
 {
-
+	glDeleteProgram(shader);
 }
 
 DllExport void Renderer::renderWindow(GLFWwindow* window, float vertexPositions[], unsigned int indexes[])
@@ -52,13 +52,12 @@ DllExport void Renderer::renderWindow(GLFWwindow* window, float vertexPositions[
 		"}\n";
 
 	
-	unsigned int shader = CreateShader(vertexShader, fragmentShader); 
+	shader = CreateShader(vertexShader, fragmentShader); 
 	glUseProgram(shader);
 
-	unsigned int shaderTransformLoc = glGetUniformLocation(shader, "mvpMat"); //Buscamos en AMBOS shaders la variable uniform llamada mvpMat y obtenemos su posicion en memoria
-	glUniformMatrix4fv(shaderTransformLoc, 1, GL_FALSE, glm::value_ptr(rendererMVPMatrix)); //le asignamos contenido a la variable que se encuentra en esa posicion de memoria
+	
 
-	glDeleteProgram(shader);
+	glUseProgram(0);
 }
 
 DllExport void Renderer::clearWindow()
@@ -146,6 +145,9 @@ DllExport void Renderer::updateRendererModelMatrix(glm::mat4 modelMatrix)
 
 DllExport void Renderer::updateMVPMatrix()
 {
+	glUseProgram(shader);
+	unsigned int shaderTransformLoc = glGetUniformLocation(shader, "mvpMat"); //Buscamos en AMBOS shaders la variable uniform llamada mvpMat y obtenemos su posicion en memoria
+	glUniformMatrix4fv(shaderTransformLoc, 1, GL_FALSE, glm::value_ptr(rendererMVPMatrix)); //le asignamos contenido a la variable que se encuentra en esa posicion de memoria
 	rendererMVPMatrix = projectionMatrix * viewMatrix * rendererModelMatrix;
 }
 

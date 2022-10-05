@@ -6,6 +6,7 @@ DllExport BaseGame::BaseGame()
 
 DllExport BaseGame::~BaseGame()
 {
+
 }
 
 DllExport int BaseGame::run()
@@ -16,12 +17,12 @@ DllExport int BaseGame::run()
 	Renderer* renderer = new Renderer(shape->getModelMatrix(), "ortho");
 	window->run();
 	shape->createSquare();
+	renderer->renderWindow(window->getWindow(), shape->getVertexPositions(), shape->getIndexes()); //Renderizamos la ventana y los objetos dentro de ella (vertices)
 
 	//UPDATES Y DRAW
 	while (!window->windowShouldClose(window->getWindow()))
 	{
 		renderer->clearWindow();
-		renderer->renderWindow(window->getWindow(), shape->getVertexPositions(), shape->getIndexes()); //Renderizamos la ventana y los objetos dentro de ella (vertices)
 
 		renderer->updateRendererModelMatrix(shape->getModelMatrix()); //Se updatea la matriz modelo que usara el renderer, enviamos la matriz de la shape.
 		renderer->updateMVPMatrix(); //Updateamos la matriz MVP que utiliza el renderer
