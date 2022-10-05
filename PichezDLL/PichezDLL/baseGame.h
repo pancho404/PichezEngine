@@ -13,6 +13,8 @@ public:
 	DllExport ~BaseGame();
 	DllExport int run();
 
+	void move(Window* window, Shape* shape);
+
 private:
 
 };
