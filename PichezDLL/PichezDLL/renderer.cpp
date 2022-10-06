@@ -3,12 +3,12 @@
 DllExport Renderer::Renderer(static glm::mat4 rendererModelMatrix, std::string method)
 {
 	this->rendererModelMatrix = rendererModelMatrix;
-	viewMatrix = glm::mat4(1.0f);
-	if (method=="ortho") //Proyeccion ortografica/paralela
+	viewMatrix = glm::lookAt(glm::vec3(0.0f, 0.0f, 3.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+	if (method == "ortho") //Proyeccion ortografica/paralela
 	{
-		projectionMatrix = glm::ortho(-2.0f, 2.0f, -1.5f, 1.5f, -1.0f, 1.0f);
+		projectionMatrix = glm::ortho(-2.0f, 2.0f, -1.5f, 1.5f, -3.0f, 3.0f);
 	}
-	else if (method=="perspective") //En este caso seria en perspectiva pero como se trata de un motor 2D no lo vamos a programar por ahora
+	else if (method == "perspective") //En este caso seria en perspectiva pero como se trata de un motor 2D no lo vamos a programar por ahora
 	{
 		//projectionMatrix= glm::perspective()
 	}
@@ -22,7 +22,7 @@ DllExport Renderer::~Renderer()
 DllExport void Renderer::renderWindow(GLFWwindow* window, float vertexPositions[], unsigned int indexes[])
 {
 	unsigned int indexBufferObject; //creamos una variable que sera utilizada como buffer
-	unsigned int vertexBufferObject; 
+	unsigned int vertexBufferObject;
 
 	setBuffers(1, vertexBufferObject, vertexPositions, GL_STATIC_DRAW, GL_ARRAY_BUFFER); //Seteamos el buffer creado
 	setBuffers(1, indexBufferObject, indexes, GL_STATIC_DRAW, GL_ELEMENT_ARRAY_BUFFER); //Seteamos el buffer creado
@@ -37,25 +37,25 @@ DllExport void Renderer::renderWindow(GLFWwindow* window, float vertexPositions[
 		"\n"
 		"void main()\n"
 		"{\n"
-			"gl_Position =  mvpMat * vec4(position, 1.0f);\n" //Multiplicamos la MVPMat por un vec4 que contiene el vec3 anteriormente creado y un valor harcodeado en 1.0f para poder mutliplicarlo con la matriz
+		"gl_Position =  mvpMat * vec4(position, 1.0f);\n" //Multiplicamos la MVPMat por un vec4 que contiene el vec3 anteriormente creado y un valor harcodeado en 1.0f para poder mutliplicarlo con la matriz
 		"}\n";
-	
+
 	std::string fragmentShader =
 		"#version 330 core\n"
 		"\n"
 		"layout(location = 0) out vec4 color;\n"
-		"\n"		
+		"\n"
 		"\n"
 		"void main()\n"
 		"{\n"
 		"	color = vec4(1.0, 0.0, 1.0, 1.0);\n"
 		"}\n";
 
-	
-	shader = CreateShader(vertexShader, fragmentShader); 
+
+	shader = CreateShader(vertexShader, fragmentShader);
 	glUseProgram(shader);
 
-	
+
 
 	glUseProgram(0);
 }
@@ -98,7 +98,7 @@ DllExport unsigned int Renderer::CompileShader(unsigned int type, const std::str
 	unsigned int id = glCreateShader(type);
 	const char* src = source.c_str();
 	glShaderSource(id, 1, &src, nullptr);
-	glCompileShader(id);	
+	glCompileShader(id);
 
 	int result;
 	glGetShaderiv(id, GL_COMPILE_STATUS, &result);
@@ -145,16 +145,17 @@ DllExport void Renderer::updateRendererModelMatrix(glm::mat4 modelMatrix)
 
 DllExport void Renderer::updateMVPMatrix()
 {
+	rendererMVPMatrix = projectionMatrix * viewMatrix * rendererModelMatrix;
 	glUseProgram(shader);
 	unsigned int shaderTransformLoc = glGetUniformLocation(shader, "mvpMat"); //Buscamos en AMBOS shaders la variable uniform llamada mvpMat y obtenemos su posicion en memoria
 	glUniformMatrix4fv(shaderTransformLoc, 1, GL_FALSE, glm::value_ptr(rendererMVPMatrix)); //le asignamos contenido a la variable que se encuentra en esa posicion de memoria
-	rendererMVPMatrix = projectionMatrix * viewMatrix * rendererModelMatrix;
 }
 
 DllExport glm::mat4 Renderer::getViewMatrix()
 {
 	return viewMatrix;
 }
+
 
 
 

@@ -51,8 +51,8 @@ DllExport glm::vec4 Entity::getScale()
 
 DllExport void Entity::updateModelMatrix()
 {
-	//modelMatrix = scaleMat * rotationMat * translateMat;
-	modelMatrix = translateMat * rotationMat * scaleMat; //SRT
+	modelMatrix = scaleMat * rotationMat * translateMat;
+	//modelMatrix = translateMat * rotationMat * scaleMat; //SRT
 }
 
 DllExport glm::mat4 Entity::getModelMatrix()
