@@ -22,19 +22,23 @@
     <ClCompile Include="..\src\PichezDLL\baseGame.cpp" />
     <ClCompile Include="entity.cpp" />
     <ClCompile Include="entity2d.cpp" />
+    <ClCompile Include="Input.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="renderer.cpp" />
     <ClCompile Include="shape.cpp" />
     <ClCompile Include="window.cpp" />
+    <ClCompile Include="WindowsInput.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="baseGame.h" />
     <ClInclude Include="DLLExport.h" />
     <ClInclude Include="entity.h" />
     <ClInclude Include="entity2d.h" />
+    <ClInclude Include="Input.h" />
     <ClInclude Include="renderer.h" />
     <ClInclude Include="shape.h" />
     <ClInclude Include="window.h" />
+    <ClInclude Include="WindowsInput.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

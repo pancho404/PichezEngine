@@ -5,7 +5,7 @@
 #include "window.h"
 #include "renderer.h"
 #include "shape.h"
-
+#include"WindowsInput.h"
 class BaseGame
 {
 public:
@@ -16,6 +16,6 @@ public:
 	void move(Window* window, Shape* shape);
 
 private:
-
+	
 };
 

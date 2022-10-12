@@ -12,6 +12,7 @@ DllExport BaseGame::~BaseGame()
 DllExport int BaseGame::run()
 {
 	//INIT
+
 	Shape* shape = new Shape();
 	Window* window = new Window();
 	Renderer* renderer = new Renderer(shape->getModelMatrix(), "ortho");
@@ -34,6 +35,7 @@ DllExport int BaseGame::run()
 		renderer->swapBuffers(window->getWindow()); //Cambiamos los punteros de los buffers para que apunten a donde corresponda backBuffer to frontBuffer y frontBuffer to backBuffer.
 
 		window->pollEvents();
+		auto [x, y] = Input::GetMousePosition(window);
 	};
 
 	//DEINIT
