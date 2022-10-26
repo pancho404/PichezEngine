@@ -20,8 +20,9 @@ DllExport int BaseGame::run()
 	static float y;
 	static glm::vec2 mousePos;
 	window->run();
-	shape->createSquare();
-	renderer->renderWindow(window->getWindow(), shape->getVertexPositions(), shape->getIndexes()); //Renderizamos la ventana y los objetos dentro de ella (vertices)
+	//shape->createSquare(renderer);
+	shape->createTriangle(renderer);
+	renderer->renderWindow(window->getWindow()); //Renderizamos la ventana y los objetos dentro de ella (vertices)
 
 	//UPDATES Y DRAW
 	while (!window->windowShouldClose(window->getWindow()))

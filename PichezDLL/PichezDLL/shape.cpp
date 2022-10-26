@@ -13,49 +13,50 @@ DllExport void Shape::draw(Renderer* renderer, int indexCount)
 	renderer->Draw(indexCount);
 }
 
-DllExport unsigned int* Shape::getIndexes()
-{
-	return indexes;
-}
 
-DllExport void Shape::createSquare()
+
+DllExport void Shape::createSquare(Renderer* renderer)
 {
+
+	float vertices[] =
+	{
+		// positions          // colors           // texture coords
+			0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f,   // top right
+			0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f,   // bottom right
+		   -0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f,   // bottom left
+		   -0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f    // top left 
+	};
+	unsigned int indexes[] =
+	{
+		0,1,3,
+		1,2,3
+	};
+
+	renderer->setBuffers(1, vertices, GL_STATIC_DRAW, GL_ARRAY_BUFFER); //Seteamos el buffer creado
+	renderer->setBuffers(1, indexes, GL_STATIC_DRAW, GL_ELEMENT_ARRAY_BUFFER); //Seteamos el buffer creado
 	//Hardcodeamos las posiciones del array de vertices
-	vertexPositions[0] = 1.5f;
-	vertexPositions[1] = -1.5f;
-	vertexPositions[2] = 0.0f;
-	vertexPositions[3] = 2.5f;
-	vertexPositions[4] = -1.5f;
-	vertexPositions[5] = 0.0f;
-	vertexPositions[6] = 2.5f;
-	vertexPositions[7] = -1.0f;
-	vertexPositions[8] = 0.0f;
-	vertexPositions[9] = 1.5f;
-	vertexPositions[10] = -1.0f;
-	vertexPositions[11] = 0.0f;
+
 }
 
-DllExport void Shape::createTriangle()
+DllExport void Shape::createTriangle(Renderer* renderer)
 {
+	float vertices[] =
+	{
+		// positions          // colors           // texture coords
+			0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f,   // top right
+			0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f,   // bottom right
+		   -0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f,   // bottom left
+		   -0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f    // top left 
+	};
+	unsigned int indexes[] =
+	{
+		0,1,3
+	};
+
+	renderer->setBuffers(1, vertices, GL_STATIC_DRAW, GL_ARRAY_BUFFER); //Seteamos el buffer creado
+	renderer->setBuffers(1, indexes, GL_STATIC_DRAW, GL_ELEMENT_ARRAY_BUFFER); //Seteamos el buffer creado
 	//Hardcodeamos las posiciones del array de vertices
-	vertexPositions[0] = -0.5f;
-	vertexPositions[1] = -0.5f;
-	vertexPositions[2] = 0.0f;
-	vertexPositions[3] = 0.5f;
-	vertexPositions[4] = -0.5f;
-	vertexPositions[5] = 0.0f;
-	vertexPositions[6] = 0.5f;
-	vertexPositions[7] = 0.5f;
-	vertexPositions[8] = 0.0f;
 }
 
-DllExport float* Shape::getVertexPositions()
-{
-	return vertexPositions;
-}
 
-DllExport void Shape::setVertices(int subIndex, float newVertexPos) //Esta función permite cambiar el valor de un vertice especificando su subindice y la nueva posicion
-{
-	this->vertexPositions[subIndex] = newVertexPos; 
-}
 
