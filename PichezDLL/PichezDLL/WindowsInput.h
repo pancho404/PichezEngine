@@ -13,7 +13,7 @@ protected:
 
 	virtual float GetMouseXImp(Window* window)override;
 	virtual float GetMouseYImp(Window* window)override;
-	virtual std::pair<float, float> GetMousePositionImp(Window* window);
+	virtual glm::vec2 GetMousePositionImp(Window* window);
 private:
 
 };

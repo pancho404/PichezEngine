@@ -37,7 +37,7 @@ float WindowsInput::GetMouseYImp(Window* window)
 	return (float)yPos;
 }
 
-std::pair<float, float> WindowsInput::GetMousePositionImp(Window* window)
+glm::vec2 WindowsInput::GetMousePositionImp(Window* window)
 {
 	double xPos, yPos;
 
