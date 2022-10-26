@@ -16,6 +16,9 @@ DllExport int BaseGame::run()
 	Shape* shape = new Shape();
 	Window* window = new Window();
 	Renderer* renderer = new Renderer(shape->getModelMatrix(), "ortho");
+	static float x;
+	static float y;
+	static glm::vec2 mousePos;
 	window->run();
 	shape->createSquare();
 	renderer->renderWindow(window->getWindow(), shape->getVertexPositions(), shape->getIndexes()); //Renderizamos la ventana y los objetos dentro de ella (vertices)
@@ -35,7 +38,9 @@ DllExport int BaseGame::run()
 		renderer->swapBuffers(window->getWindow()); //Cambiamos los punteros de los buffers para que apunten a donde corresponda backBuffer to frontBuffer y frontBuffer to backBuffer.
 
 		window->pollEvents();
-		auto [x, y] = Input::GetMousePosition(window);
+		x = Input::GetMouseX(window);
+		y = Input::GetMouseY(window);
+		mousePos = Input::GetMousePosition(window);
 	};
 
 	//DEINIT
