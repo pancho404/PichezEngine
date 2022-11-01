@@ -5,7 +5,7 @@ Texture::Texture(const std::string& path)
 	:rendererID(0), filePath(path), localBuffer(nullptr), width(0), height(0), BPP(0)
 {
 	stbi_set_flip_vertically_on_load(1);
-	localBuffer = stbi_load(path.c_str(), &width, &height, &BPP, 4);
+	localBuffer = stbi_load(path.c_str(), &width, &height, &BPP, 0);
 	glGenTextures(1, &rendererID);
 	glBindTexture(GL_TEXTURE_2D, rendererID);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -18,8 +18,14 @@ Texture::Texture(const std::string& path)
 
 	if (localBuffer)
 	{
-		stbi_image_free(localBuffer);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, localBuffer);
+		glGenerateMipmap(GL_TEXTURE_2D);
 	}
+	else
+	{
+		std::cout << "Failed to load texture" << std::endl;
+	}
+	/*stbi_image_free(localBuffer);*/
 }
 
 Texture::~Texture()
@@ -29,7 +35,7 @@ Texture::~Texture()
 
 void Texture::Bind(unsigned int slot) const
 {
-	glActiveTexture(GL_TEXTURE0 + slot);
+	//glActiveTexture(GL_TEXTURE0 + slot);
 	glBindTexture(GL_TEXTURE_2D, rendererID);
 }
 
@@ -37,3 +43,4 @@ void Texture::Unbind() const
 {
 	glBindTexture(GL_TEXTURE_2D, 0);
 }
+

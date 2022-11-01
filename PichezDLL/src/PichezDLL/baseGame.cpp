@@ -16,12 +16,15 @@ DllExport int BaseGame::run()
 	Shape* shape = new Shape();
 	Window* window = new Window();
 	Renderer* renderer = new Renderer(shape->getModelMatrix(), "ortho");
+	Texture* texture = new Texture("..\..\res\sauron.jpg");
+	texture->Bind();
+
 	static float x;
 	static float y;
 	static glm::vec2 mousePos;
 	window->run();
 	//shape->createSquare(renderer);
-	shape->createTriangle(renderer);
+	shape->createSquare(renderer);
 	renderer->renderWindow(window->getWindow()); //Renderizamos la ventana y los objetos dentro de ella (vertices)
 
 	//UPDATES Y DRAW

@@ -30,11 +30,21 @@ DllExport void Renderer::renderWindow(GLFWwindow* window)
 		"\n"
 		"layout(location = 0) in vec3 position;" //creamos un vector que corresponde a la posicion de los vertices
 		"\n"
+		"layout (location = 1) in vec3 aColor;"
+		"\n"
+		"layout(location = 2) in vec2 aTexCoord;"
+		"\n"
+		"out vec3 ourColor;"
+		"\n"
+		"out vec2 TexCoord;"
+		"\n"
 		"uniform mat4 mvpMat;" //creamos la matriz MVP (Model View Projection) que modificara la posicion de los vertices
 		"\n"
 		"void main()\n"
 		"{\n"
 		"gl_Position =  mvpMat * vec4(position, 1.0f);\n" //Multiplicamos la MVPMat por un vec4 que contiene el vec3 anteriormente creado y un valor harcodeado en 1.0f para poder mutliplicarlo con la matriz
+		"ourColor = aColor;\n"
+		"TexCoord = aTexCoord;\n"
 		"}\n";
 
 	std::string fragmentShader =
@@ -42,10 +52,15 @@ DllExport void Renderer::renderWindow(GLFWwindow* window)
 		"\n"
 		"layout(location = 0) out vec4 color;\n"
 		"\n"
+		"in vec3 ourColor;"
+		"\n"
+		"in vec2 TexCoord;\n"
+		"uniform sampler2D ourTexture;\n"
+		"\n"
 		"\n"
 		"void main()\n"
 		"{\n"
-		"	color = vec4(1.0, 0.0, 1.0, 1.0);\n"
+		"	color = texture(ourTexture, TexCoord);\n"
 		"}\n";
 
 

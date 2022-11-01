@@ -24,6 +24,7 @@ public:
 	DllExport void Draw(unsigned int indexCount);
 	DllExport void updateRendererModelMatrix(glm::mat4 modelMatrix);
 	DllExport void updateMVPMatrix();
+	DllExport void setUniform1i();
 	DllExport glm::mat4 getViewMatrix();
 private:
 	glm::mat4 rendererModelMatrix;
