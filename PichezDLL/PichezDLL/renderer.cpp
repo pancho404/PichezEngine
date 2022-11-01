@@ -56,17 +56,18 @@ DllExport void Renderer::renderWindow(GLFWwindow* window)
 		"\n"
 		"in vec2 TexCoord;\n"
 		"uniform sampler2D ourTexture;\n"
+		"uniform sampler2D ourSecondTexture;\n"
 		"\n"
 		"\n"
 		"void main()\n"
 		"{\n"
-		"	color = texture(ourTexture, TexCoord);\n"
+			"FragColor = mix(texture(ourTexture, TexCoord), texture(ourSecondTexture, TexCoord), 0.2);"
 		"}\n";
 
 
 	shader = CreateShader(vertexShader, fragmentShader);
 	glUseProgram(shader);
-
+	glUniform1i(glGetUniformLocation(shader, "texture1"), 0); // set it manually
 
 
 	glUseProgram(0);
