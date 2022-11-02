@@ -42,9 +42,9 @@ DllExport void Renderer::renderWindow(GLFWwindow* window)
 		"\n"
 		"void main()\n"
 		"{\n"
-		"gl_Position =  mvpMat * vec4(position, 1.0f);\n" //Multiplicamos la MVPMat por un vec4 que contiene el vec3 anteriormente creado y un valor harcodeado en 1.0f para poder mutliplicarlo con la matriz
-		"ourColor = aColor;\n"
-		"TexCoord = aTexCoord;\n"
+			"gl_Position =  mvpMat * vec4(position, 1.0f);\n" //Multiplicamos la MVPMat por un vec4 que contiene el vec3 anteriormente creado y un valor harcodeado en 1.0f para poder mutliplicarlo con la matriz
+			"ourColor = aColor;\n"
+			"TexCoord = aTexCoord;\n"
 		"}\n";
 
 	std::string fragmentShader =
@@ -55,19 +55,18 @@ DllExport void Renderer::renderWindow(GLFWwindow* window)
 		"in vec3 ourColor;"
 		"\n"
 		"in vec2 TexCoord;\n"
-		"uniform sampler2D ourTexture;\n"
-		"uniform sampler2D ourSecondTexture;\n"
 		"\n"
+		"uniform sampler2D ourTexture;\n"
 		"\n"
 		"void main()\n"
 		"{\n"
-			"FragColor = mix(texture(ourTexture, TexCoord), texture(ourSecondTexture, TexCoord), 0.2);"
+			"color = texture(ourTexture, TexCoord);"
 		"}\n";
 
 
 	shader = CreateShader(vertexShader, fragmentShader);
 	glUseProgram(shader);
-	glUniform1i(glGetUniformLocation(shader, "texture1"), 0); // set it manually
+	//glUniform1i(glGetUniformLocation(shader, "texture1"), 0); // set it manually
 
 
 	glUseProgram(0);
@@ -103,12 +102,12 @@ DllExport void Renderer::setFloatVertex()
 {
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 8, 0); //Asigna los atributos XYZ RGBA ST del vertice y por cual debera empezar a leer
 	glEnableVertexAttribArray(0);
+	
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 8, (void*)(3 * sizeof(float))); //Asigna los atributos XYZ RGBA ST del vertice y por cual debera empezar a leer
 	glEnableVertexAttribArray(1);
+	
 	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 8, (void*)(6 * sizeof(float))); //Asigna los atributos XYZ RGBA ST del vertice y por cual debera empezar a leer
 	glEnableVertexAttribArray(2);
-
-
 }
 
 DllExport unsigned int Renderer::CompileShader(unsigned int type, const std::string& source)
@@ -153,6 +152,7 @@ DllExport  unsigned int Renderer::CreateShader(const std::string& _vertexShader,
 }
 DllExport void Renderer::Draw(unsigned int indexCount)
 {
+	glBindVertexArray(vertexArrayObject);
 	glDrawElements(GL_TRIANGLES, indexCount, GL_UNSIGNED_INT, nullptr);
 }
 

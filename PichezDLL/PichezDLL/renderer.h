@@ -33,6 +33,7 @@ private:
 	glm::mat4 rendererMVPMatrix;
 	unsigned int indexBufferObject;
 	unsigned int vertexBufferObject;
+	unsigned int vertexArrayObject;
 	unsigned int shader;
 };
 

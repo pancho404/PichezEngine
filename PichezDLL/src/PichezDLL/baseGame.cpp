@@ -16,8 +16,8 @@ DllExport int BaseGame::run()
 	Shape* shape = new Shape();
 	Window* window = new Window();
 	Renderer* renderer = new Renderer(shape->getModelMatrix(), "ortho");
-	Texture* texture = new Texture("..\..\res\sauron.jpg");
-	texture->Bind();
+	Texture* texture = new Texture("res\sauron.jpg");
+	//texture->                                               ();
 
 	static float x;
 	static float y;
