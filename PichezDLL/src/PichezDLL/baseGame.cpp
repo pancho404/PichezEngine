@@ -16,7 +16,6 @@ DllExport int BaseGame::run()
 	Shape* shape = new Shape();
 	Window* window = new Window();
 	Renderer* renderer = new Renderer(shape->getModelMatrix(), "ortho");
-	Texture* texture = new Texture("res\sauron.jpg");
 	//texture->                                               ();
 
 	static float x;
@@ -26,6 +25,8 @@ DllExport int BaseGame::run()
 	//shape->createSquare(renderer);
 	shape->createSquare(renderer);
 	renderer->renderWindow(window->getWindow()); //Renderizamos la ventana y los objetos dentro de ella (vertices)
+
+	Texture* texture = new Texture("res\sauron.jpg");
 
 	//UPDATES Y DRAW
 	while (!window->windowShouldClose(window->getWindow()))
@@ -40,7 +41,7 @@ DllExport int BaseGame::run()
 		shape->draw(renderer, 6); //Dibujamos la figura, enviandole que renderer la renderizará y cuantos indices posee
 
 		renderer->swapBuffers(window->getWindow()); //Cambiamos los punteros de los buffers para que apunten a donde corresponda backBuffer to frontBuffer y frontBuffer to backBuffer.
-
+		
 		window->pollEvents();
 		x = Input::GetMouseX(window);
 		y = Input::GetMouseY(window);
@@ -52,6 +53,7 @@ DllExport int BaseGame::run()
 	delete window;
 	delete renderer;
 	delete shape;
+	delete texture;
 	return 0;
 
 }

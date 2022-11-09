@@ -21,7 +21,7 @@ Texture::Texture(const std::string& path)
 	if (data)
 	{
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, awidth, aheight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
-		//glGenerateMipmap(GL_TEXTURE_2D);
+		glGenerateMipmap(GL_TEXTURE_2D);
 	}
 	else
 	{
@@ -39,8 +39,7 @@ Texture::~Texture()
 void Texture::Bind(unsigned int slot) const
 {
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, rendererID);
-	
+	glBindTexture(GL_TEXTURE_2D, rendererID);	
 }
 
 void Texture::Unbind() const

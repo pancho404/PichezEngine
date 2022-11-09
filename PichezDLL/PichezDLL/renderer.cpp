@@ -66,7 +66,7 @@ DllExport void Renderer::renderWindow(GLFWwindow* window)
 
 	shader = CreateShader(vertexShader, fragmentShader);
 	glUseProgram(shader);
-	//glUniform1i(glGetUniformLocation(shader, "texture1"), 0); // set it manually
+	glUniform1i(glGetUniformLocation(shader, "ourTexture"), 0); // set it manually
 
 
 	glUseProgram(0);
