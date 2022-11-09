@@ -15,8 +15,7 @@ DllExport int BaseGame::run()
 
 	Shape* shape = new Shape();
 	Window* window = new Window();
-	Renderer* renderer = new Renderer(shape->getModelMatrix(), "ortho");
-	//texture->                                               ();
+	Renderer* renderer = new Renderer(shape->getModelMatrix(), "ortho");	
 
 	static float x;
 	static float y;
