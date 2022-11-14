@@ -4,17 +4,15 @@
 Texture::Texture(const std::string& path)
 	: rendererID(0), filePath(path), localBuffer(nullptr), width(0), height(0), BPP(0)
 {
-	stbi_set_flip_vertically_on_load(1);
-	glGenTextures(1, &rendererID);
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, rendererID);
-	//Bind();
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-	unsigned char* data = stbi_load("../res/wood.jpg", &width, &height, &BPP, 0);
+	stbi_set_flip_vertically_on_load(1);
+	glGenTextures(1, &rendererID);
+	/*glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, rendererID);*/
+	unsigned char* data = stbi_load(filePath.c_str(), &width, &height, &BPP, 0);
 	//localBuffer = stbi_load("res/sauron.jpg", &width, &height, &BPP, 0);
 
 	if (data)
@@ -35,10 +33,10 @@ Texture::~Texture()
 	glDeleteTextures(1, &rendererID);
 }
 
-void Texture::Bind(unsigned int slot) const
+void Texture::Bind(unsigned int slot, unsigned int textureUnit) const
 {
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, rendererID);	
+	glActiveTexture(GL_TEXTURE0 + slot);
+	glBindTexture(GL_TEXTURE_2D, textureUnit);
 }
 
 void Texture::Unbind() const
