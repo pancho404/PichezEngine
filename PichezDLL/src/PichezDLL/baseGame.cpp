@@ -25,10 +25,10 @@ DllExport int BaseGame::run()
 	shape->createSquare(renderer);
 	renderer->renderWindow(window->getWindow()); //Renderizamos la ventana y los objetos dentro de ella (vertices)
 
-	Texture* texture = new Texture("../res/wood.png");
+	Texture* texture = new Texture("../res/sauron.png");
 	texture->Bind(1, texture->GetID());
-	Texture* texture2 = new Texture("../res/sauron.png");
-	texture2->Bind(2, texture2->GetID());
+	//Texture* texture2 = new Texture("../res/wood.png");
+	//texture2->Bind(2, texture2->GetID());
 
 	//UPDATES Y DRAW
 	while (!window->windowShouldClose(window->getWindow()))
