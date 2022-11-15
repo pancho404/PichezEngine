@@ -25,7 +25,7 @@ DllExport int BaseGame::run()
 	shape->createSquare(renderer);
 	renderer->renderWindow(window->getWindow()); //Renderizamos la ventana y los objetos dentro de ella (vertices)
 
-	Texture* texture = new Texture("../res/sauron.png");
+	Texture* texture = new Texture("../res/wood.png");
 	texture->Bind(0, texture->GetID());
 	Texture* texture2 = new Texture("../res/sauron.png");
 	texture2->Bind(1, texture2->GetID());
