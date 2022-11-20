@@ -21,7 +21,6 @@ DllExport int BaseGame::run()
 	static float y;
 	static glm::vec2 mousePos;
 	window->run();
-	//shape->createSquare(renderer);
 	shape->createSquare(renderer);
 	renderer->renderWindow(window->getWindow()); //Renderizamos la ventana y los objetos dentro de ella (vertices)
 
@@ -41,7 +40,6 @@ DllExport int BaseGame::run()
 		//shape->addRotationToAxis((float)glfwGetTime(), glm::vec3(0.0f, 0.0f, 1.0f)); // Aplicamos una transformacion a la figura
 		move(window, shape);
 		shape->draw(renderer, 6); //Dibujamos la figura, enviandole que renderer la renderizará y cuantos indices posee
-
 		renderer->swapBuffers(window->getWindow()); //Cambiamos los punteros de los buffers para que apunten a donde corresponda backBuffer to frontBuffer y frontBuffer to backBuffer.
 		
 		window->pollEvents();
@@ -64,11 +62,11 @@ void BaseGame::move(Window* window, Shape* shape)
 {
 	if (glfwGetKey(window->getWindow(), 'D'))
 	{
-		shape->addPosition(0.1, 0.0f, 0.0f);
+		shape->addPosition(10.0f, 0.0f, 0.0f);
 	}
 	if (glfwGetKey(window->getWindow(), 'A'))
 	{
-		shape->addPosition(-0.1, 0.0f, 0.0f);
+		shape->addPosition(-10.0f, 0.0f, 0.0f);
 	}
 	if (glfwGetKey(window->getWindow(), 'Q'))
 	{

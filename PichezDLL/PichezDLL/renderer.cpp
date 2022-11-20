@@ -6,7 +6,7 @@ DllExport Renderer::Renderer(static glm::mat4 rendererModelMatrix, std::string m
 	viewMatrix = glm::lookAt(glm::vec3(0.0f, 0.0f, 3.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 	if (method == "ortho") //Proyeccion ortografica/paralela
 	{
-		projectionMatrix = glm::ortho(-2.0f, 2.0f, -1.5f, 1.5f, -3.0f, 3.0f);
+		projectionMatrix = glm::ortho(0.0f, 640.0f, 480.0f, 0.0f, -3.0f, 3.0f);
 	}
 	else if (method == "perspective") //En este caso seria en perspectiva pero como se trata de un motor 2D no lo vamos a programar por ahora
 	{
