@@ -14,6 +14,7 @@ DllExport int BaseGame::run()
 	//INIT
 
 	Shape* shape = new Shape();
+	Shape* shape2 = new Shape();
 	Window* window = new Window();
 	Renderer* renderer = new Renderer(shape->getModelMatrix(), "ortho");	
 
@@ -21,6 +22,7 @@ DllExport int BaseGame::run()
 	static float y;
 	static glm::vec2 mousePos;
 	window->run();
+	shape2->createTriangle(renderer);
 	shape->createSquare(renderer);
 	renderer->renderWindow(window->getWindow()); //Renderizamos la ventana y los objetos dentro de ella (vertices)
 
@@ -40,6 +42,7 @@ DllExport int BaseGame::run()
 		//shape->addRotationToAxis((float)glfwGetTime(), glm::vec3(0.0f, 0.0f, 1.0f)); // Aplicamos una transformacion a la figura
 		move(window, shape);
 		shape->draw(renderer, 6); //Dibujamos la figura, enviandole que renderer la renderizará y cuantos indices posee
+		shape2->draw(renderer, 6); //Dibujamos la figura, enviandole que renderer la renderizará y cuantos indices posee
 		renderer->swapBuffers(window->getWindow()); //Cambiamos los punteros de los buffers para que apunten a donde corresponda backBuffer to frontBuffer y frontBuffer to backBuffer.
 		
 		window->pollEvents();

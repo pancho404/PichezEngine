@@ -61,7 +61,8 @@ DllExport void Renderer::renderWindow(GLFWwindow* window)
 		"\n"
 		"void main()\n"
 		"{\n"
-			"color = mix(texture(ourTexture, TexCoord), texture(ourTexture2, TexCoord), 0.5);"
+			//"color = mix(texture(ourTexture, TexCoord), texture(ourTexture2, TexCoord), 0.8);"
+			"color = ourColor;"
 		"}\n";
 
 
@@ -86,14 +87,14 @@ DllExport void Renderer::swapBuffers(GLFWwindow* window)
 
 
 
-DllExport void Renderer::setBuffers(int quantity, unsigned int bufferArray[], GLenum drawMode, GLenum bufferMode)
+DllExport void Renderer::setBuffers(int quantity, unsigned int bufferArray[], GLenum drawMode, GLenum bufferMode, unsigned int &indexBufferObject)
 {
 	glGenBuffers(quantity, &indexBufferObject); //Crea el buffer con el ID pasado por parametro (un unsigned int)
 	glBindBuffer(bufferMode, indexBufferObject); //bindea el parametro id a el bufferMode especificado
 	glBufferData(bufferMode, 6 * sizeof(float), bufferArray, drawMode);	//Le asigna la info al buffer PARAMETROS: modo al que se bindeo el buffer, tamaño del buffer, contenido del buffer, para que se va a suar el buffer
 }
 
-DllExport void Renderer::setBuffers(int quantity, float bufferArray[], GLenum drawMode, GLenum bufferMode)
+DllExport void Renderer::setBuffers(int quantity, float bufferArray[], GLenum drawMode, GLenum bufferMode, unsigned int &vertexBufferObject)
 {
 	glGenBuffers(quantity, &vertexBufferObject); //Crea el buffer con el ID pasado por parametro (un unsigned int)
 	glBindBuffer(bufferMode, vertexBufferObject); //bindea el parametro id a el bufferMode especificado

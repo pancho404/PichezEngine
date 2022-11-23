@@ -60,4 +60,14 @@ DllExport glm::mat4 Entity::getModelMatrix()
 	return modelMatrix;
 }
 
+DllExport unsigned int Entity::getVBO()
+{
+	return vertexBufferObject;
+}
+
+DllExport unsigned int Entity::getIBO()
+{
+	return indexBufferObject;
+}
+
 

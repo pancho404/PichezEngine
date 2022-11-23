@@ -27,6 +27,8 @@ public:
 	DllExport void updateModelMatrix();
 	DllExport glm::mat4 getModelMatrix();
 	DllExport virtual void draw(Renderer* renderer, int indexCount) = 0;
+	DllExport unsigned int getVBO();
+	DllExport unsigned int getIBO();
 
 private:	
 	glm::vec4 positionVec = glm::vec4(1.0f, 0.0f, 0.0f, 1.0f); //Vector que pertenece a la matriz identidad
@@ -36,7 +38,8 @@ private:
 	glm::mat4 rotationMat = glm::mat4(1.0f);
 	glm::mat4 scaleMat = glm::mat4(1.0f);
 	glm::mat4 modelMatrix = glm::mat4(1.0f);
-	
+	unsigned int vertexBufferObject;
+	unsigned int indexBufferObject;
 };
 
 
