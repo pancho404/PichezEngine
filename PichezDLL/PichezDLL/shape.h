@@ -4,7 +4,6 @@
 class Shape : public Entity2d
 {
 private:
-	std::vector<float> vertices;
 
 public:
 	DllExport Shape();
@@ -12,6 +11,7 @@ public:
 	DllExport void draw(Renderer* renderer, int indexCount) override;
 	DllExport void createSquare(Renderer* renderer);
 	DllExport void createTriangle(Renderer* renderer);
+	DllExport void updatePos();
 
 
 };

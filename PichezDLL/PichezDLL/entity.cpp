@@ -3,7 +3,7 @@
 
 DllExport Entity::Entity()
 {
-	
+
 }
 
 Entity::~Entity()
@@ -68,6 +68,16 @@ DllExport unsigned int Entity::getVBO()
 DllExport unsigned int Entity::getIBO()
 {
 	return indexBufferObject;
+}
+
+DllExport Coordinates Entity::getPos()
+{
+	return pos;
+}
+
+DllExport void Entity::setPos(Coordinates pos)
+{
+	this->pos = pos;
 }
 
 

@@ -10,7 +10,7 @@ struct Coordinates
 	float x;
 	float y;
 	float z;
-	
+
 };
 
 class Entity
@@ -29,8 +29,11 @@ public:
 	DllExport virtual void draw(Renderer* renderer, int indexCount) = 0;
 	DllExport unsigned int getVBO();
 	DllExport unsigned int getIBO();
+	DllExport Coordinates getPos();
+	DllExport void setPos(Coordinates pos);
 
-private:	
+
+private:
 	glm::vec4 positionVec = glm::vec4(1.0f, 0.0f, 0.0f, 1.0f); //Vector que pertenece a la matriz identidad
 	glm::vec4 rotationVec = glm::vec4(0.0f, 1.0, 0.0f, 1.0f);  //Vector que pertenece a la matriz identidad
 	glm::vec4 scaleVec = glm::vec4(0.0f, 0.0f, 1.0f, 1.0f);  //Vector que pertenece a la matriz identidad
@@ -40,6 +43,9 @@ private:
 	glm::mat4 modelMatrix = glm::mat4(1.0f);
 	unsigned int vertexBufferObject;
 	unsigned int indexBufferObject;
+
+protected:
+	Coordinates pos;
 };
 
 

@@ -23,9 +23,12 @@ DllExport void Shape::createSquare(Renderer* renderer)
 		// positions          // colors           // texture coords
 		 640.0f,  0.0f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f,   // top right
 		 640.0f, 100.0f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f,   // bottom right
-	 	 550.0f, 100.0f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f,   // bottom left
+		 550.0f, 100.0f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f,   // bottom left
 		 550.0f,  0.0f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f    // top left 
 	};
+	pos.x = 550.0f;
+	pos.y = 0.0f;
+	pos.z = 0.0f;
 	unsigned int indexes[] =
 	{
 		0,1,3,
@@ -59,6 +62,11 @@ DllExport void Shape::createTriangle(Renderer* renderer)
 	renderer->setBuffers(1, vertices, GL_STATIC_DRAW, GL_ARRAY_BUFFER, vbo); //Seteamos el buffer creado
 	renderer->setBuffers(1, indexes, GL_STATIC_DRAW, GL_ELEMENT_ARRAY_BUFFER, ibo); //Seteamos el buffer creado
 	//Hardcodeamos las posiciones del array de vertices
+}
+
+DllExport void Shape::updatePos()
+{
+	
 }
 
 

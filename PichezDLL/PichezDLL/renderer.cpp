@@ -61,8 +61,8 @@ DllExport void Renderer::renderWindow(GLFWwindow* window)
 		"\n"
 		"void main()\n"
 		"{\n"
-			//"color = mix(texture(ourTexture, TexCoord), texture(ourTexture2, TexCoord), 0.8);"
-			"color = ourColor;"
+			"color = mix(texture(ourTexture, TexCoord), texture(ourTexture2, TexCoord), 0.8);"
+			//"color = ourColor;"
 		"}\n";
 
 

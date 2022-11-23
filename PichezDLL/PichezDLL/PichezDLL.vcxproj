@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="..\src\PichezDLL\baseGame.cpp" />
     <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="entity.cpp" />
     <ClCompile Include="entity2d.cpp" />
     <ClCompile Include="Frame.cpp" />
@@ -37,6 +38,7 @@
   <ItemGroup>
     <ClInclude Include="Animation.h" />
     <ClInclude Include="baseGame.h" />
+    <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="DLLExport.h" />
     <ClInclude Include="entity.h" />
     <ClInclude Include="entity2d.h" />
@@ -58,7 +60,7 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
@@ -71,7 +73,7 @@
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
