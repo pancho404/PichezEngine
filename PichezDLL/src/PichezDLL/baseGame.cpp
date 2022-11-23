@@ -1,5 +1,5 @@
 #include "..\..\PichezDLL\baseGame.h" 
-
+#include"..\..\PichezDLL\Timer.h" 
 DllExport BaseGame::BaseGame()
 {
 }
@@ -36,7 +36,7 @@ DllExport int BaseGame::run()
 
 		renderer->updateRendererModelMatrix(shape->getModelMatrix()); //Se updatea la matriz modelo que usara el renderer, enviamos la matriz de la shape.
 		renderer->updateMVPMatrix(); //Updateamos la matriz MVP que utiliza el renderer
-
+		Timer::updateDeltaTime(glfwGetTime());
 		//shape->addRotationToAxis((float)glfwGetTime(), glm::vec3(0.0f, 0.0f, 1.0f)); // Aplicamos una transformacion a la figura
 		move(window, shape);
 		shape->draw(renderer, 6); //Dibujamos la figura, enviandole que renderer la renderizará y cuantos indices posee

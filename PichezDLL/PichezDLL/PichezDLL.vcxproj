@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -20,27 +20,33 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\PichezDLL\baseGame.cpp" />
+    <ClCompile Include="Animation.cpp" />
     <ClCompile Include="entity.cpp" />
     <ClCompile Include="entity2d.cpp" />
+    <ClCompile Include="Frame.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="renderer.cpp" />
     <ClCompile Include="shape.cpp" />
     <ClCompile Include="stb_image.cpp" />
     <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="Timer.cpp" />
     <ClCompile Include="window.cpp" />
     <ClCompile Include="WindowsInput.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Animation.h" />
     <ClInclude Include="baseGame.h" />
     <ClInclude Include="DLLExport.h" />
     <ClInclude Include="entity.h" />
     <ClInclude Include="entity2d.h" />
+    <ClInclude Include="Frame.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="renderer.h" />
     <ClInclude Include="shape.h" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="Texture.h" />
+    <ClInclude Include="Timer.h" />
     <ClInclude Include="window.h" />
     <ClInclude Include="WindowsInput.h" />
   </ItemGroup>
@@ -52,7 +58,7 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
