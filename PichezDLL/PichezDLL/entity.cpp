@@ -18,12 +18,13 @@ DllExport void Entity::addPosition(float x, float y, float z)
 {
 	glm::vec3 vecToAdd = glm::vec3(x, y, z); //Creamos el vector que se le sumará a la posicion actual de
 	translateMat = glm::translate(translateMat, vecToAdd); //realizamos la adicion del vector a la matriz, modificando así los valores de la matriz
+	posVec += vecToAdd;
 	updateModelMatrix();
 }
 
-DllExport glm::vec4 Entity::getPosition()
+DllExport glm::vec3 Entity::getPosition()
 {
-	return positionVec;
+	return posVec;
 }
 
 DllExport void Entity::addRotationToAxis(float angleAmount, glm::vec3 axis)
@@ -32,7 +33,7 @@ DllExport void Entity::addRotationToAxis(float angleAmount, glm::vec3 axis)
 	updateModelMatrix();
 }
 
-DllExport glm::vec4 Entity::getRotation()
+DllExport glm::vec3 Entity::getRotation()
 {
 	return rotationVec;
 }
@@ -41,10 +42,11 @@ DllExport void Entity::scaleToRelative(float x, float y, float z)
 {
 	glm::vec3 vector = glm::vec3(x, y, z); //Creamos un vector con los valores pasados por parametro
 	scaleMat = glm::scale(scaleMat, vector); //Escalamaos pasando por parametro la matriz escala y el vector que contiene el valor relativo al que sera escalado el objeto
+	scaleVec += vector;
 	updateModelMatrix();
 }
 
-DllExport glm::vec4 Entity::getScale()
+DllExport glm::vec3 Entity::getScale()
 {
 	return scaleVec;
 }
@@ -74,14 +76,46 @@ DllExport unsigned int Entity::getVAO()
 	return vertexArrayObject;
 }
 
-DllExport Coordinates Entity::getPos()
+DllExport float Entity::getPosX()
 {
-	return pos;
+	return posVec.x;
 }
 
-DllExport void Entity::setPos(Coordinates pos)
+DllExport float Entity::getPosY()
 {
-	this->pos = pos;
+	return posVec.y;
+}
+
+DllExport float Entity::getPosZ()
+{
+	return posVec.z;
+}
+
+DllExport float Entity::getSizeX()
+{
+	return scaleVec.x;
+}
+
+DllExport float Entity::getSizeY()
+{
+	return scaleVec.y;
+}
+
+DllExport float Entity::getSizeZ()
+{
+	return scaleVec.z;
+}
+
+DllExport void Entity::setSize(glm::vec3 size)
+{
+	this->scaleVec.x = size.x;
+	this->scaleVec.y = size.y;
+	this->scaleVec.z = size.z;
+}
+
+DllExport void Entity::setPos(glm::vec3 pos)
+{
+	this->posVec = pos;
 }
 
 

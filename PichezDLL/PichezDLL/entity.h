@@ -19,25 +19,30 @@ public:
 	DllExport Entity();
 	DllExport ~Entity();
 	DllExport void addPosition(float x, float y, float z);
-	DllExport glm::vec4 getPosition();
+	DllExport glm::vec3 getPosition();
 	DllExport void addRotationToAxis(float angleAmount, glm::vec3 axis);
-	DllExport glm::vec4 getRotation();
+	DllExport glm::vec3 getRotation();
 	DllExport void scaleToRelative(float x, float y, float z);
-	DllExport glm::vec4 getScale();
+	DllExport glm::vec3 getScale();
 	DllExport void updateModelMatrix();
 	DllExport glm::mat4 getModelMatrix();
 	DllExport virtual void draw(Renderer* renderer, int indexCount) = 0;
 	DllExport unsigned int getVBO();
 	DllExport unsigned int getIBO();
 	DllExport unsigned int getVAO();
-	DllExport Coordinates getPos();
-	DllExport void setPos(Coordinates pos);
-
+	DllExport float getPosX();
+	DllExport float getPosY();
+	DllExport float getPosZ();
+	DllExport void setPos(glm::vec3 pos);
+	DllExport float getSizeX();
+	DllExport float getSizeY();
+	DllExport float getSizeZ();
+	DllExport void setSize(glm::vec3 size);
 
 private:
-	glm::vec4 positionVec = glm::vec4(1.0f, 0.0f, 0.0f, 1.0f); //Vector que pertenece a la matriz identidad
-	glm::vec4 rotationVec = glm::vec4(0.0f, 1.0, 0.0f, 1.0f);  //Vector que pertenece a la matriz identidad
-	glm::vec4 scaleVec = glm::vec4(0.0f, 0.0f, 1.0f, 1.0f);  //Vector que pertenece a la matriz identidad
+	glm::vec3 rotationVec = glm::vec3(1.0f,1.0f,1.0f);  //Vector que pertenece a la matriz identidad
+	glm::vec3 scaleVec = glm::vec3(1.0f, 1.0f, 1.0f);  //Vector que pertenece a la matriz identidad
+	glm::vec3 posVec = glm::vec3(1.0f, 1.0f, 1.0f);
 	glm::mat4 translateMat; //Inicializamos las matrices con la matriz identidad glm::mat4(1.0f)
 	glm::mat4 rotationMat;
 	glm::mat4 scaleMat;
@@ -47,7 +52,6 @@ private:
 	unsigned int vertexArrayObject;
 
 protected:
-	Coordinates pos;
 };
 
 

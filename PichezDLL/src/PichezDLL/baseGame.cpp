@@ -1,5 +1,7 @@
 #include "..\..\PichezDLL\baseGame.h" 
 #include"..\..\PichezDLL\Timer.h" 
+#include "..\..\PichezDLL\CollisionManager.h"
+
 DllExport BaseGame::BaseGame()
 {
 }
@@ -17,6 +19,7 @@ DllExport int BaseGame::run()
 	Shape* shape2 = new Shape();
 	Window* window = new Window();
 	Renderer* renderer = new Renderer(shape->getModelMatrix(), "ortho");
+	CollisionManager* collisionManager = new CollisionManager();
 
 	static float x;
 	static float y;
@@ -31,8 +34,8 @@ DllExport int BaseGame::run()
 
 	Texture* texture = new Texture("../res/sauron.png");
 	texture->Bind(1, texture->GetID());
-	//Texture* texture2 = new Texture("../res/wood.png");
-	//texture2->Bind(2, texture2->GetID());
+	Texture* texture2 = new Texture("../res/wood.png");
+	
 
 	//UPDATES Y DRAW
 	while (!window->windowShouldClose(window->getWindow()))
@@ -48,7 +51,7 @@ DllExport int BaseGame::run()
 
 		shape->draw(renderer, 6); //Dibujamos la figura, enviandole que renderer la renderizará y cuantos indices posee
 
-		move(window, shape2);
+		//move(window, shape2);
 
 		renderer->updateRendererModelMatrix(shape2->getModelMatrix()); //Se updatea la matriz modelo que usara el renderer, enviamos la matriz de la shape.
 		renderer->updateMVPMatrix(); //Updateamos la matriz MVP que utiliza el renderer
@@ -56,6 +59,13 @@ DllExport int BaseGame::run()
 		shape2->draw(renderer, 3); //Dibujamos la figura, enviandole que renderer la renderizará y cuantos indices posee
 		
 		renderer->swapBuffers(window->getWindow()); //Cambiamos los punteros de los buffers para que apunten a donde corresponda backBuffer to frontBuffer y frontBuffer to backBuffer.
+
+		if (collisionManager->isColliding(shape, shape2))
+		{
+			texture2->Bind(2, texture2->GetID());
+			texture->Unbind();
+			std::cout << "Collision";
+		}
 
 		window->pollEvents();
 		x = Input::GetMouseX(window);
@@ -68,7 +78,9 @@ DllExport int BaseGame::run()
 	delete window;
 	delete renderer;
 	delete shape;
+	delete shape2;
 	delete texture;
+	delete collisionManager;
 	return 0;
 
 }
