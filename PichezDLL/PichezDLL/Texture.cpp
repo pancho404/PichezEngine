@@ -10,9 +10,7 @@ Texture::Texture(const std::string& path)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	stbi_set_flip_vertically_on_load(1);
-	glGenTextures(1, &rendererID);
-	/*glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, rendererID);*/
+	glGenTextures(1, &rendererID);	
 	unsigned char* data = stbi_load(filePath.c_str(), &width, &height, &BPP, 0);
 	//localBuffer = stbi_load("res/sauron.jpg", &width, &height, &BPP, 0);
 

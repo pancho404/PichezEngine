@@ -6,7 +6,7 @@ DllExport Renderer::Renderer(static glm::mat4 rendererModelMatrix, std::string m
 	viewMatrix = glm::lookAt(glm::vec3(0.0f, 0.0f, 3.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 	if (method == "ortho") //Proyeccion ortografica/paralela
 	{
-		projectionMatrix = glm::ortho(0.0f, 640.0f, 480.0f, 0.0f, -3.0f, 3.0f);
+		projectionMatrix = glm::ortho(0.0f, 640.0f, 480.0f, 0.0f, -50.0f, 50.0f);
 	}
 	else if (method == "perspective") //En este caso seria en perspectiva pero como se trata de un motor 2D no lo vamos a programar por ahora
 	{
@@ -171,11 +171,10 @@ DllExport void Renderer::updateRendererModelMatrix(glm::mat4 modelMatrix)
 DllExport void Renderer::updateMVPMatrix()
 {
 	glUseProgram(shader);
-	rendererMVPMatrix = projectionMatrix * viewMatrix * rendererModelMatrix;
 	unsigned int modelLoc = glGetUniformLocation(shader, "model"); //Buscamos en AMBOS shaders la variable uniform llamada mvpMat y obtenemos su posicion en memoria
 	glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(rendererModelMatrix)); //le asignamos contenido a la variable que se encuentra en esa posicion de memoria
-	unsigned int vieLoc = glGetUniformLocation(shader, "view"); //Buscamos en AMBOS shaders la variable uniform llamada mvpMat y obtenemos su posicion en memoria
-	glUniformMatrix4fv(vieLoc, 1, GL_FALSE, glm::value_ptr(viewMatrix)); //le asignamos contenido a la variable que se encuentra en esa posicion de memoria
+	unsigned int viewLoc = glGetUniformLocation(shader, "view"); //Buscamos en AMBOS shaders la variable uniform llamada mvpMat y obtenemos su posicion en memoria
+	glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(viewMatrix)); //le asignamos contenido a la variable que se encuentra en esa posicion de memoria
 	unsigned int projectionLoc = glGetUniformLocation(shader, "projection"); //Buscamos en AMBOS shaders la variable uniform llamada mvpMat y obtenemos su posicion en memoria
 	glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projectionMatrix)); //le asignamos contenido a la variable que se encuentra en esa posicion de memoria
 }
@@ -187,7 +186,7 @@ DllExport glm::mat4 Renderer::getViewMatrix()
 
 DllExport void Renderer::updateViewMatrix()
 {
-	//viewMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(-320.0f, -100.0f, 0.0f));
+	viewMatrix = glm::lookAt(glm::vec3(0.0f, 0.0f, 3.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 }
 
 

@@ -26,6 +26,8 @@ DllExport int BaseGame::run()
 	shape2->createTriangle(renderer);
 	renderer->renderWindow(window->getWindow()); //Renderizamos la ventana y los objetos dentro de ella (vertices)
 	shape2->addPosition(200.0f, 0.0, 0.0f);
+	renderer->updateMVPMatrix();
+	renderer->updateRendererModelMatrix(shape2->getModelMatrix());
 
 	Texture* texture = new Texture("../res/sauron.png");
 	texture->Bind(1, texture->GetID());
@@ -37,14 +39,22 @@ DllExport int BaseGame::run()
 	{
 		renderer->clearWindow();
 
+		//renderer->updateViewMatrix();
 		renderer->updateRendererModelMatrix(shape->getModelMatrix()); //Se updatea la matriz modelo que usara el renderer, enviamos la matriz de la shape.
 		renderer->updateMVPMatrix(); //Updateamos la matriz MVP que utiliza el renderer
 		Timer::updateDeltaTime(glfwGetTime());
 
 		move(window, shape);
 
-		shape2->draw(renderer, 6); //Dibujamos la figura, enviandole que renderer la renderizará y cuantos indices posee
 		shape->draw(renderer, 6); //Dibujamos la figura, enviandole que renderer la renderizará y cuantos indices posee
+
+		move(window, shape2);
+
+		renderer->updateMVPMatrix(); //Updateamos la matriz MVP que utiliza el renderer
+		renderer->updateRendererModelMatrix(shape2->getModelMatrix()); //Se updatea la matriz modelo que usara el renderer, enviamos la matriz de la shape.
+
+		shape2->draw(renderer, 3); //Dibujamos la figura, enviandole que renderer la renderizará y cuantos indices posee
+		
 		renderer->swapBuffers(window->getWindow()); //Cambiamos los punteros de los buffers para que apunten a donde corresponda backBuffer to frontBuffer y frontBuffer to backBuffer.
 
 		window->pollEvents();
@@ -75,11 +85,11 @@ void BaseGame::move(Window* window, Shape* shape)
 	}
 	if (glfwGetKey(window->getWindow(), 'Q'))
 	{
-		shape->addRotationToAxis(1.5f, glm::vec3(0.0f, 0.0f, 1.0f));
+		shape->addRotationToAxis(-1.5f, glm::vec3(0.0f, 0.0f, 1.0f));
 	}
 	if (glfwGetKey(window->getWindow(), 'E'))
 	{
-		shape->addRotationToAxis(-1.5f, glm::vec3(0.0f, 0.0f, 1.0f));
+		shape->addRotationToAxis(1.5f, glm::vec3(0.0f, 0.0f, 1.0f));
 	}
 	if (glfwGetKey(window->getWindow(), 'S'))
 	{
@@ -88,5 +98,13 @@ void BaseGame::move(Window* window, Shape* shape)
 	if (glfwGetKey(window->getWindow(), 'W'))
 	{
 		shape->scaleToRelative(1.1f, 1.1f, 1.1f);
+	}
+	if (glfwGetKey(window->getWindow(), GLFW_KEY_DOWN))
+	{
+		shape->addPosition(0.0f, 10.0f, 0.0f);
+	}
+	if (glfwGetKey(window->getWindow(), GLFW_KEY_UP))
+	{
+		shape->addPosition(0.0f, -10.0f, 0.0f);
 	}
 }
