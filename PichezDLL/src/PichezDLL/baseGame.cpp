@@ -50,8 +50,8 @@ DllExport int BaseGame::run()
 
 		move(window, shape2);
 
-		renderer->updateMVPMatrix(); //Updateamos la matriz MVP que utiliza el renderer
 		renderer->updateRendererModelMatrix(shape2->getModelMatrix()); //Se updatea la matriz modelo que usara el renderer, enviamos la matriz de la shape.
+		renderer->updateMVPMatrix(); //Updateamos la matriz MVP que utiliza el renderer
 
 		shape2->draw(renderer, 3); //Dibujamos la figura, enviandole que renderer la renderizará y cuantos indices posee
 		
