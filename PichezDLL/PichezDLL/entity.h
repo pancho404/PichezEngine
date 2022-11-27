@@ -37,10 +37,10 @@ private:
 	glm::vec4 positionVec = glm::vec4(1.0f, 0.0f, 0.0f, 1.0f); //Vector que pertenece a la matriz identidad
 	glm::vec4 rotationVec = glm::vec4(0.0f, 1.0, 0.0f, 1.0f);  //Vector que pertenece a la matriz identidad
 	glm::vec4 scaleVec = glm::vec4(0.0f, 0.0f, 1.0f, 1.0f);  //Vector que pertenece a la matriz identidad
-	glm::mat4 translateMat = glm::mat4(1.0f); //Inicializamos las matrices con la matriz identidad glm::mat4(1.0f)
-	glm::mat4 rotationMat = glm::mat4(1.0f);
-	glm::mat4 scaleMat = glm::mat4(1.0f);
-	glm::mat4 modelMatrix = glm::mat4(1.0f);
+	glm::mat4 translateMat; //Inicializamos las matrices con la matriz identidad glm::mat4(1.0f)
+	glm::mat4 rotationMat;
+	glm::mat4 scaleMat;
+	glm::mat4 modelMatrix;
 	unsigned int vertexBufferObject;
 	unsigned int indexBufferObject;
 

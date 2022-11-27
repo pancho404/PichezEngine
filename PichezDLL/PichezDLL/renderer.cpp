@@ -38,11 +38,15 @@ DllExport void Renderer::renderWindow(GLFWwindow* window)
 		"\n"
 		"out vec2 TexCoord;"
 		"\n"
-		"uniform mat4 mvpMat;" //creamos la matriz MVP (Model View Projection) que modificara la posicion de los vertices
+		"uniform mat4 model = mat4(1.0f);" //creamos la matriz MVP (Model View Projection) que modificara la posicion de los vertices
+		"\n"
+		"uniform mat4 view = mat4(1.0f);" //creamos la matriz MVP (Model View Projection) que modificara la posicion de los vertices
+		"\n"
+		"uniform mat4 projection = mat4(1.0f);" //creamos la matriz MVP (Model View Projection) que modificara la posicion de los vertices
 		"\n"
 		"void main()\n"
 		"{\n"
-			"gl_Position =  mvpMat * vec4(position, 1.0f);\n" //Multiplicamos la MVPMat por un vec4 que contiene el vec3 anteriormente creado y un valor harcodeado en 1.0f para poder mutliplicarlo con la matriz
+			"gl_Position =  projection * view * model * vec4(position, 1.0f);\n" //Multiplicamos la MVPMat por un vec4 que contiene el vec3 anteriormente creado y un valor harcodeado en 1.0f para poder mutliplicarlo con la matriz
 			"ourColor = aColor;\n"
 			"TexCoord = aTexCoord;\n"
 		"}\n";
@@ -61,7 +65,7 @@ DllExport void Renderer::renderWindow(GLFWwindow* window)
 		"\n"
 		"void main()\n"
 		"{\n"
-			"color = mix(texture(ourTexture, TexCoord), texture(ourTexture2, TexCoord), 0.8);"
+			"color = mix(texture(ourTexture, TexCoord), texture(ourTexture2, TexCoord), 0.2);"
 			//"color = ourColor;"
 		"}\n";
 
@@ -166,10 +170,14 @@ DllExport void Renderer::updateRendererModelMatrix(glm::mat4 modelMatrix)
 
 DllExport void Renderer::updateMVPMatrix()
 {
-	rendererMVPMatrix = projectionMatrix * viewMatrix * rendererModelMatrix;
 	glUseProgram(shader);
-	unsigned int shaderTransformLoc = glGetUniformLocation(shader, "mvpMat"); //Buscamos en AMBOS shaders la variable uniform llamada mvpMat y obtenemos su posicion en memoria
-	glUniformMatrix4fv(shaderTransformLoc, 1, GL_FALSE, glm::value_ptr(rendererMVPMatrix)); //le asignamos contenido a la variable que se encuentra en esa posicion de memoria
+	rendererMVPMatrix = projectionMatrix * viewMatrix * rendererModelMatrix;
+	unsigned int modelLoc = glGetUniformLocation(shader, "model"); //Buscamos en AMBOS shaders la variable uniform llamada mvpMat y obtenemos su posicion en memoria
+	glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(rendererModelMatrix)); //le asignamos contenido a la variable que se encuentra en esa posicion de memoria
+	unsigned int vieLoc = glGetUniformLocation(shader, "view"); //Buscamos en AMBOS shaders la variable uniform llamada mvpMat y obtenemos su posicion en memoria
+	glUniformMatrix4fv(vieLoc, 1, GL_FALSE, glm::value_ptr(viewMatrix)); //le asignamos contenido a la variable que se encuentra en esa posicion de memoria
+	unsigned int projectionLoc = glGetUniformLocation(shader, "projection"); //Buscamos en AMBOS shaders la variable uniform llamada mvpMat y obtenemos su posicion en memoria
+	glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projectionMatrix)); //le asignamos contenido a la variable que se encuentra en esa posicion de memoria
 }
 
 DllExport glm::mat4 Renderer::getViewMatrix()
@@ -177,6 +185,10 @@ DllExport glm::mat4 Renderer::getViewMatrix()
 	return viewMatrix;
 }
 
+DllExport void Renderer::updateViewMatrix()
+{
+	//viewMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(-320.0f, -100.0f, 0.0f));
+}
 
 
 

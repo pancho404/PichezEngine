@@ -2,6 +2,7 @@
 
 DllExport Shape::Shape()
 {
+	
 }
 
 DllExport Shape::~Shape()
@@ -17,14 +18,14 @@ DllExport void Shape::draw(Renderer* renderer, int indexCount)
 
 DllExport void Shape::createSquare(Renderer* renderer)
 {
-
+	
 	float vertices[] =
 	{
 		// positions          // colors           // texture coords
-		 640.0f,  0.0f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f,   // top right
-		 640.0f, 100.0f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f,   // bottom right
-		 550.0f, 100.0f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f,   // bottom left
-		 550.0f,  0.0f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f    // top left 
+		 50.0f,  -50.0f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f,   // top right
+		 50.0f, 50.0f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f,   // bottom right
+		 -50.0f, 50.0f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f,   // bottom left
+		 -50.0f,  -50.0f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f    // top left 
 	};
 	pos.x = 550.0f;
 	pos.y = 0.0f;
@@ -50,7 +51,7 @@ DllExport void Shape::createTriangle(Renderer* renderer)
 		 100.0f,  0.0f, 0.0f,   1.0f, 1.0f, 1.0f,   1.0f, 1.0f,   // top right
 		 100.0f, 100.0f, 0.0f,   1.0f, 1.0f, 1.0f,   1.0f, 0.0f,   // bottom right
 		 0.0f, 100.0f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f,   // bottom left
-		 550.0f,  0.0f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f    // top left 
+		 0.0f,  0.0f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f    // top left 
 	};
 	unsigned int indexes[] =
 	{

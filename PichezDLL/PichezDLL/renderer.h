@@ -26,6 +26,7 @@ public:
 	DllExport void updateMVPMatrix();
 	DllExport void setUniform1i();
 	DllExport glm::mat4 getViewMatrix();
+	DllExport void updateViewMatrix();
 private:
 	glm::mat4 rendererModelMatrix;
 	glm::mat4 projectionMatrix;
