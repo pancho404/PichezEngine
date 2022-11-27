@@ -29,6 +29,7 @@ public:
 	DllExport virtual void draw(Renderer* renderer, int indexCount) = 0;
 	DllExport unsigned int getVBO();
 	DllExport unsigned int getIBO();
+	DllExport unsigned int getVAO();
 	DllExport Coordinates getPos();
 	DllExport void setPos(Coordinates pos);
 
@@ -43,6 +44,7 @@ private:
 	glm::mat4 modelMatrix;
 	unsigned int vertexBufferObject;
 	unsigned int indexBufferObject;
+	unsigned int vertexArrayObject;
 
 protected:
 	Coordinates pos;

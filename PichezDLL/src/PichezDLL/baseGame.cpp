@@ -16,15 +16,16 @@ DllExport int BaseGame::run()
 	Shape* shape = new Shape();
 	Shape* shape2 = new Shape();
 	Window* window = new Window();
-	Renderer* renderer = new Renderer(shape->getModelMatrix(), "ortho");	
+	Renderer* renderer = new Renderer(shape->getModelMatrix(), "ortho");
 
 	static float x;
 	static float y;
 	static glm::vec2 mousePos;
 	window->run();
-	shape2->createTriangle(renderer);
 	shape->createSquare(renderer);
+	shape2->createTriangle(renderer);
 	renderer->renderWindow(window->getWindow()); //Renderizamos la ventana y los objetos dentro de ella (vertices)
+	shape2->addPosition(200.0f, 0.0, 0.0f);
 
 	Texture* texture = new Texture("../res/sauron.png");
 	texture->Bind(1, texture->GetID());
@@ -42,10 +43,10 @@ DllExport int BaseGame::run()
 
 		move(window, shape);
 
-		shape->draw(renderer, 6); //Dibujamos la figura, enviandole que renderer la renderizará y cuantos indices posee
 		shape2->draw(renderer, 6); //Dibujamos la figura, enviandole que renderer la renderizará y cuantos indices posee
+		shape->draw(renderer, 6); //Dibujamos la figura, enviandole que renderer la renderizará y cuantos indices posee
 		renderer->swapBuffers(window->getWindow()); //Cambiamos los punteros de los buffers para que apunten a donde corresponda backBuffer to frontBuffer y frontBuffer to backBuffer.
-		
+
 		window->pollEvents();
 		x = Input::GetMouseX(window);
 		y = Input::GetMouseY(window);

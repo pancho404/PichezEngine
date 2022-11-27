@@ -69,6 +69,11 @@ DllExport unsigned int Entity::getIBO()
 	return indexBufferObject;
 }
 
+DllExport unsigned int Entity::getVAO()
+{
+	return vertexArrayObject;
+}
+
 DllExport Coordinates Entity::getPos()
 {
 	return pos;

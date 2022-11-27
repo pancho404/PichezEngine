@@ -21,7 +21,7 @@ public:
 	DllExport void setFloatVertex();
 	DllExport static unsigned int CompileShader(unsigned int type, const std::string& source);
 	DllExport static unsigned int CreateShader(const std::string& vertexShader, const std::string& fragmentShader);
-	DllExport void Draw(unsigned int indexCount);
+	DllExport void Draw(unsigned int indexCount, unsigned int& vertexArrayObject);
 	DllExport void updateRendererModelMatrix(glm::mat4 modelMatrix);
 	DllExport void updateMVPMatrix();
 	DllExport void setUniform1i();
