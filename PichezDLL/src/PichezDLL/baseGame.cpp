@@ -26,7 +26,7 @@ DllExport int BaseGame::run()
 	static glm::vec2 mousePos;
 	window->run();
 	shape->createSquare(renderer);
-	shape2->createTriangle(renderer);
+	shape2->createSquare(renderer);
 	renderer->renderWindow(window->getWindow()); //Renderizamos la ventana y los objetos dentro de ella (vertices)
 	shape2->addPosition(200.0f, 0.0, 0.0f);
 	renderer->updateMVPMatrix();
@@ -56,7 +56,7 @@ DllExport int BaseGame::run()
 		renderer->updateRendererModelMatrix(shape2->getModelMatrix()); //Se updatea la matriz modelo que usara el renderer, enviamos la matriz de la shape.
 		renderer->updateMVPMatrix(); //Updateamos la matriz MVP que utiliza el renderer
 
-		shape2->draw(renderer, 3); //Dibujamos la figura, enviandole que renderer la renderizará y cuantos indices posee
+		shape2->draw(renderer, 6); //Dibujamos la figura, enviandole que renderer la renderizará y cuantos indices posee
 		
 		renderer->swapBuffers(window->getWindow()); //Cambiamos los punteros de los buffers para que apunten a donde corresponda backBuffer to frontBuffer y frontBuffer to backBuffer.
 

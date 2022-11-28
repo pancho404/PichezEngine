@@ -47,11 +47,15 @@ private:
 	glm::mat4 rotationMat;
 	glm::mat4 scaleMat;
 	glm::mat4 modelMatrix;
+	
 	unsigned int vertexBufferObject;
 	unsigned int indexBufferObject;
 	unsigned int vertexArrayObject;
 
 protected:
+	float lenghtX;
+	float lenghtY;
+	float lenghtZ;
 };
 
 
