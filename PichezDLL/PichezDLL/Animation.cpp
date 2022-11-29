@@ -10,21 +10,25 @@ Animation::Animation()
 	speed = 1.0f;
 
 }
-Animation::~Animation(void) {}
-void Animation::Update() {
+
+Animation::~Animation(void)
+{
+
+}
+
+void Animation::Update()
+{
 	currentTime += Timer::getDeltaTime();;
 
-	while (currentTime > animationLength) {
+	while (currentTime > animationLength)
+	{
 		currentTime -= animationLength;
 	}
 
 	float frameLength = animationLength / frames.size();
 	currentFrame = static_cast<int>(currentTime / frameLength);
 }
-void Animation::AddFrame(float frameX, float frameY,
-	float frameWidth, float frameHeigth,
-	float textureWidth, float textureHeigth,
-	float durationInSecs)
+void Animation::AddFrame(float frameX, float frameY, float frameWidth, float frameHeigth, float textureWidth, float textureHeigth, float durationInSecs)
 {
 	animationLength = durationInSecs * 1000;
 	Frame frame;
@@ -44,17 +48,14 @@ void Animation::AddFrame(float frameX, float frameY,
 	frames.push_back(frame);
 }
 
-void Animation::AddFrame(float frameX, float frameY,
-	float frameWidth, float frameHeigth,
-	float textureWidth, float textureHeigth,
-	float durationInSecs,
-	int frameCount)
+void Animation::AddFrame(float frameX, float frameY, float frameWidth, float frameHeigth, float textureWidth, float textureHeigth, float durationInSecs, int frameCount)
 {
 	animationLength = durationInSecs * 1000;
 
 	float frameXIndex = 0;
 
-	for (int i = 0; i < frameCount; i++) {
+	for (int i = 0; i < frameCount; i++)
+	{
 		Frame frame;
 
 		frame.uvCoords[0].u = ((frameX + frameXIndex) / textureWidth);
@@ -74,10 +75,12 @@ void Animation::AddFrame(float frameX, float frameY,
 	}
 }
 
-vector<Frame>& Animation::getFrames() {
+vector<Frame>& Animation::getFrames()
+{
 	return frames;
 }
 
-int Animation::GetCurrentFrame() {
+int Animation::GetCurrentFrame()
+{
 	return currentFrame;
 }

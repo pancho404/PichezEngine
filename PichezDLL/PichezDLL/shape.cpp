@@ -63,6 +63,9 @@ DllExport void Shape::createTriangle(Renderer* renderer)
 	setSize(glm::vec3(50.0f, 50.0f, 50.0f));
 	unsigned int vbo;
 	unsigned int ibo;
+	lenghtX = 100.0f;
+	lenghtY = 100.0f;
+	lenghtZ = 100.0f;
 	renderer->setBuffers(1, vertices, GL_STATIC_DRAW, GL_ARRAY_BUFFER, vbo); //Seteamos el buffer creado
 	renderer->setBuffers(1, indexes, GL_STATIC_DRAW, GL_ELEMENT_ARRAY_BUFFER, ibo); //Seteamos el buffer creado
 	//Hardcodeamos las posiciones del array de vertices

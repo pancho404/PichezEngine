@@ -41,8 +41,13 @@ DllExport glm::vec3 Entity::getRotation()
 DllExport void Entity::scaleToRelative(float x, float y, float z)
 {
 	glm::vec3 vector = glm::vec3(x, y, z); //Creamos un vector con los valores pasados por parametro
+	lenghtX += x;
+	lenghtY += y;
+	lenghtZ += z;
+	posVec.x += x;
+	posVec.y += y;
+	posVec.z += z;
 	scaleMat = glm::scale(scaleMat, vector); //Escalamaos pasando por parametro la matriz escala y el vector que contiene el valor relativo al que sera escalado el objeto
-	scaleVec += vector;
 	updateModelMatrix();
 }
 
@@ -93,17 +98,17 @@ DllExport float Entity::getPosZ()
 
 DllExport float Entity::getSizeX()
 {
-	return scaleVec.x;
+	return lenghtX;
 }
 
 DllExport float Entity::getSizeY()
 {
-	return scaleVec.y;
+	return lenghtY;
 }
 
 DllExport float Entity::getSizeZ()
 {
-	return scaleVec.z;
+	return lenghtZ;
 }
 
 DllExport void Entity::setSize(glm::vec3 size)
