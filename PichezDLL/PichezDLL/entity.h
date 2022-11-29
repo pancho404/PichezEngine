@@ -42,7 +42,7 @@ public:
 private:
 	glm::vec3 rotationVec = glm::vec3(1.0f,1.0f,1.0f);  //Vector que pertenece a la matriz identidad
 	glm::vec3 scaleVec = glm::vec3(1.0f, 1.0f, 1.0f);  //Vector que pertenece a la matriz identidad
-	glm::vec3 posVec = glm::vec3(1.0f, 1.0f, 1.0f);
+	glm::vec3 posVec = glm::vec3(50.0f, 50.0f, 50.0f);
 	glm::mat4 translateMat; //Inicializamos las matrices con la matriz identidad glm::mat4(1.0f)
 	glm::mat4 rotationMat;
 	glm::mat4 scaleMat;

@@ -36,7 +36,7 @@ DllExport void Shape::createSquare(Renderer* renderer)
 	lenghtX = 100.0f;
 	lenghtY = 100.0f;
 	lenghtZ = 100.0f;
-	setSize(glm::vec3(50.0f, -50.0f, 50.0f));
+	setSize(glm::vec3(50.0f, 50.0f, 50.0f));
 	unsigned int vbo = getVBO();
 	unsigned int ibo = getIBO();
 	renderer->setBuffers(1, vertices, GL_STATIC_DRAW, GL_ARRAY_BUFFER, vbo); //Seteamos el buffer creado
