@@ -16,9 +16,12 @@ Entity::~Entity()
 
 DllExport void Entity::addPosition(float x, float y, float z)
 {
-	glm::vec3 vecToAdd = glm::vec3(x, y, z); //Creamos el vector que se le sumará a la posicion actual de
+	glm::vec3 vecToAdd = glm::vec3(0.0f, 0.0f, 0.0f); //Creamos el vector que se le sumará a la posicion actual de
+	vecToAdd = glm::vec3(x, y, z); //Creamos el vector que se le sumará a la posicion actual de
 	translateMat = glm::translate(translateMat, vecToAdd); //realizamos la adicion del vector a la matriz, modificando así los valores de la matriz
-	posVec += vecToAdd;
+	posVec.x += vecToAdd.x;
+	posVec.y += vecToAdd.y;
+	posVec.z += vecToAdd.z;
 	updateModelMatrix();
 }
 
@@ -44,9 +47,10 @@ DllExport void Entity::scaleToRelative(float x, float y, float z)
 	lenghtX += x;
 	lenghtY += y;
 	lenghtZ += z;
-	posVec.x += x;
+	/*posVec.x += x;
 	posVec.y += y;
-	posVec.z += z;
+	posVec.z += z;*/
+	scaleVec = vector + glm::vec3(scaleVec.x, scaleVec.y, scaleVec.z);
 	scaleMat = glm::scale(scaleMat, vector); //Escalamaos pasando por parametro la matriz escala y el vector que contiene el valor relativo al que sera escalado el objeto
 	updateModelMatrix();
 }

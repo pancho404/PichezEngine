@@ -12,12 +12,14 @@ DllExport bool CollisionManager::isColliding(Shape* objectOne, Shape* objectTwo)
 {
 
     // collision x-axis?
-    bool collisionX = objectOne->getPosX() + objectOne->getSizeX() >= objectTwo->getPosX() &&
-        objectTwo->getPosX() + objectTwo->getSizeX() >= objectOne->getPosX();
+    bool collisionX = (objectOne->getPosX() + objectOne->getScale().x >= objectTwo->getPosX() - objectTwo->getScale().x &&
+        objectTwo->getPosX() + objectTwo->getScale().x >= objectOne->getPosX() - objectOne->getScale().x) || (objectOne->getPosX() - objectOne->getScale().x <= objectTwo->getPosX() + objectTwo->getScale().x &&
+            objectTwo->getPosX() + objectTwo->getScale().x <= objectOne->getPosX() - objectOne->getScale().x);
       
     // collision y-axis?
-    bool collisionY = objectOne->getPosY() + objectOne->getSizeY() >= objectTwo->getPosY() &&
-        objectTwo->getPosY() + objectTwo->getSizeY() >= objectOne->getPosY();
+    bool collisionY = (objectOne->getPosY() + objectOne->getScale().y >= objectTwo->getPosY() + objectTwo->getScale().y &&
+        objectTwo->getPosY() + objectTwo->getScale().y >= objectOne->getPosY() - objectOne->getScale().y) || (objectOne->getPosY() + objectOne->getScale().y >= objectTwo->getPosY() - objectTwo->getScale().y &&
+            objectTwo->getPosY() + objectTwo->getScale().y >= objectOne->getPosY() - objectOne->getScale().y);
     // collision only if on both axes
     
     return collisionX && collisionY;
