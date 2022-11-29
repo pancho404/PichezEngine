@@ -18,5 +18,6 @@ void Timer::updateDeltaTime(float currentTime)
 	currentDeltaTime = currentTime - lastDeltaTime;
 	lastDeltaTime = currentTime;
 }
+
 float Timer::currentDeltaTime = 0;
 float Timer::lastDeltaTime = 0;

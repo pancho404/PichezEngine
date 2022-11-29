@@ -1,9 +1,9 @@
 #pragma once
 
-
 #include "Frame.h"
 #include <vector>
 #define DllExport __declspec( dllexport )
+
 using namespace std;
 class Animation
 {
@@ -19,16 +19,9 @@ public:
 
 	DllExport void Update();
 
-	DllExport void AddFrame(float frameX, float frameY,
-		float frameWidth, float frameHeigth,
-		float textureWidth, float textureHeigth,
-		float durationInSecs);
+	DllExport void AddFrame(float frameX, float frameY, float frameWidth, float frameHeigth, float textureWidth, float textureHeigth, float durationInSecs);
 
-	DllExport void AddFrame(float frameX, float frameY,
-		float frameWidth, float frameHeigth,
-		float textureWidth, float textureHeigth,
-		float durationInSecs,
-		int frameCount);
+	DllExport void AddFrame(float frameX, float frameY, float frameWidth, float frameHeigth, float textureWidth, float textureHeigth, float durationInSecs, int frameCount);
 
 	DllExport int GetCurrentFrame();
 
