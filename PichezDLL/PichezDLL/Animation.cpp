@@ -97,7 +97,7 @@ void Animation::SetCurrentFrame(int frame, float* vertex)
 			f.uvCoords[2].u, f.uvCoords[2].v,
 			f.uvCoords[3].u, f.uvCoords[3].v
 		};
-		vertex[6] += uvCoords[0];
+		vertex[6] = uvCoords[0];
 		vertex[14] = uvCoords[2];
 		vertex[22] = uvCoords[4];
 		vertex[30] = uvCoords[6];

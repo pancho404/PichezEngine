@@ -47,8 +47,8 @@ DllExport void Entity::scaleToRelative(float x, float y, float z)
 	lenghtX += x;
 	lenghtY += y;
 	lenghtZ += z;
-	
 	scaleVec = vector + glm::vec3(scaleVec.x, scaleVec.y, scaleVec.z);
+	//posVec = vector + glm::vec3(posVec.x, posVec.y, posVec.z) / glm::vec3(2.0f);
 	scaleMat = glm::scale(scaleMat, vector); //Escalamaos pasando por parametro la matriz escala y el vector que contiene el valor relativo al que sera escalado el objeto
 	updateModelMatrix();
 }
