@@ -30,7 +30,7 @@ void Animation::Update()
 }
 void Animation::AddFrame(float frameX, float frameY, float frameWidth, float frameHeigth, float textureWidth, float textureHeigth, float durationInSecs)
 {
-	animationLength = durationInSecs * 1000;
+	animationLength = durationInSecs;
 	Frame frame;
 
 	frame.uvCoords[0].u = (frameX / textureWidth);
@@ -83,4 +83,28 @@ vector<Frame>& Animation::getFrames()
 int Animation::GetCurrentFrame()
 {
 	return currentFrame;
+}
+
+void Animation::SetCurrentFrame(int frame, float* vertex)
+{
+	{
+		Frame f = getFrames()[frame];
+
+		float uvCoords[]
+		{
+			f.uvCoords[0].u, f.uvCoords[0].v,
+			f.uvCoords[1].u, f.uvCoords[1].v,
+			f.uvCoords[2].u, f.uvCoords[2].v,
+			f.uvCoords[3].u, f.uvCoords[3].v
+		};
+		vertex[6] += uvCoords[0];
+		vertex[14] = uvCoords[2];
+		vertex[22] = uvCoords[4];
+		vertex[30] = uvCoords[6];
+
+		vertex[7] = uvCoords[1];
+		vertex[15] = uvCoords[3];
+		vertex[23] = uvCoords[5];
+		vertex[31] = uvCoords[7];
+	}
 }

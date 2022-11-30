@@ -8,9 +8,9 @@ private:
 	std::string filePath;
 	unsigned char* localBuffer;
 	int width, height, BPP;
-
+	Renderer* renderer;
 public:
-	Texture(const std::string& path);
+	Texture(const std::string& path, Renderer* renderer);
 	~Texture();
 
 	void Bind(unsigned int slot, unsigned int textureUnit)const;
@@ -18,5 +18,6 @@ public:
 	int GetWidth()const { return width; }
 	int GetHeight()const { return height; }
 	unsigned int GetID()const { return rendererID; }
+	
 };
 

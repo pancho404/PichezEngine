@@ -26,7 +26,7 @@ public:
 	DllExport glm::vec3 getScale();
 	DllExport void updateModelMatrix();
 	DllExport glm::mat4 getModelMatrix();
-	DllExport virtual void draw(Renderer* renderer, int indexCount) = 0;
+	DllExport virtual void draw(Renderer* renderer, int indexCount, unsigned int textureID) = 0;
 	DllExport unsigned int getVBO();
 	DllExport unsigned int getIBO();
 	DllExport unsigned int getVAO();

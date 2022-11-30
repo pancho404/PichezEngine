@@ -27,6 +27,7 @@ public:
 
 	DllExport vector<Frame>& getFrames();
 
+	DllExport void SetCurrentFrame(int frame, float* vertex);
 
 	vector<Frame> frames;
 };

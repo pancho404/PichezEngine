@@ -21,12 +21,13 @@ public:
 	DllExport void setFloatVertex();
 	DllExport static unsigned int CompileShader(unsigned int type, const std::string& source);
 	DllExport static unsigned int CreateShader(const std::string& vertexShader, const std::string& fragmentShader);
-	DllExport void Draw(unsigned int indexCount, unsigned int& vertexArrayObject);
+	DllExport void Draw(unsigned int indexCount, unsigned int& vertexArrayObject, unsigned int textureID);
 	DllExport void updateRendererModelMatrix(glm::mat4 modelMatrix);
 	DllExport void updateMVPMatrix();
 	DllExport void setUniform1i();
 	DllExport glm::mat4 getViewMatrix();
 	DllExport void updateViewMatrix();
+	unsigned int shader;
 private:
 	glm::mat4 rendererModelMatrix;
 	glm::mat4 projectionMatrix;
@@ -35,6 +36,5 @@ private:
 	unsigned int indexBufferObject;
 	unsigned int vertexBufferObject;
 	unsigned int vertexArrayObject;
-	unsigned int shader;
 };
 

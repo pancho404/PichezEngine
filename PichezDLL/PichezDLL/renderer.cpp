@@ -65,18 +65,17 @@ DllExport void Renderer::renderWindow(GLFWwindow* window)
 		"\n"
 		"void main()\n"
 		"{\n"
-			"color = mix(texture(ourTexture, TexCoord), texture(ourTexture2, TexCoord), 0.2);"
+			"color = texture(ourTexture, TexCoord);"
 			//"color = ourColor;"
 		"}\n";
 
 
 	shader = CreateShader(vertexShader, fragmentShader);
 	glUseProgram(shader);
-	glUniform1i(glGetUniformLocation(shader, "ourTexture"), 0); 
-	glUniform1i(glGetUniformLocation(shader, "ourTexture2"), 1);
+	
 
 
-	glUseProgram(0);
+	//glUseProgram(0);
 }
 
 DllExport void Renderer::clearWindow()
@@ -157,9 +156,11 @@ DllExport  unsigned int Renderer::CreateShader(const std::string& _vertexShader,
 
 	return program;
 }
-DllExport void Renderer::Draw(unsigned int indexCount, unsigned int &vertexArrayObject)
+DllExport void Renderer::Draw(unsigned int indexCount, unsigned int &vertexArrayObject, unsigned int textureID)
 {
 	glBindVertexArray(vertexArrayObject);
+	glUniform1f(glGetUniformLocation(shader, "ourTexture"), (GLfloat)textureID);
+	//glUniform1i(glGetUniformLocation(shader, "ourTexture2"), 1);
 	glDrawElements(GL_TRIANGLES, indexCount, GL_UNSIGNED_INT, nullptr);
 }
 

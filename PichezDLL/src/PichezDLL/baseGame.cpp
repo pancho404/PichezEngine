@@ -1,6 +1,7 @@
 #include "..\..\PichezDLL\baseGame.h" 
 #include"..\..\PichezDLL\Timer.h" 
 #include "..\..\PichezDLL\CollisionManager.h"
+#include "..\..\PichezDLL\Animation.h"
 
 DllExport BaseGame::BaseGame()
 {
@@ -20,6 +21,7 @@ DllExport int BaseGame::run()
 	Window* window = new Window();
 	Renderer* renderer = new Renderer(shape->getModelMatrix(), "ortho");
 	CollisionManager* collisionManager = new CollisionManager();
+	Animation* animation = new Animation();
 
 	static float x;
 	static float y;
@@ -32,10 +34,20 @@ DllExport int BaseGame::run()
 	renderer->updateMVPMatrix();
 	renderer->updateRendererModelMatrix(shape2->getModelMatrix());
 
-	Texture* texture = new Texture("../res/sauron.png");
-	texture->Bind(1, texture->GetID());
-	Texture* texture2 = new Texture("../res/wood.png");
-	
+	Texture* texture = new Texture("../res/faker.png", renderer);
+	Texture* texture2 = new Texture("../res/wood.png", renderer);
+
+//	animation->AddFrame((float)texture->GetWidth() - (float)texture->GetWidth(), (float)texture->GetHeight() - (float)texture->GetHeight(), (float)texture->GetWidth(), (float)texture->GetHeight(), (float)texture->GetWidth(), (float)texture->GetHeight(), f);
+	//animation->AddFrame((float)texture2->GetWidth() - (float)texture2->GetWidth(), (float)texture2->GetHeight() - (float)texture2->GetHeight(), (float)texture2->GetWidth(), (float)texture2->GetHeight(), (float)texture2->GetWidth(), (float)texture2->GetHeight(), 4.0f);
+
+
+	for (int i = 0; i < 2; i++)
+	{
+		for (int j = 0; j < 2; j++)
+		{
+			animation->AddFrame(i, j, texture->GetWidth() / 2, texture->GetHeight() / 2, texture->GetWidth(), texture->GetHeight(), 1.0f);
+		}
+	}
 
 	//UPDATES Y DRAW
 	while (!window->windowShouldClose(window->getWindow()))
@@ -47,23 +59,22 @@ DllExport int BaseGame::run()
 		renderer->updateMVPMatrix(); //Updateamos la matriz MVP que utiliza el renderer
 		Timer::updateDeltaTime(glfwGetTime());
 
+		animation->Update();
+		animation->SetCurrentFrame(animation->GetCurrentFrame(), shape->getVertices());
 		move(window, shape);
-
-		shape->draw(renderer, 6); //Dibujamos la figura, enviandole que renderer la renderizará y cuantos indices posee
-
-		//move(window, shape2);
+		texture->Bind(0, texture->GetID());
+		shape->draw(renderer, 6, texture->GetID()); //Dibujamos la figura, enviandole que renderer la renderizará y cuantos indices posee
+		texture->Unbind();
 
 		renderer->updateRendererModelMatrix(shape2->getModelMatrix()); //Se updatea la matriz modelo que usara el renderer, enviamos la matriz de la shape.
 		renderer->updateMVPMatrix(); //Updateamos la matriz MVP que utiliza el renderer
 
-		shape2->draw(renderer, 6); //Dibujamos la figura, enviandole que renderer la renderizará y cuantos indices posee
-		
+		texture2->Bind(1, texture2->GetID());
+		shape2->draw(renderer, 6, texture2->GetID()); //Dibujamos la figura, enviandole que renderer la renderizará y cuantos indices posee
+		texture2->Unbind();
 		renderer->swapBuffers(window->getWindow()); //Cambiamos los punteros de los buffers para que apunten a donde corresponda backBuffer to frontBuffer y frontBuffer to backBuffer.
-
 		if (collisionManager->isColliding(shape, shape2))
 		{
-			texture2->Bind(2, texture2->GetID());
-			texture->Unbind();
 			std::cout << "Collision";
 		}
 
@@ -80,7 +91,10 @@ DllExport int BaseGame::run()
 	delete shape;
 	delete shape2;
 	delete texture;
+	delete texture2;
 	delete collisionManager;
+	delete animation;
+
 	return 0;
 
 }
