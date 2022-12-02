@@ -19,9 +19,9 @@ public:
 
 	DllExport void Update();
 
-	DllExport void AddFrame(float frameX, float frameY, float frameWidth, float frameHeigth, float textureWidth, float textureHeigth, float durationInSecs);
+	DllExport void AddFrame(float frameX, float frameY, float frameWidth, float frameHeigth, float textureWidth, float textureHeigth, float duration);
 
-	DllExport void AddFrame(float frameX, float frameY, float frameWidth, float frameHeigth, float textureWidth, float textureHeigth, float durationInSecs, int frameCount);
+	DllExport void AddFrame(float frameX, float frameY, float frameWidth, float frameHeigth, float textureWidth, float textureHeigth, float duration, int frameCount);
 
 	DllExport int GetCurrentFrame();
 
