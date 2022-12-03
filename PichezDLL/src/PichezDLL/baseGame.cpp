@@ -40,15 +40,30 @@ DllExport int BaseGame::run()
 	Texture* texture4 = new Texture("../res/dodge3.png", renderer);
 	Texture* texture5 = new Texture("../res/dodge4.png", renderer);
 	Texture* texture6 = new Texture("../res/wood.png", renderer);
+	Texture* texture7 = new Texture("../res/brick.png", renderer);
+	Texture* texture8 = new Texture("../res/faker.png", renderer);
 
-	animation->AddFrame((float)texture->GetWidth(), (float)texture->GetHeight(), (float)texture->GetWidth(), (float)texture->GetHeight(), (float)texture->GetWidth(), (float)texture->GetHeight(), 0.75f);
 
-	animation->AddFrame(texture2->GetWidth(), texture2->GetHeight(), texture2->GetWidth(), texture2->GetHeight(), texture2->GetWidth(), texture2->GetHeight(), 0.75f);
-	animation->AddFrame(texture3->GetWidth(), texture3->GetHeight(), texture3->GetWidth(), texture3->GetHeight(), texture3->GetWidth(), texture3->GetHeight(), 0.75f);
-	animation->AddFrame(texture4->GetWidth(), texture4->GetHeight(), texture4->GetWidth(), texture4->GetHeight(), texture4->GetWidth(), texture4->GetHeight(), 0.75f);
-	animation->AddFrame(texture5->GetWidth(), texture5->GetHeight(), texture5->GetWidth(), texture5->GetHeight(), texture5->GetWidth(), texture5->GetHeight(), 0.75f);
-	//animation->SetCurrentFrame(animation->GetCurrentFrame() + 2, shape->getVertices());
+	
+	//animation->AddFrame(texture2->GetWidth(), texture2->GetHeight(), texture2->GetWidth(), texture2->GetHeight(), texture2->GetWidth(), texture2->GetHeight(), 2.0f, 8);
+	//animation->AddFrame(texture3->GetWidth(), texture3->GetHeight(), texture3->GetWidth(), texture3->GetHeight(), texture3->GetWidth(), texture3->GetHeight(), 2.0f, 8);
+	//animation->AddFrame(texture->GetWidth(), texture->GetHeight(), texture->GetWidth(), texture->GetHeight(), texture->GetWidth(), texture->GetHeight(), 2.0f, 8);
+	//animation->AddFrame(texture->GetWidth(), texture->GetHeight(), texture->GetWidth(), texture->GetHeight(), texture->GetWidth(), texture->GetHeight(), 2.0f, 8);
+	//animation->AddFrame(texture->GetWidth(), texture->GetHeight(), texture->GetWidth(), texture->GetHeight(), texture->GetWidth(), texture->GetHeight(), 2.0f, 8);
+	//animation->AddFrame(texture4->GetWidth(), texture4->GetHeight(), texture4->GetWidth(), texture4->GetHeight(), texture4->GetWidth(), texture4->GetHeight(), 2.0f, 8);
+	//animation->AddFrame(texture5->GetWidth(), texture5->GetHeight(), texture5->GetWidth(), texture5->GetHeight(), texture5->GetWidth(), texture5->GetHeight(), 2.0f, 8);
+	//animation->AddFrame(texture6->GetWidth(), texture6->GetHeight(), texture6->GetWidth(), texture6->GetHeight(), texture6->GetWidth(), texture6->GetHeight(), 2.0f, 8);
+	//animation->SetCurrentFrame(0, shape->getVertices());
 
+	animation->AddFrame(texture2);
+	animation->AddFrame(texture3);
+	animation->AddFrame(texture4);
+	animation->AddFrame(texture5);
+	animation->AddFrame(texture);
+	animation->AddFrame(texture6);
+	animation->AddFrame(texture7);
+	animation->AddFrame(texture8);
+	animation->SetAnimationValues(2);
 
 	//UPDATES Y DRAW
 	while (!window->windowShouldClose(window->getWindow()))
@@ -61,15 +76,15 @@ DllExport int BaseGame::run()
 
 		Timer::updateDeltaTime(glfwGetTime());
 
-		animation->Update();
-		texture2->Bind(0, animation->GetCurrentFrame());
-		shape->draw(renderer, 6, animation->GetCurrentFrame()); //Dibujamos la figura, enviandole que renderer la renderizará y cuantos indices posee
-		texture2->Unbind();
+		animation->UpdateAnimation();
+		animation->getCurrentFrame()->Bind();
+		shape->draw(renderer, 6, animation->getCurrentFrame()->GetID()); //Dibujamos la figura, enviandole que renderer la renderizará y cuantos indices posee
+		animation->getCurrentFrame()->Unbind();
 
 		renderer->updateRendererModelMatrix(shape2->getModelMatrix()); //Se updatea la matriz modelo que usara el renderer, enviamos la matriz de la shape.
 		renderer->updateMVPMatrix(); //Updateamos la matriz MVP que utiliza el renderer
 
-		texture6->Bind(1, texture6->GetID());
+		texture6->Bind();
 		shape2->draw(renderer, 6, texture6->GetID()); //Dibujamos la figura, enviandole que renderer la renderizará y cuantos indices posee
 		texture6->Unbind();
 		renderer->swapBuffers(window->getWindow()); //Cambiamos los punteros de los buffers para que apunten a donde corresponda backBuffer to frontBuffer y frontBuffer to backBuffer.
@@ -78,7 +93,6 @@ DllExport int BaseGame::run()
 			std::cout << "Collision";
 		}
 		window->pollEvents();
-
 		move(window, shape);
 		x = Input::GetMouseX(window);
 		y = Input::GetMouseY(window);

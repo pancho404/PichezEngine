@@ -160,7 +160,6 @@ DllExport void Renderer::Draw(unsigned int indexCount, unsigned int &vertexArray
 {
 	glBindVertexArray(vertexArrayObject);
 	glUniform1f(glGetUniformLocation(shader, "ourTexture"), (GLfloat)textureID);
-	//glUniform1i(glGetUniformLocation(shader, "ourTexture2"), 1);
 	glDrawElements(GL_TRIANGLES, indexCount, GL_UNSIGNED_INT, nullptr);
 }
 

@@ -1,110 +1,58 @@
 #include "Animation.h"
-#include"Timer.h"
+#include "Timer.h"
+
+
 Animation::Animation()
 {
-
-	currentTime = 0;
+	animationTextures.clear();
 	currentFrame = 0;
-	animationLength = 1000;
-	frames = vector<Frame>();
-	speed = 1.0f;
+	currentTime = 0;
+	frameDuration = 0;
+}
+
+Animation::~Animation()
+{
+	animationTextures.clear();
+}
+
+
+
+void Animation::SetAnimationValues(float framesPerSecond)
+{
+
+	frameDuration = 1 / framesPerSecond; //Dividimos 1 segundo por la cantidad de frames
 
 }
 
-Animation::~Animation(void)
+void Animation::AddFrame(Texture* texture)
 {
+
+	animationTextures.push_back(texture);
 
 }
 
-void Animation::Update()
+void Animation::UpdateAnimation()
 {
-	currentTime += Timer::getDeltaTime();;
 
-	while (currentTime > animationLength)
+	currentTime += Timer::getDeltaTime();
+
+	if (currentTime >= frameDuration) // si el timer supera la duracion de la animacion...
 	{
-		currentTime -= animationLength;
-	}
-
-	float frameLength = animationLength / frames.size();
-	currentFrame = static_cast<int>(currentTime / frameLength);
-}
-void Animation::AddFrame(float frameX, float frameY, float frameWidth, float frameHeigth, float textureWidth, float textureHeigth, float durationInSecs)
-{
-	animationLength = durationInSecs;
-	Frame frame;
-
-	frame.uvCoords[0].u = (frameX / textureWidth);
-	frame.uvCoords[0].v = (frameY / textureHeigth);
-
-	frame.uvCoords[1].u = ((frameX + frameWidth) / textureWidth);
-	frame.uvCoords[1].v = (frameY / textureHeigth);
-
-	frame.uvCoords[2].u = (frameX / textureWidth);
-	frame.uvCoords[2].v = ((frameY + frameHeigth) / textureHeigth);
-
-	frame.uvCoords[3].u = ((frameX + frameWidth) / textureWidth);
-	frame.uvCoords[3].v = ((frameY + frameHeigth) / textureHeigth);
-
-	this->frames.push_back(frame);
-}
-
-void Animation::AddFrame(float frameX, float frameY, float frameWidth, float frameHeigth, float textureWidth, float textureHeigth, float durationInSecs, int frameCount)
-{
-	animationLength = durationInSecs * 1000;
-
-	float frameXIndex = 0;
-
-	for (int i = 0; i < frameCount; i++)
-	{
-		Frame frame;
-
-		frame.uvCoords[0].u = ((frameX + frameXIndex) / textureWidth);
-		frame.uvCoords[0].v = (frameY / textureHeigth);
-
-		frame.uvCoords[1].u = (((frameX + frameXIndex) + frameWidth) / textureWidth);
-		frame.uvCoords[1].v = (frameY / textureHeigth);
-
-		frame.uvCoords[2].u = ((frameX + frameXIndex) / textureWidth);
-		frame.uvCoords[2].v = ((frameY + frameHeigth) / textureHeigth);
-
-		frame.uvCoords[3].u = (((frameX + frameXIndex) + frameWidth) / textureWidth);
-		frame.uvCoords[3].v = ((frameY + frameHeigth) / textureHeigth);
-
-		frames.push_back(frame);
-		frameXIndex += frameWidth;
-	}
-}
-
-vector<Frame>& Animation::getFrames()
-{
-	return frames;
-}
-
-int Animation::GetCurrentFrame()
-{
-	return currentFrame + 2;
-}
-
-void Animation::SetCurrentFrame(int frame, float* vertex)
-{
-	{
-		Frame f = getFrames()[frame];
-
-		float uvCoords[]
+		while (currentTime > frameDuration)
 		{
-			f.uvCoords[0].u, f.uvCoords[0].v,
-			f.uvCoords[1].u, f.uvCoords[1].v,
-			f.uvCoords[2].u, f.uvCoords[2].v,
-			f.uvCoords[3].u, f.uvCoords[3].v
-		};
-		vertex[6] = uvCoords[0];
-		vertex[14] = uvCoords[2];
-		vertex[22] = uvCoords[4];
-		vertex[30] = uvCoords[6];
+			currentTime -= frameDuration; //reseteamos timer
+			currentFrame++; //seguimos al proximo frame de la animacion y el timer se resetea para que dure lo mismo
 
-		vertex[7] = uvCoords[1];
-		vertex[15] = uvCoords[3];
-		vertex[23] = uvCoords[5];
-		vertex[31] = uvCoords[7];
+			if (currentFrame >= animationTextures.size()) //Si termino la animacion la reseteamos xd
+			{
+				currentFrame = 0;
+			}
+		}
 	}
+
+}
+
+Texture* Animation::getCurrentFrame()
+{
+	return animationTextures[currentFrame];
 }

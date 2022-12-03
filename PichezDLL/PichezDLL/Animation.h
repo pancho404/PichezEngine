@@ -1,34 +1,29 @@
 #pragma once
 
+#include "Texture.h"
 #include "Frame.h"
 #include <vector>
 #define DllExport __declspec( dllexport )
 
 using namespace std;
-class Animation
+
+class  DllExport Animation
 {
 private:
-	float currentFrame;
+	int currentFrame;
 	float currentTime;
-	float animationLength;
-	float speed;
-
+	float frameDuration;
+	vector<Texture*> animationTextures;
 public:
-	DllExport Animation();
-	DllExport ~Animation();
+	Animation();
+	~Animation();
 
-	DllExport void Update();
-
-	DllExport void AddFrame(float frameX, float frameY, float frameWidth, float frameHeigth, float textureWidth, float textureHeigth, float duration);
-
-	DllExport void AddFrame(float frameX, float frameY, float frameWidth, float frameHeigth, float textureWidth, float textureHeigth, float duration, int frameCount);
-
-	DllExport int GetCurrentFrame();
-
-	DllExport vector<Frame>& getFrames();
-
-	DllExport void SetCurrentFrame(int frame, float* vertex);
-
+	void SetAnimationValues(float framesPerSecond);
+	void AddFrame(Texture* texture);
+	void UpdateAnimation();
+	void ChangeFrame();
+	void Draw();
+	Texture* getCurrentFrame();
 	vector<Frame> frames;
 };
 

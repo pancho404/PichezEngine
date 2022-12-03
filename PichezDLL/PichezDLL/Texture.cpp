@@ -42,9 +42,9 @@ Texture::~Texture()
 	glDeleteTextures(1, &rendererID);
 }
 
-void Texture::Bind(unsigned int slot, unsigned int textureUnit) const
+void Texture::Bind() const
 {
-	glBindTexture(GL_TEXTURE_2D, textureUnit);	
+	glBindTexture(GL_TEXTURE_2D, GetID());	
 }
 
 void Texture::Unbind() const

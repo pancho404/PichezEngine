@@ -13,7 +13,7 @@ public:
 	Texture(const std::string& path, Renderer* renderer);
 	~Texture();
 
-	void Bind(unsigned int slot, unsigned int textureUnit)const;
+	void Bind()const;
 	void Unbind()const;
 	int GetWidth()const { return width; }
 	int GetHeight()const { return height; }
