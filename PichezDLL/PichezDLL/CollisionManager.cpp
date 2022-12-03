@@ -8,7 +8,7 @@ CollisionManager::~CollisionManager()
 {
 }
 
-DllExport bool CollisionManager::isColliding(Shape* objectOne, Shape* objectTwo)
+DllExport bool CollisionManager::isColliding(Entity* objectOne, Entity* objectTwo)
 {
 
     // collision x-axis?

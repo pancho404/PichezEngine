@@ -7,6 +7,7 @@
 #include "shape.h"
 #include"WindowsInput.h"
 #include"Texture.h"
+#include "Sprite.h"
 class BaseGame
 {
 public:
@@ -14,9 +15,10 @@ public:
 	DllExport ~BaseGame();
 	DllExport int run();
 
-	void move(Window* window, Shape* shape);
+	void move(Window* window, Entity* shape);
 
 private:
+
 
 };
 

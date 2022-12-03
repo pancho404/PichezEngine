@@ -29,8 +29,10 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="renderer.cpp" />
     <ClCompile Include="shape.cpp" />
+    <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="stb_image.cpp" />
     <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="TextureImporter.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="window.cpp" />
     <ClCompile Include="WindowsInput.cpp" />
@@ -46,8 +48,10 @@
     <ClInclude Include="Input.h" />
     <ClInclude Include="renderer.h" />
     <ClInclude Include="shape.h" />
+    <ClInclude Include="Sprite.h" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="Texture.h" />
+    <ClInclude Include="TextureImporter.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="window.h" />
     <ClInclude Include="WindowsInput.h" />

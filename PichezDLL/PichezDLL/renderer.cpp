@@ -61,7 +61,6 @@ DllExport void Renderer::renderWindow(GLFWwindow* window)
 		"in vec2 TexCoord;\n"
 		"\n"
 		"uniform sampler2D ourTexture;\n"
-		"uniform sampler2D ourTexture2;\n"
 		"\n"
 		"void main()\n"
 		"{\n"
@@ -81,6 +80,7 @@ DllExport void Renderer::renderWindow(GLFWwindow* window)
 DllExport void Renderer::clearWindow()
 {
 	glClear(GL_COLOR_BUFFER_BIT);
+	glClearColor(1,0,0,1);
 }
 
 DllExport void Renderer::swapBuffers(GLFWwindow* window)
@@ -187,6 +187,26 @@ DllExport glm::mat4 Renderer::getViewMatrix()
 DllExport void Renderer::updateViewMatrix()
 {
 	viewMatrix = glm::lookAt(glm::vec3(0.0f, 0.0f, 3.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+}
+
+DllExport void Renderer::drawTexture(unsigned int indices, unsigned int VAO, unsigned int VBO, float* vertices, float textureVerticesSize)
+{
+	glBindVertexArray(VAO);
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBufferData(GL_ARRAY_BUFFER, textureVerticesSize, vertices, GL_STATIC_DRAW);
+
+	glUseProgram(shader);
+
+	unsigned int texLocation = glGetAttribLocation(shader, "ourTexture");
+
+	glVertexAttribPointer(texLocation, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 8, (void*)(6 * sizeof(float))); //Asigna los atributos XYZ RGBA ST del vertice y por cual debera empezar a leer
+	glEnableVertexAttribArray(texLocation);
+
+	glDrawElements(GL_TRIANGLES, indices, GL_UNSIGNED_INT, nullptr);
+
+	glBindVertexArray(0);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glUseProgram(0);
 }
 
 

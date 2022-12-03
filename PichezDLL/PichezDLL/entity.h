@@ -40,13 +40,14 @@ public:
 	DllExport void setSize(glm::vec3 size);
 
 private:
+	
 	glm::vec3 rotationVec = glm::vec3(1.0f,1.0f,1.0f);  //Vector que pertenece a la matriz identidad
 	glm::vec3 scaleVec = glm::vec3(1.0f, 1.0f, 1.0f);  //Vector que pertenece a la matriz identidad
 	glm::vec3 posVec = glm::vec3(50.0f, 50.0f, 50.0f);
-	glm::mat4 translateMat; //Inicializamos las matrices con la matriz identidad glm::mat4(1.0f)
-	glm::mat4 rotationMat;
-	glm::mat4 scaleMat;
-	glm::mat4 modelMatrix;
+	glm::mat4 translateMat = glm::mat4(1.0f); //Inicializamos las matrices con la matriz identidad glm::mat4(1.0f)
+	glm::mat4 rotationMat = glm::mat4(1.0f);
+	glm::mat4 scaleMat = glm::mat4(1.0f);
+	glm::mat4 modelMatrix = glm::mat4(1.0f);
 	
 	unsigned int vertexBufferObject;
 	unsigned int indexBufferObject;
@@ -56,6 +57,14 @@ protected:
 	float lenghtX;
 	float lenghtY;
 	float lenghtZ;
+	float vertices[32] =
+	{
+		// positions          // colors           // texture coords
+		 100.0f,  0, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 0.0f,   // top right
+		 100.0f, 100.0f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 1.0f,   // bottom right
+		 0.0f, 100.0f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 1.0f,   // bottom left
+		 0.0f,  0.0f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 0.0f    // top left 
+	};
 };
 
 
