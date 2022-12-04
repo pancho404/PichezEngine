@@ -39,8 +39,8 @@ DllExport int BaseGame::run()
 	renderer->updateMVPMatrix();
 
 
-	sprite1->LoadTexture("../res/faker.png", true);
-	sprite2->LoadTexture("../res/sauron.png", true);
+	sprite1->LoadTexture("../res/wood.png", true);
+	sprite2->LoadTexture("../res/brick.png", true);
 	//Texture* texture = new Texture("../res/sauron.png", renderer);
 	//Texture* texture2 = new Texture("../res/dodge1.png", renderer);
 	//Texture* texture3 = new Texture("../res/dodge2.png", renderer);
@@ -51,7 +51,7 @@ DllExport int BaseGame::run()
 	//Texture* texture8 = new Texture("../res/faker.png", renderer);
 
 
-	
+	//animation->AddFrame()
 	//animation->AddFrame(texture2->GetWidth(), texture2->GetHeight(), texture2->GetWidth(), texture2->GetHeight(), texture2->GetWidth(), texture2->GetHeight(), 2.0f, 8);
 	//animation->AddFrame(texture3->GetWidth(), texture3->GetHeight(), texture3->GetWidth(), texture3->GetHeight(), texture3->GetWidth(), texture3->GetHeight(), 2.0f, 8);
 	//animation->AddFrame(texture->GetWidth(), texture->GetHeight(), texture->GetWidth(), texture->GetHeight(), texture->GetWidth(), texture->GetHeight(), 2.0f, 8);

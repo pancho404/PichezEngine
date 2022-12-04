@@ -80,7 +80,6 @@ DllExport void Renderer::renderWindow(GLFWwindow* window)
 DllExport void Renderer::clearWindow()
 {
 	glClear(GL_COLOR_BUFFER_BIT);
-	glClearColor(1,0,0,1);
 }
 
 DllExport void Renderer::swapBuffers(GLFWwindow* window)
