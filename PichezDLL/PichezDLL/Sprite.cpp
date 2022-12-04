@@ -13,7 +13,7 @@ Sprite::Sprite(Renderer* rend) : Entity()
 	textureVerticesSize = sizeof(vertices);
 	texturejeje = NULL;
 	vertexBuffer = vertices;
-	animation = NULL;
+	animation = 0;
 	renderer = rend;
 	settedAnimation = false;
 }
@@ -28,7 +28,6 @@ void Sprite::LoadTexture(const char* path, bool isTransparent)
 {
 	if (isAnimation)
 	{
-
 		stbi_set_flip_vertically_on_load(true);
 	}
 	else
@@ -58,11 +57,11 @@ void Sprite::SetAnimation(int columns, int rows, float framesPerSeconds)
 	}
 }
 
-void Sprite::AddFrameToAnimation(int frameX, int frameY, int frame)
+void Sprite::AddFrameToAnimation(int frameX, int frameY, int frame, int animationNumber)
 {
 	if (animation)
 	{
-		animation->AddFrame(frameX, frameY, frame);
+		animation->AddFrame(frameX, frameY, frame, animationNumber);
 	}
 }
 
@@ -129,4 +128,20 @@ void Sprite::draw(Renderer* renderer, int indexCount, unsigned int textureID)
 void Sprite::setIsAnimation(bool flag)
 {
 	isAnimation = flag;
+}
+
+void Sprite::AddAnimation()
+{
+	if (animation)
+	{
+		animation->CreateAnimation();
+	}
+}
+
+void Sprite::ChangeAnimation(int animation)
+{
+	if (this->animation)
+	{
+		this->animation->ChangeAnimation(animation);
+	}
 }

@@ -45,7 +45,7 @@ public:
 	void LoadTexture(const char* path, bool isTransparent);
 	void StartUseAnimation();
 	void SetAnimation(int columns, int rows, float framesPerSeconds);
-	void AddFrameToAnimation(int frameX, int frameY, int frame);
+	void AddFrameToAnimation(int frameX, int frameY, int frame, int animationNumber);
 	void DrawTexture(Renderer* renderer);
 	void draw(Renderer* renderer, int indexCount, unsigned int textureID) override;
 	void UpdateAnimation();
@@ -54,6 +54,8 @@ public:
 	void BlendSprite();
 	void UnBlendSprite();
 	void setIsAnimation(bool flag);
+	void AddAnimation();
+	void ChangeAnimation(int animation);
 };
 
 

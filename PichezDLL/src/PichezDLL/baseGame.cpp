@@ -3,6 +3,7 @@
 #include "..\..\PichezDLL\CollisionManager.h"
 #include "..\..\PichezDLL\Animation.h"
 
+Sprite* sprite1;
 DllExport BaseGame::BaseGame()
 {
 }
@@ -22,8 +23,8 @@ DllExport int BaseGame::run()
 	Renderer* renderer = new Renderer(shape->getModelMatrix(), "ortho");
 	CollisionManager* collisionManager = new CollisionManager();
 	//Animation* animation = new Animation();
-	Sprite* sprite1 = new Sprite(renderer);
 	Sprite* sprite2 = new Sprite(renderer);
+	sprite1 = new Sprite(renderer);
 	//Texture* texture6 = new Texture("../res/sauron.png", renderer);
 
 	static float x;
@@ -43,13 +44,16 @@ DllExport int BaseGame::run()
 	//Seteamos si es animacion para flipear las texturas :)
 	sprite2->setIsAnimation(false);
 	sprite1->setIsAnimation(true);
-
 	//Cargamos las texturas
 	sprite2->LoadTexture("../res/sauron.png", false);
-	sprite1->LoadTexture("../res/anim.png", true);
+	sprite1->LoadTexture("../res/practico.png", true);
 
 	//Seteamos la aniamcion
 	sprite1->StartUseAnimation();
+	sprite1->AddAnimation();
+	sprite1->AddAnimation();
+	sprite1->AddAnimation();
+	sprite1->AddAnimation();
 	sprite1->SetAnimation(8, 4, 4);
 	float i;
 	float j;
@@ -57,7 +61,10 @@ DllExport int BaseGame::run()
 	for (i = 0; i < 8; i++)
 	{
 		
-		sprite1->AddFrameToAnimation(i, 0, i);
+		sprite1->AddFrameToAnimation(i, 0, i, 0);
+		sprite1->AddFrameToAnimation(i, 1, i, 1);
+		sprite1->AddFrameToAnimation(i, 2, i, 2);
+		sprite1->AddFrameToAnimation(i, 3, i, 3);
 
 	}
 
@@ -136,10 +143,12 @@ void BaseGame::move(Window* window, Entity* entity)
 	if (glfwGetKey(window->getWindow(), 'D'))
 	{
 		entity->addPosition(10.0f, 0.0f, 0.0f);
+		sprite1->ChangeAnimation(2);
 	}
 	if (glfwGetKey(window->getWindow(), 'A'))
 	{
 		entity->addPosition(-10.0f, 0.0f, 0.0f);
+		sprite1->ChangeAnimation(3);
 	}
 	if (glfwGetKey(window->getWindow(), 'Q'))
 	{
@@ -152,17 +161,21 @@ void BaseGame::move(Window* window, Entity* entity)
 	if (glfwGetKey(window->getWindow(), 'S'))
 	{
 		entity->scaleToRelative(0.9f, 0.9f, 0.9f);
+		
 	}
 	if (glfwGetKey(window->getWindow(), 'W'))
 	{
 		entity->scaleToRelative(1.1f, 1.1f, 1.1f);
+		
 	}
 	if (glfwGetKey(window->getWindow(), GLFW_KEY_DOWN))
 	{
 		entity->addPosition(0.0f, 10.0f, 0.0f);
+		sprite1->ChangeAnimation(0);
 	}
 	if (glfwGetKey(window->getWindow(), GLFW_KEY_UP))
 	{
 		entity->addPosition(0.0f, -10.0f, 0.0f);
+		sprite1->ChangeAnimation(1);
 	}
 }

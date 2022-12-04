@@ -26,6 +26,8 @@ class  DllExport Animation
 {
 private:
 	int totalFrames;	
+	int currentFrame;
+	int currentAnimation;
 
 	float timeBetweenFrames;
 	float timer;
@@ -38,14 +40,15 @@ private:
 	float* spriteVertices;
 	int rows;
 	int columns;
+	vector<Anim> animations;
 public:
-	int currentFrame;
-	Anim animations;
 	Animation();
 	~Animation();
 
 	void SetAnimationValues(int columns, int rows, float framesPerSecond, int width, int height, float* vertices);
-	void AddFrame(int frameX, int frameY, int frame);
+	void AddFrame(int frameX, int frameY, int frame, int animation);
+	void ChangeAnimation(int animationToUse);
+	void CreateAnimation();
 	void UpdateAnimation();
 	void ChangeFrame();
 };
