@@ -17,6 +17,7 @@ private:
 	Animation* animation;
 	bool settedAnimation;
 	bool isTransparent;
+	bool isAnimation;
 	unsigned int textureVerticesSize;
 	unsigned int indices[6] =
 	{
@@ -52,6 +53,7 @@ public:
 	int GetChannels();
 	void BlendSprite();
 	void UnBlendSprite();
+	void setIsAnimation(bool flag);
 };
 
 

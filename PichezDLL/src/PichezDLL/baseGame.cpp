@@ -24,6 +24,7 @@ DllExport int BaseGame::run()
 	//Animation* animation = new Animation();
 	Sprite* sprite1 = new Sprite(renderer);
 	Sprite* sprite2 = new Sprite(renderer);
+	//Texture* texture6 = new Texture("../res/sauron.png", renderer);
 
 	static float x;
 	static float y;
@@ -32,28 +33,28 @@ DllExport int BaseGame::run()
 	shape->createSquare(renderer);
 	shape2->createSquare(renderer);
 	renderer->renderWindow(window->getWindow()); //Renderizamos la ventana y los objetos dentro de ella (vertices)
-	//shape2->addPosition(200.0f, 0.0, 0.0f);
+	shape2->addPosition(200.0f, 0.0, 0.0f);
 	sprite2->addPosition(200.0f, 0.0, 0.0f);
 	renderer->updateRendererModelMatrix(sprite2->getModelMatrix());
 	sprite2->updateModelMatrix();
 	renderer->updateMVPMatrix();
 
 
+	//Seteamos si es animacion para flipear las texturas :)
+	sprite2->setIsAnimation(false);
+	sprite1->setIsAnimation(true);
 
+	//Cargamos las texturas
+	sprite2->LoadTexture("../res/sauron.png", false);
+	sprite1->LoadTexture("../res/anim.png", true);
 
-	//sprite1->LoadTexture("../res/anim.png", true);
-	//sprite2->LoadTexture("../res/brick.png", true);
-
-
-	//sprite1 = new Sprite(renderer);
-	sprite1->LoadTexture("../res/dodge.png", true);
+	//Seteamos la aniamcion
 	sprite1->StartUseAnimation();
-	sprite1->SetAnimation(4, 1, 4);
-
+	sprite1->SetAnimation(8, 4, 4);
 	float i;
 	float j;
 	float frameCounter = 0;
-	for (i = 0; i < 4; i++)
+	for (i = 0; i < 8; i++)
 	{
 		
 		sprite1->AddFrameToAnimation(i, 0, i);
@@ -73,11 +74,7 @@ DllExport int BaseGame::run()
 
 		move(window, sprite1);
 
-		renderer->updateRendererModelMatrix(sprite1->getModelMatrix()); //Se updatea la matriz modelo que usara el renderer, enviamos la matriz de la shape.
-		renderer->updateMVPMatrix(); //Updateamos la matriz MVP que utiliza el renderer
-
-
-		renderer->updateRendererModelMatrix(sprite2->getModelMatrix()); //Se updatea la matriz modelo que usara el renderer, enviamos la matriz de la shape.
+		renderer->updateRendererModelMatrix(shape2->getModelMatrix()); //Se updatea la matriz modelo que usara el renderer, enviamos la matriz de la shape.
 		renderer->updateMVPMatrix(); //Updateamos la matriz MVP que utiliza el renderer
 		sprite2->DrawTexture(renderer);
 
@@ -97,9 +94,9 @@ DllExport int BaseGame::run()
 		//renderer->updateRendererModelMatrix(sprite1->getModelMatrix()); //Se updatea la matriz modelo que usara el renderer, enviamos la matriz de la shape.
 		//renderer->updateMVPMatrix(); //Updateamos la matriz MVP que utiliza el renderer
 
-		////texture6->Bind();
-		////shape2->draw(renderer, 6, texture6->GetID()); //Dibujamos la figura, enviandole que renderer la renderizará y cuantos indices posee
-		////texture6->Unbind();
+		//texture6->Bind();
+		//shape2->draw(renderer, 6, texture6->GetID()); //Dibujamos la figura, enviandole que renderer la renderizará y cuantos indices posee
+		//texture6->Unbind();
 
 		if (collisionManager->isColliding(sprite1, sprite2))
 		{

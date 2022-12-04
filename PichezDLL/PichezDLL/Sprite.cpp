@@ -26,7 +26,15 @@ Sprite::~Sprite()
 
 void Sprite::LoadTexture(const char* path, bool isTransparent)
 {
-	stbi_set_flip_vertically_on_load(true);
+	if (isAnimation)
+	{
+
+		stbi_set_flip_vertically_on_load(true);
+	}
+	else
+	{
+		stbi_set_flip_vertically_on_load(false);
+	}
 	TextureImporter textureImporter;
 	this->isTransparent = isTransparent;
 	textureImporter.LoadTexture(path, this->data, texture, width, height, channels, isTransparent);
@@ -36,6 +44,7 @@ void Sprite::StartUseAnimation()
 {
 	if (!animation)
 	{
+
 		animation = new Animation();
 	}
 }
@@ -45,7 +54,7 @@ void Sprite::SetAnimation(int columns, int rows, float framesPerSeconds)
 	if (animation)
 	{
 		settedAnimation = true;
-		animation->SetAnimationValues(columns, rows, framesPerSeconds, width, height, vertices);		
+		animation->SetAnimationValues(columns, rows, framesPerSeconds, width, height, vertices);
 	}
 }
 
@@ -72,14 +81,13 @@ void Sprite::DrawTexture(Renderer* renderer)
 	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 8, (void*)(6 * sizeof(float)));
 	glEnableVertexAttribArray(2);
 	renderer->drawTexture(6, VAO, VBO, vertices, textureVerticesSize);
-	/*glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glDisable(GL_TEXTURE_2D);*/
+
 
 	if (isTransparent)
 	{
 		UnBlendSprite();
 	}
-	
+
 }
 
 void Sprite::UpdateAnimation()
@@ -89,7 +97,7 @@ void Sprite::UpdateAnimation()
 		//renderer->setBuffers(1, uvVertices, GL_STATIC_DRAW, GL_ARRAY_BUFFER, uvVerticesBufferObject);
 		//glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 8, (void*)(6 * sizeof(float))); //Asigna los atributos XYZ RGBA ST del vertice y por cual debera empezar a leer
 		//glEnableVertexAttribArray(0);
-		animation->UpdateAnimation();		
+		animation->UpdateAnimation();
 	}
 }
 
@@ -116,4 +124,9 @@ void Sprite::UnBlendSprite()
 void Sprite::draw(Renderer* renderer, int indexCount, unsigned int textureID)
 {
 
+}
+
+void Sprite::setIsAnimation(bool flag)
+{
+	isAnimation = flag;
 }
