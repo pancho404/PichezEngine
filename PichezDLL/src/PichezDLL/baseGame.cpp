@@ -21,7 +21,7 @@ DllExport int BaseGame::run()
 	Window* window = new Window();
 	Renderer* renderer = new Renderer(shape->getModelMatrix(), "ortho");
 	CollisionManager* collisionManager = new CollisionManager();
-	Animation* animation = new Animation();
+	//Animation* animation = new Animation();
 	Sprite* sprite1 = new Sprite(renderer);
 	Sprite* sprite2 = new Sprite(renderer);
 
@@ -39,39 +39,32 @@ DllExport int BaseGame::run()
 	renderer->updateMVPMatrix();
 
 
-	sprite1->LoadTexture("../res/wood.png", true);
-	sprite2->LoadTexture("../res/brick.png", true);
-	//Texture* texture = new Texture("../res/sauron.png", renderer);
-	//Texture* texture2 = new Texture("../res/dodge1.png", renderer);
-	//Texture* texture3 = new Texture("../res/dodge2.png", renderer);
-	//Texture* texture4 = new Texture("../res/dodge3.png", renderer);
-	//Texture* texture5 = new Texture("../res/dodge4.png", renderer);
-	//Texture* texture6 = new Texture("../res/wood.png", renderer);
-	//Texture* texture7 = new Texture("../res/brick.png", renderer);
-	//Texture* texture8 = new Texture("../res/faker.png", renderer);
 
 
-	//animation->AddFrame()
-	//animation->AddFrame(texture2->GetWidth(), texture2->GetHeight(), texture2->GetWidth(), texture2->GetHeight(), texture2->GetWidth(), texture2->GetHeight(), 2.0f, 8);
-	//animation->AddFrame(texture3->GetWidth(), texture3->GetHeight(), texture3->GetWidth(), texture3->GetHeight(), texture3->GetWidth(), texture3->GetHeight(), 2.0f, 8);
-	//animation->AddFrame(texture->GetWidth(), texture->GetHeight(), texture->GetWidth(), texture->GetHeight(), texture->GetWidth(), texture->GetHeight(), 2.0f, 8);
-	//animation->AddFrame(texture->GetWidth(), texture->GetHeight(), texture->GetWidth(), texture->GetHeight(), texture->GetWidth(), texture->GetHeight(), 2.0f, 8);
-	//animation->AddFrame(texture->GetWidth(), texture->GetHeight(), texture->GetWidth(), texture->GetHeight(), texture->GetWidth(), texture->GetHeight(), 2.0f, 8);
-	//animation->AddFrame(texture4->GetWidth(), texture4->GetHeight(), texture4->GetWidth(), texture4->GetHeight(), texture4->GetWidth(), texture4->GetHeight(), 2.0f, 8);
-	//animation->AddFrame(texture5->GetWidth(), texture5->GetHeight(), texture5->GetWidth(), texture5->GetHeight(), texture5->GetWidth(), texture5->GetHeight(), 2.0f, 8);
-	//animation->AddFrame(texture6->GetWidth(), texture6->GetHeight(), texture6->GetWidth(), texture6->GetHeight(), texture6->GetWidth(), texture6->GetHeight(), 2.0f, 8);
-	//animation->SetCurrentFrame(0, shape->getVertices());
+	//sprite1->LoadTexture("../res/anim.png", true);
+	//sprite2->LoadTexture("../res/brick.png", true);
 
-	//animation->AddFrame(texture2);
-	//animation->AddFrame(texture3);
-	//animation->AddFrame(texture4);
-	//animation->AddFrame(texture5);
-	//animation->AddFrame(texture);
-	//animation->AddFrame(texture6);
-	//animation->AddFrame(texture7);
-	//animation->AddFrame(texture8);
-	//animation->SetAnimationValues(2);
 
+	//sprite1 = new Sprite(renderer);
+	sprite1->LoadTexture("../res/dodge.png", true);
+	sprite1->StartUseAnimation();
+	sprite1->SetAnimation(4, 1, 4);
+
+	float i;
+	float j;
+	float frameCounter = 0;
+	for (i = 0; i < 4; i++)
+	{
+		
+		sprite1->AddFrameToAnimation(i, 0, i);
+
+	}
+
+	/*for (j = 0; j < 4; j++)
+	{
+		sprite1->AddFrameToAnimation(0, j, i);
+		i++;
+	}*/
 	//UPDATES Y DRAW
 	while (!window->windowShouldClose(window->getWindow()))
 	{
@@ -79,19 +72,27 @@ DllExport int BaseGame::run()
 		Timer::updateDeltaTime(glfwGetTime());
 
 		move(window, sprite1);
-		// 
+
 		renderer->updateRendererModelMatrix(sprite1->getModelMatrix()); //Se updatea la matriz modelo que usara el renderer, enviamos la matriz de la shape.
 		renderer->updateMVPMatrix(); //Updateamos la matriz MVP que utiliza el renderer
-		sprite1->DrawTexture(renderer);
 
 
 		renderer->updateRendererModelMatrix(sprite2->getModelMatrix()); //Se updatea la matriz modelo que usara el renderer, enviamos la matriz de la shape.
 		renderer->updateMVPMatrix(); //Updateamos la matriz MVP que utiliza el renderer
 		sprite2->DrawTexture(renderer);
 
+
+		renderer->updateRendererModelMatrix(sprite1->getModelMatrix()); //Se updatea la matriz modelo que usara el renderer, enviamos la matriz de la shape.
+		renderer->updateMVPMatrix(); //Updateamos la matriz MVP que utiliza el renderer
+		sprite1->UpdateAnimation();
+
+		sprite1->DrawTexture(renderer);
+
+
+
 		////animation->UpdateAnimation();
 		////animation->getCurrentFrame()->Bind();
-		////shape->draw(renderer, 6, animation->getCurrentFrame()->GetID()); //Dibujamos la figura, enviandole que renderer la renderizará y cuantos indices posee
+		//shape->draw(renderer, 6, ); //Dibujamos la figura, enviandole que renderer la renderizará y cuantos indices posee
 		////animation->getCurrentFrame()->Unbind();
 		//renderer->updateRendererModelMatrix(sprite1->getModelMatrix()); //Se updatea la matriz modelo que usara el renderer, enviamos la matriz de la shape.
 		//renderer->updateMVPMatrix(); //Updateamos la matriz MVP que utiliza el renderer
@@ -127,7 +128,7 @@ DllExport int BaseGame::run()
 	delete texture6;
 	delete texture2;*/
 	delete collisionManager;
-	delete animation;
+	//delete animation;
 
 	return 0;
 

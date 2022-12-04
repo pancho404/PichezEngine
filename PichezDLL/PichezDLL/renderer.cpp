@@ -80,6 +80,7 @@ DllExport void Renderer::renderWindow(GLFWwindow* window)
 DllExport void Renderer::clearWindow()
 {
 	glClear(GL_COLOR_BUFFER_BIT);
+	glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
 }
 
 DllExport void Renderer::swapBuffers(GLFWwindow* window)
@@ -188,7 +189,7 @@ DllExport void Renderer::updateViewMatrix()
 	viewMatrix = glm::lookAt(glm::vec3(0.0f, 0.0f, 3.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 }
 
-DllExport void Renderer::drawTexture(unsigned int indices, unsigned int VAO, unsigned int VBO, float* vertices, float textureVerticesSize)
+DllExport void Renderer::drawTexture(unsigned int indices, unsigned int& VAO, unsigned int& VBO, float* vertices, float textureVerticesSize)
 {
 	glBindVertexArray(VAO);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);

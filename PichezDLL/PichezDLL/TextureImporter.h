@@ -6,7 +6,7 @@ class DllExport TextureImporter
 
 public:
 
-	void LoadTexture(const char* path, unsigned char* data, unsigned int& texture, int width, int height, int channels, bool transparent);
+	void LoadTexture(const char* path, unsigned char* data, unsigned int& texture, int& width, int& height, int channels, bool transparent);
 
 };
 

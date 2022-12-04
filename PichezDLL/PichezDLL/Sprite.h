@@ -23,17 +23,19 @@ private:
 		0, 1, 3,
 		1, 2, 3
 	};
-	//float vertices[32] =
-	//{
-	//	// positions          // colors           // texture coords
-	//	 100.0f,  0, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 0.0f,   // top right
-	//	 100.0f, 100.0f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 1.0f,   // bottom right
-	//	 0.0f, 100.0f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 1.0f,   // bottom left
-	//	 0.0f,  0.0f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 0.0f    // top left 
-	//};
+	float vertices[32] =
+	{
+		// positions          // colors           // texture coords
+		 100.0f,  0, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 0.0f,   // top right
+		 100.0f, 100.0f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 1.0f,   // bottom right
+		 0.0f, 100.0f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 1.0f,   // bottom left
+		 0.0f,  0.0f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 0.0f    // top left 
+	};
 	float* vertexBuffer;
 	unsigned int VBO;
 	unsigned int VAO;
+	unsigned int uvVAO;
+	unsigned int uvVBO;
 
 public:
 

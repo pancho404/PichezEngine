@@ -4,7 +4,7 @@
 #include "stb_image.h"
 #include <iostream>
 
-void TextureImporter::LoadTexture(const char* path, unsigned char* data, unsigned int& texture, int width, int height, int channels, bool transparent)
+void TextureImporter::LoadTexture(const char* path, unsigned char* data, unsigned int& texture, int &width, int &height, int channels, bool transparent)
 {
 
 	data = stbi_load(path, &width, &height, &channels, 0);

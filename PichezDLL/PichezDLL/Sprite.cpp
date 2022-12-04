@@ -7,7 +7,7 @@
 #include "glm/gtc/matrix_transform.hpp"
 #include "glm/gtc/type_ptr.hpp"
 #include <iostream>
-
+#include "stb_image.h"
 Sprite::Sprite(Renderer* rend) : Entity()
 {
 	textureVerticesSize = sizeof(vertices);
@@ -26,23 +26,35 @@ Sprite::~Sprite()
 
 void Sprite::LoadTexture(const char* path, bool isTransparent)
 {
+	stbi_set_flip_vertically_on_load(true);
 	TextureImporter textureImporter;
 	this->isTransparent = isTransparent;
 	textureImporter.LoadTexture(path, this->data, texture, width, height, channels, isTransparent);
-	//texturejeje = new Texture(path, renderer);
-
 }
 
 void Sprite::StartUseAnimation()
 {
+	if (!animation)
+	{
+		animation = new Animation();
+	}
 }
 
 void Sprite::SetAnimation(int columns, int rows, float framesPerSeconds)
 {
+	if (animation)
+	{
+		settedAnimation = true;
+		animation->SetAnimationValues(columns, rows, framesPerSeconds, width, height, vertices);		
+	}
 }
 
 void Sprite::AddFrameToAnimation(int frameX, int frameY, int frame)
 {
+	if (animation)
+	{
+		animation->AddFrame(frameX, frameY, frame);
+	}
 }
 
 void Sprite::DrawTexture(Renderer* renderer)
@@ -52,26 +64,33 @@ void Sprite::DrawTexture(Renderer* renderer)
 		BlendSprite();
 	}
 
-	glBindTexture(GL_TEXTURE_2D, texture);
-
-	renderer->Draw(6, VAO, texture);
+	glEnable(GL_TEXTURE_2D);
 
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, 0);
+	glBindTexture(GL_TEXTURE_2D, texture);
+	renderer->setBuffers(1, vertices, GL_STATIC_DRAW, GL_ARRAY_BUFFER, uvVBO);
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 8, (void*)(6 * sizeof(float)));
+	glEnableVertexAttribArray(2);
+	renderer->drawTexture(6, VAO, VBO, vertices, textureVerticesSize);
+	/*glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glDisable(GL_TEXTURE_2D);*/
 
 	if (isTransparent)
 	{
 		UnBlendSprite();
 	}
-	//unsigned int vao2 = getVAO();
-	//texturejeje->Bind();
-	//renderer->Draw(sizeof(indices), vao2, texturejeje->GetID());
-	//texturejeje->Unbind();
 	
 }
 
 void Sprite::UpdateAnimation()
 {
+	if (animation)
+	{
+		//renderer->setBuffers(1, uvVertices, GL_STATIC_DRAW, GL_ARRAY_BUFFER, uvVerticesBufferObject);
+		//glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 8, (void*)(6 * sizeof(float))); //Asigna los atributos XYZ RGBA ST del vertice y por cual debera empezar a leer
+		//glEnableVertexAttribArray(0);
+		animation->UpdateAnimation();		
+	}
 }
 
 float* Sprite::GetVertices()
@@ -84,7 +103,7 @@ int Sprite::GetChannels()
 	return channels;
 }
 
-void Sprite::BlendSprite() 
+void Sprite::BlendSprite()
 {
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -96,5 +115,5 @@ void Sprite::UnBlendSprite()
 
 void Sprite::draw(Renderer* renderer, int indexCount, unsigned int textureID)
 {
-	
+
 }

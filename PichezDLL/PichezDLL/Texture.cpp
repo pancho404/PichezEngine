@@ -6,6 +6,8 @@ Texture::Texture(const std::string& path, Renderer* renderer)
 {
 	unsigned char* data;
 
+	stbi_set_flip_vertically_on_load(true);
+
 	std::string pathName = path;
 	data = stbi_load(pathName.c_str(), &width, &height, &BPP, 0);
 

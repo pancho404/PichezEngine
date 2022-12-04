@@ -28,7 +28,7 @@ public:
 	DllExport glm::mat4 getViewMatrix();
 	DllExport void updateViewMatrix();
 	unsigned int shader;
-	DllExport void drawTexture(unsigned int indices, unsigned int VAO, unsigned int VBO, float* vertices, float textureVerticesSize);
+	DllExport void drawTexture(unsigned int indices, unsigned int& VAO, unsigned int& VBO, float* vertices, float textureVerticesSize);
 private:
 	glm::mat4 rendererModelMatrix;
 	glm::mat4 projectionMatrix;
