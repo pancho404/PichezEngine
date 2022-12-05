@@ -16,6 +16,8 @@ Sprite::Sprite(Renderer* rend) : Entity()
 	animation = 0;
 	renderer = rend;
 	settedAnimation = false;
+	lenghtX = 100.0f;
+	lenghtY = 100.0f;
 }
 
 Sprite::~Sprite()

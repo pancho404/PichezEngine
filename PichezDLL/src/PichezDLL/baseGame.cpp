@@ -46,7 +46,7 @@ DllExport int BaseGame::run()
 	sprite1->setIsAnimation(true);
 	//Cargamos las texturas
 	sprite2->LoadTexture("../res/sauron.png", false);
-	sprite1->LoadTexture("../res/practico.png", true);
+	sprite1->LoadTexture("../res/anim.png", true);
 
 	//Seteamos la aniamcion
 	sprite1->StartUseAnimation();
