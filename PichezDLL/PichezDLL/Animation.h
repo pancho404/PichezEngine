@@ -29,8 +29,8 @@ private:
 	int currentFrame;
 	int currentAnimation;
 
-	float timeBetweenFrames;
-	float timer;
+	float timePerFrame;
+	float currentTIme;
 
 	int spriteSheetWidth;
 	float spriteWidth;
