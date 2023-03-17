@@ -6,8 +6,8 @@ Animation::Animation()
 {
 	currentFrame = 0;
 	totalFrames = 0;
-	timePerFrame = 0;
-	currentTIme = 0;
+	timeBetweenFrames = 0;
+	timer = 0;
 	spriteSheetWidth = 0;
 	spriteWidth = 0;
 	spriteSheetHeight = 0;
@@ -23,7 +23,7 @@ Animation::~Animation()
 
 void Animation::SetAnimationValues(int columns, int rows, float framesPerSecond, int width, int height, float* vertices)
 {
-	timePerFrame = 1 / framesPerSecond; //Calculamos cuando dura cada frame dividiendo 1 segundo por los frames que hay por segundo
+	timeBetweenFrames = 1.0f / framesPerSecond;
 	this->rows = rows;
 	this->columns = columns;
 
@@ -49,44 +49,48 @@ void Animation::AddFrame(int frameX, int frameY, int frame, int animation)
 		animations[animation].uv.V3[frame] = (spriteHeight / spriteSheetHeight) * (frameY - 1);
 		animations[animation].uv.V4[frame] = (spriteHeight / spriteSheetHeight) * frameY;
 		animations[animation].cantFrames++;
-	}
+	}	
 }
 
 void Animation::ChangeAnimation(int animationToUse)
 {
 	currentAnimation = animationToUse;
-	ChangeFrame(); //Llamamos a ChangeFrame para darles nuevas coordenadas de Uv a la animacion
+	//currentFrame = 0;
+	ChangeFrame();
 }
 
 void Animation::CreateAnimation()
 {
 	Anim anim;
-	anim.cantFrames = 0; //inicializo en 0 para poder pushbackear
-	animations.push_back(anim); //Añado una animacion a el vector de animaciones, el size aumenta
+	anim.cantFrames = 0;
+	animations.push_back(anim);
 }
 
 
 
 void Animation::UpdateAnimation()
 {
-	currentTIme += Timer::getDeltaTime(); 
+	timer += Timer::getDeltaTime();
 
-	while (currentTIme > timePerFrame)
+	if (timer >= timeBetweenFrames)
 	{
-		currentTIme -= timePerFrame;
-		currentFrame++; //Pasamos al frame siguiente
-		if (currentFrame >= animations[currentAnimation].cantFrames) //si se va fuera del vector de animaciones o llega al final de la animacion entonces reseteamos la animacion
+		while (timer > timeBetweenFrames)
 		{
-			currentFrame = 0;
+			timer -= timeBetweenFrames;
+			currentFrame++;
+			if (currentFrame >= animations[currentAnimation].cantFrames)
+			{
+				currentFrame = 0;
+			}
 		}
+		ChangeFrame();
+		timer += Timer::getDeltaTime();
 	}
-	ChangeFrame();
-
 }
 
 void Animation::ChangeFrame()
 {
-	spriteVertices[6] = animations[currentAnimation].uv.U1[currentFrame]; //Segun la animacion actual, actualizamos la primera coordenada de UV correspondiente al frame actual;
+	spriteVertices[6] = animations[currentAnimation].uv.U1[currentFrame];
 	spriteVertices[14] = animations[currentAnimation].uv.U2[currentFrame];
 	spriteVertices[22] = animations[currentAnimation].uv.U3[currentFrame];
 	spriteVertices[30] = animations[currentAnimation].uv.U4[currentFrame];

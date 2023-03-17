@@ -29,19 +29,17 @@ DllExport bool CollisionManager::isColliding(Entity* objectOne, Entity* objectTw
     bool collisionY = objectOne->getPosY() + objectOne->getSizeY() >= objectTwo->getPosY() &&
         objectTwo->getPosY() + objectTwo->getSizeY() >= objectOne->getPosY();
     // collision only if on both axes
-    
     return collisionX && collisionY;
- 
-    
+    //return collisionX && collisionY;
 }
 
-DllExport bool CollisionManager::isCollidiingX(Entity* objectOne, Entity* objectTwo)
+DllExport bool CollisionManager::isCollidiingX(Shape* objectOne, Shape* objectTwo)
 {
     bool collision = objectOne->getPosX() > objectTwo->getPosX() || objectOne->getPosX() < objectTwo->getPosX();
     return collision;
 }
 
-DllExport bool CollisionManager::isCollidiingY(Entity* objectOne, Entity* objectTwo)
+DllExport bool CollisionManager::isCollidiingY(Shape* objectOne, Shape* objectTwo)
 {
     bool collision = objectOne->getPosY() > objectTwo->getPosY() || objectOne->getPosY() < objectTwo->getPosY();
     return collision;

@@ -74,7 +74,6 @@ void Sprite::DrawTexture(Renderer* renderer)
 		BlendSprite();
 	}
 
-	//Rebindeo el buffer de UV
 	glEnable(GL_TEXTURE_2D);
 
 	glActiveTexture(GL_TEXTURE0);

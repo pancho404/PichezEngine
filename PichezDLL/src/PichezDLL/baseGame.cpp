@@ -34,8 +34,8 @@ DllExport int BaseGame::run()
 	shape->createSquare(renderer);
 	shape2->createSquare(renderer);
 	renderer->renderWindow(window->getWindow()); //Renderizamos la ventana y los objetos dentro de ella (vertices)
-	shape2->addPosition(200.0f, 100.0f, 0.0f);
-	sprite2->addPosition(200.0f, 100.0f, 0.0f);
+	shape2->addPosition(200.0f, 0.0, 0.0f);
+	sprite2->addPosition(200.0f, 0.0, 0.0f);
 	renderer->updateRendererModelMatrix(sprite2->getModelMatrix());
 	sprite2->updateModelMatrix();
 	renderer->updateMVPMatrix();
@@ -79,6 +79,7 @@ DllExport int BaseGame::run()
 		renderer->clearWindow();
 		Timer::updateDeltaTime(glfwGetTime());
 
+		move(window, sprite1);
 
 		renderer->updateRendererModelMatrix(shape2->getModelMatrix()); //Se updatea la matriz modelo que usara el renderer, enviamos la matriz de la shape.
 		renderer->updateMVPMatrix(); //Updateamos la matriz MVP que utiliza el renderer
@@ -104,12 +105,9 @@ DllExport int BaseGame::run()
 		//shape2->draw(renderer, 6, texture6->GetID()); //Dibujamos la figura, enviandole que renderer la renderizará y cuantos indices posee
 		//texture6->Unbind();
 
-		glm::vec3 previousPosition = sprite1->getPosition();
-		move(window, sprite1);
 		if (collisionManager->isColliding(sprite1, sprite2))
 		{
-			std::cout << "Collision" << std::endl;
-			sprite1->setPos(previousPosition);
+			std::cout << "Collision";
 		}
 
 		x = Input::GetMouseX(window);
@@ -125,7 +123,14 @@ DllExport int BaseGame::run()
 	delete window;
 	delete renderer;
 	delete shape;
-	delete shape2;	
+	delete shape2;
+	/*delete texture;
+	delete texture2;
+	delete texture3;
+	delete texture4;
+	delete texture5;
+	delete texture6;
+	delete texture2;*/
 	delete collisionManager;
 	//delete animation;
 

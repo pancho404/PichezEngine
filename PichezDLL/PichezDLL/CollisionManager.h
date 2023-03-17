@@ -9,8 +9,8 @@ public:
 	CollisionManager();
 	~CollisionManager();
 	DllExport bool isColliding(Entity* objectOne, Entity* objectTwo);
-	DllExport bool isCollidiingX(Entity* objectOne, Entity* objectTwo);
-	DllExport bool isCollidiingY(Entity* objectOne, Entity* objectTwo);
+	DllExport bool isCollidiingX(Shape* objectOne, Shape* objectTwo);
+	DllExport bool isCollidiingY(Shape* objectOne, Shape* objectTwo);
 private:
 
 };
